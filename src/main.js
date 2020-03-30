@@ -24,7 +24,9 @@ enableRotation();
 function parseLatLong(data) {
 	for(var i = 0; i < data.length; i++) {
 		var tmp = data[i]["GeoLocation"].replace("(", '').replace(')', '').split(',');
-
+		if (tmp.length == 1) {
+			continue;
+		}
 		locations.push({
 			"latitude": parseFloat(tmp[0]),
 			"longitude": parseFloat(tmp[1])
