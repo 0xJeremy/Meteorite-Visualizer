@@ -18,23 +18,44 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import {IndexRoute, Route} from 'react-router';
-import React from 'react';
-import Demo from '../app';
+import React, {Component} from 'react';
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import {addDataToMap, wrapTo} from 'kepler.gl/actions';
+import KeplerGl from 'kepler.gl';
 
-export function onAuthEnterCallback(nextState, replace, callback) {
-  // TODO: detect auth provider
-  callback();
-}
+import sampleData from '../data/sample-data';
+import config from '../configurations/config';
 
-export function buildAppRoutes(Component) {
-  return [
-    <Route key="auth" path="auth" component={Demo} onEnter={onAuthEnterCallback} />,
-    <Route key="demo" path="demo">
-      <IndexRoute component={Component} />
-      <Route path="map" component={Component} />
-      <Route path="(:id)" component={Component} />
-      <Route path="map/:provider" component={Component} />
-    </Route>
-  ];
+export default class FreshMap extends Component {
+  componentDidMount() {
+    this.props.dispatch(
+      wrapTo(
+        this.props.id,
+        addDataToMap({
+          datasets: sampleData,
+          options: {
+            centerMap: true
+          },
+          config
+        })
+      )
+    );
+  }
+
+  render() {
+    const {mapboxApiAccessToken, id} = this.props;
+
+    return (
+      <AutoSizer>
+        {({height, width}) => (
+          <KeplerGl
+            mapboxApiAccessToken={mapboxApiAccessToken}
+            id={id}
+            width={width}
+            height={height}
+          />
+        )}
+      </AutoSizer>
+    );
+  }
 }

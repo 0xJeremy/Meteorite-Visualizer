@@ -18,23 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import {IndexRoute, Route} from 'react-router';
-import React from 'react';
-import Demo from '../app';
+import {createAction, handleActions} from 'redux-actions';
 
-export function onAuthEnterCallback(nextState, replace, callback) {
-  // TODO: detect auth provider
-  callback();
-}
+// CONSTANTS
+export const INIT = 'INIT';
 
-export function buildAppRoutes(Component) {
-  return [
-    <Route key="auth" path="auth" component={Demo} onEnter={onAuthEnterCallback} />,
-    <Route key="demo" path="demo">
-      <IndexRoute component={Component} />
-      <Route path="map" component={Component} />
-      <Route path="(:id)" component={Component} />
-      <Route path="map/:provider" component={Component} />
-    </Route>
-  ];
-}
+// ACTIONS
+export const appInit = createAction(INIT);
+
+// INITIAL_STATE
+const initialState = {
+  appName: 'example',
+  loaded: false
+};
+
+// REDUCER
+const appReducer = handleActions(
+  {
+    [INIT]: (state, action) => ({
+      ...state,
+      loaded: true
+    })
+  },
+  initialState
+);
+
+export default appReducer;

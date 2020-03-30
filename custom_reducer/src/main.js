@@ -18,47 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import React, {Component, createRef} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import document from 'global/document';
+import {Provider} from 'react-redux';
+import {render} from 'react-dom';
+import store from './store';
+import App from './app';
 
-const WIDTH = 400;
-const HEIGHT = 800;
-const style = {borther: 0};
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 
-export default class Frame extends Component {
-  componentDidMount() {
-    this.renderFrameContents();
-  }
-  componentDidUpdate() {
-    this.renderFrameContents();
-  }
-
-  componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(this.root.current.contentDocument);
-  }
-
-  root = createRef();
-  innerHtml = createRef();
-
-  renderFrameContents = () => {
-    const doc = this.root.current.contentDocument;
-    if (doc.readyState === 'complete') {
-      ReactDOM.render(
-        <html
-          ref={this.innerHtml}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: this.props.children
-          }}
-        />,
-        doc
-      );
-    } else {
-      setTimeout(this.renderFrameContents.bind(this), 0);
-    }
-  };
-
-  render() {
-    return <iframe width={`${WIDTH}px`} height={`${HEIGHT}px`} style={style} ref={this.root} />;
-  }
-}
+render(<Root />, document.body.appendChild(document.createElement('div')));

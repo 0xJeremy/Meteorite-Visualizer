@@ -18,23 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import {IndexRoute, Route} from 'react-router';
-import React from 'react';
-import Demo from '../app';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import keplerGlReducer from 'kepler.gl/reducers';
+import {enhanceReduxMiddleware} from 'kepler.gl/middleware';
 
-export function onAuthEnterCallback(nextState, replace, callback) {
-  // TODO: detect auth provider
-  callback();
-}
+import appReducer from './app-reducer';
+import window from 'global/window';
 
-export function buildAppRoutes(Component) {
-  return [
-    <Route key="auth" path="auth" component={Demo} onEnter={onAuthEnterCallback} />,
-    <Route key="demo" path="demo">
-      <IndexRoute component={Component} />
-      <Route path="map" component={Component} />
-      <Route path="(:id)" component={Component} />
-      <Route path="map/:provider" component={Component} />
-    </Route>
-  ];
-}
+const reducers = combineReducers({
+  keplerGl: keplerGlReducer,
+  app: appReducer
+});
+
+const middlewares = enhanceReduxMiddleware([]);
+const enhancers = [applyMiddleware(...middlewares)];
+
+const initialState = {};
+
+// add redux devtools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export default createStore(reducers, initialState, composeEnhancers(...enhancers));
