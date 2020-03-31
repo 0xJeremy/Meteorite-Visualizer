@@ -25,49 +25,6 @@ export default {
       filters: [],
       layers: [
         {
-          id: '1s8r5md',
-          type: 'point',
-          config: {
-            dataId: 'tree_data',
-            label: 'location',
-            color: [18, 147, 154],
-            columns: {
-              lat: 'Location_latitude',
-              lng: 'Location_longitude',
-              altitude: null
-            },
-            isVisible: true,
-            visConfig: {
-              radius: 10,
-              fixedRadius: false,
-              opacity: 0.8,
-              outline: false,
-              thickness: 2,
-              colorRange: {
-                name: 'Ice And Fire',
-                type: 'diverging',
-                category: 'Uber',
-                colors: ['#D50255', '#FEAD54', '#FEEDB1', '#E8FEB5', '#49E3CE', '#0198BD'],
-                reversed: true
-              },
-              radiusRange: [33.6, 96.2],
-              'hi-precision': false
-            }
-          },
-          visualChannels: {
-            colorField: {
-              name: 'Species',
-              type: 'string'
-            },
-            colorScale: 'ordinal',
-            sizeField: {
-              name: 'Age',
-              type: 'integer'
-            },
-            sizeScale: 'sqrt'
-          }
-        },
-        {
           id: '7otjdz',
           type: 'hexagon',
           config: {
@@ -134,7 +91,7 @@ export default {
       isSplit: false
     },
     mapStyle: {
-      styleType: 'light',
+      styleType: 'dark',
       topLayerGroups: {
         label: true
       },
