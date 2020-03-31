@@ -7,34 +7,52 @@ import window from 'global/window';
 const customizedKeplerGlReducer = keplerGlReducer
   .initialState({
     uiState: {
-      // hide side panel to disallower user customize the map
       readOnly: true,
 
-      // customize which map control button to show
-      // mapControls: {
-        // visibleLayers: {
-        //   show: true
-        // },
-        // mapLegend: {
-        //   show: true,
-        //   active: true
-        // },
-        // toggle3d: {
-        //   show: true
-        // },
-        // splitMap: {
-        //   show: true
-        // }
-      // }
+      mapControls: {
+        visibleLayers: {
+          show: true
+        },
+        mapLegend: {
+          show: false,
+          active: true
+        },
+        toggle3d: {
+          show: false
+        },
+        splitMap: {
+          show: false
+        },
+        mapDraw: {
+          show: false,
+          active: false
+        }
+      }
     }
   })
-  // handle additional actions
   .plugin({
     HIDE_AND_SHOW_SIDE_PANEL: (state, action) => ({
       ...state,
       uiState: {
         ...state.uiState,
-        readOnly: !state.uiState.readOnly
+        readOnly: !state.uiState.readOnly,
+        mapControls: {
+          visibleLayers: {
+            show: !state.uiState.mapControls.visibleLayers.show
+          },
+          mapLegend: {
+            show: !state.uiState.mapControls.mapLegend.show
+          },
+          toggle3d: {
+            show: !state.uiState.mapControls.toggle3d.show
+          },
+          splitMap: {
+            show: !state.uiState.mapControls.splitMap.show
+          },
+          mapDraw: {
+            show: !state.uiState.mapControls.mapDraw.show
+          }
+      }
       }
     })
   });
