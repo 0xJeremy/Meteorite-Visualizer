@@ -1,24 +1,5 @@
-# Customize kepler.gl Reducer
+# Meteorite Data using Kepler.gl
 
-This example demos how to customize kepler.gl reducer
-  1. Customize reducer initialState by `keplerGlReducer.initialState`
-  2. Adding custom actions by `keplerGlReducer.plugins`
-
-### Local dev
-```
-npm install
-```
-or
-```
-yarn
-```
-
-add mapbox access token to node env
-```
-export MapboxAccessToken=<your_mapbox_token>
-```
-
-then
-```
-npm start
-```
+1. `npm install`
+2. `export MapboxAccessToken=<your_mapbox_token>`
+3. `npm start`
