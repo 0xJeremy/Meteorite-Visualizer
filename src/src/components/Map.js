@@ -21,10 +21,9 @@ const initialViewState = {
   bearing: 0
 };
 
-
 export default function Deck(props) {
   const classes = useStyles();
-  const {mapStyle = 'mapbox://styles/mapbox/dark-v9'} = props;
+  const mapStyle = 'mapbox://styles/mapbox/dark-v9';
 
   return (
     <div className={classes.root}>
