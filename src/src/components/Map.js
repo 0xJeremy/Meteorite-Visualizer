@@ -14,6 +14,14 @@ const styles = theme => ({
     position: 'relative',
     marginBottom: '16px',
   },
+  tooltip: {
+    position: 'absolute',
+    zIndex: 100,
+    pointerEvents: 'none',
+    color: '#4fbbd6',
+    backgroundColor: '#242730',
+    padding: '8px 8px 8px 8px',
+  },
 });
 
 const MAP_VIEW = new MapView({repeat: true});
@@ -35,10 +43,27 @@ class Deck extends Component {
       y: 0,
       hoveredObject: null,
       expandedObjects: null,
+      pointerX: null,
+      pointerY: null,
+      hoverCallback: props.hoverCallback,
     };
     this.data = props.data;
   }
 
+  _renderTooltip() {
+    const {hoveredObject, pointerX, pointerY} = this.state || {};
+    const { classes } = this.props;
+    return hoveredObject && (
+      <div className={classes.tooltip} style={{left: pointerX+20, top: pointerY+20}}>
+        Name: { hoveredObject.name } <br />
+        Year: { hoveredObject.year } <br />
+        Class: { hoveredObject.class } <br />
+        Mass: { hoveredObject.mass } <br />
+      </div>
+    );
+  }
+
+  // documentation: https://deck.gl/#/documentation/deckgl-api-reference/layers/scatterplot-layer?section=getposition-function-optional-transition-enabled
   getLayer() {
     const {data = this.data} = this.props;
     return new ScatterplotLayer({
@@ -50,12 +75,17 @@ class Deck extends Component {
       filled: true,
       radiusScale: 6,
       radiusMinPixels: 5,
-      radiusMaxPixels: 100,
+      radiusMaxPixels: 8,
       lineWidthMinPixels: 1,
       getPosition: d => d.coordinates,
-      getRadius: d => Math.sqrt(d.exits),
+      getRadius: d => d.mass * 1,
       getFillColor: d => [255, 140, 0],
       getLineColor: d => [0, 0, 0],
+      onHover: info => this.setState({
+          hoveredObject: info.object,
+          pointerX: info.x,
+          pointerY: info.y
+        })
     });
   }
   
@@ -77,6 +107,7 @@ class Deck extends Component {
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
+          { this._renderTooltip() }
         </DeckGL>
       </div>
     );

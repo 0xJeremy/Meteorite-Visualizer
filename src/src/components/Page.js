@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Page() {
   const classes = useStyles();
+  const [hoverItem, setHoverItem] = useState(null);
 
   return (
     <div>
@@ -34,8 +35,8 @@ export default function Page() {
           <Paper className={classes.paper} style={{minHeight: '70vh'}}>MORE TOGGLES</Paper>
         </Grid>
         <Grid item xs={7}>
-          <Deck data={data}/>
-          <DataTable data={data}/>
+          <Deck data={data} hoverCallback={setHoverItem} />
+          <DataTable data={data} hoverItem={hoverItem} />
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 1</Paper>

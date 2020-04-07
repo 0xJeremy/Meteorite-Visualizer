@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
+  const hoverItem = props.hoverItem;
 
   return (
     <TableContainer className={classes.root} component={Paper}>
