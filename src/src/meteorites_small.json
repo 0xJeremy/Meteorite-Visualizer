@@ -1,5 +1,4 @@
-[
-{"coordinates":[28.96,13.66033],"name":"Al Zarnkh","class":"LL5","mass":"700","year":2001},
+[{"coordinates":[28.96,13.66033],"name":"Al Zarnkh","class":"LL5","mass":"700","year":2001},
 {"coordinates":[6.01533,45.82133],"name":"Alby sur Chéran","class":"Eucrite-mmict","mass":"252","year":2002},
 {"coordinates":[32.41275,20.74575],"name":"Almahata Sitta","class":"Ureilite-an","mass":"3950","year":2008},
 {"coordinates":[-97.01,31.805],"name":"Ash Creek","class":"L6","mass":"9500","year":2009},
@@ -32,5 +31,4 @@
 {"coordinates":[14.05217,46.42137],"name":"Jesenice","class":"L6","mass":"3667","year":2009},
 {"coordinates":[70.31333,22.68],"name":"Jodiya","class":"L5","mass":"100","year":2006},
 {"coordinates":[73.22329,20.33916],"name":"Kaprada","class":"L5/6","mass":"1600","year":2004},
-{"coordinates":[77.58333,29.58333],"name":"Kasauli","class":"H4","mass":"16820","year":2003}
-]
+{"coordinates":[77.58333,29.58333],"name":"Kasauli","class":"H4","mass":"16820","year":2003}]

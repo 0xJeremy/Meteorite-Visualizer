@@ -34,7 +34,7 @@ export default function Page() {
           <Paper className={classes.paper} style={{minHeight: '70vh'}}>MORE TOGGLES</Paper>
         </Grid>
         <Grid item xs={7}>
-          <Deck />
+          <Deck data={data}/>
           <DataTable data={data}/>
         </Grid>
         <Grid item xs={3}>

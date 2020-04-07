@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import DeckGL from '@deck.gl/react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import {StaticMap} from 'react-map-gl';
+import {ScatterplotLayer} from '@deck.gl/layers';
+import {MapView} from '@deck.gl/core';
 import MAPBOX_ACCESS_TOKEN from './APIKey';
 
-const useStyles = makeStyles({
+const styles = theme => ({
   root: {
     minHeight: '70vh',
     maxWidth: '100%',
@@ -13,23 +16,75 @@ const useStyles = makeStyles({
   },
 });
 
-const initialViewState = {
-  longitude: -122.41669,
-  latitude: 37.7853,
-  zoom: 13,
+const MAP_VIEW = new MapView({repeat: true});
+const INITIAL_VIEW = {
+  longitude: -35,
+  latitude: 36.7,
+  zoom: 1.8,
+  maxZoom: 20,
   pitch: 0,
   bearing: 0
 };
 
-export default function Deck(props) {
-  const classes = useStyles();
-  const mapStyle = 'mapbox://styles/mapbox/dark-v9';
+class Deck extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className={classes.root}>
-      <DeckGL initialViewState={initialViewState} controller={true} >
-        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} mapStyle={mapStyle}/>
-      </DeckGL>
-    </div>
-  );
+    this.state = {
+      x: 0,
+      y: 0,
+      hoveredObject: null,
+      expandedObjects: null,
+    };
+    this.data = props.data;
+  }
+
+  getLayer() {
+    const {data = this.data} = this.props;
+    return new ScatterplotLayer({
+      id: 'scatterplot-layer',
+      data,
+      pickable: true,
+      opacity: 0.8,
+      stroked: true,
+      filled: true,
+      radiusScale: 6,
+      radiusMinPixels: 5,
+      radiusMaxPixels: 100,
+      lineWidthMinPixels: 1,
+      getPosition: d => d.coordinates,
+      getRadius: d => Math.sqrt(d.exits),
+      getFillColor: d => [255, 140, 0],
+      getLineColor: d => [0, 0, 0],
+    });
+  }
+  
+  render() {
+    const {mapStyle = 'mapbox://styles/mapbox/dark-v9'} = this.props;
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <DeckGL
+          layers={this.getLayer()}
+          views={MAP_VIEW}
+          initialViewState={INITIAL_VIEW}
+          controller={{dragRotate: false}}
+        >
+          <StaticMap
+            reuseMaps
+            mapStyle={mapStyle}
+            preventStyleDiffing={true}
+            mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
+          />
+        </DeckGL>
+      </div>
+    );
+  }
 }
+
+Deck.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Deck);
