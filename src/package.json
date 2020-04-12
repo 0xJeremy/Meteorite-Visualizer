@@ -7,11 +7,9 @@
     "d3": "^5.15.1",
     "deck.gl": "^8.1.1",
     "react": "^16.9.0",
-    "react-d3-library": "^1.1.8",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.3",
-    "react-scripts": "3.1.0",
-    "react-terminal-component": "^1.4.1"
+    "react-scripts": "3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
