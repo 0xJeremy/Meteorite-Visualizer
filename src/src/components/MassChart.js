@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   svg: {
     minHeight: '30vh',
+    minWidth: '100%'
   },
 }));
 
@@ -28,7 +29,7 @@ export default function MassChart(props) {
   const classes = useStyles();
   const data = props.data;
 
-  const svgWidth = 300,
+  const svgWidth = 450,
         svgHeight = 300;
 
   const margin = { top: 20, right: 20, bottom: 30, left: 40 },
@@ -37,11 +38,12 @@ export default function MassChart(props) {
 
   const x = scaleBand()
             .rangeRound([0, width])
-            .padding(0.1),
-        y = scaleLinear().rangeRound([height, 0]);
+            .padding(0.1)
+            .domain(data.map(d => d.mass));
 
-  x.domain(data.map(d => d.mass));
-  y.domain([0, max(data, d => d.mass)]);
+  const y = scaleLinear()
+            .rangeRound([height, 0])
+            .domain([0, max(data, d => d.mass)]);
 
   return (
     <Paper className={classes.paper}>
@@ -49,7 +51,7 @@ export default function MassChart(props) {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
           <g>
-            <g ref={node => select(node).call(axisLeft(y).ticks(10, '%'))} />
+            <g ref={node => select(node).call(axisLeft(y))} />
 {/*            <text transform="rotate(-90)" y="-10" dy="0.5em" textAnchor="end">
               Frequency
             </text>*/}
