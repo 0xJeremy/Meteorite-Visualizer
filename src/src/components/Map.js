@@ -64,7 +64,7 @@ class Deck extends Component {
     );
   }
 
-  setItem(d) {
+  setGlobalHoverObject(d) {
     this.setState({
       globalHoverObject: d
     })
@@ -85,14 +85,10 @@ class Deck extends Component {
       radiusMaxPixels: 8,
       lineWidthMinPixels: 1,
       getPosition: d => d.coordinates,
-      getRadius: d => {
-        if(d === this.state.globalHoverObject) {
-          return d.mass * 1
-        }
-        return d.mass * 1
-      },
+      getRadius: d => d.mass * 1,
       getFillColor: d => {
-        if(d === this.state.globalHoverObject) {
+        if(d === this.state.globalHoverObject ||
+           d === this.state.hoveredObject) {
           return [213, 93, 14]
         }
         return [79, 187, 214]
@@ -107,7 +103,6 @@ class Deck extends Component {
         this.state.hoverCallback(info.object)
       },
       updateTriggers: {
-        getRadius: [this.state],
         getFillColor: [this.state]
       }
     });

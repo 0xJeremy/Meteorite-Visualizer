@@ -4,8 +4,10 @@
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "@material-ui/icons": "^4.2.1",
+    "d3": "^5.15.1",
     "deck.gl": "^8.1.1",
     "react": "^16.9.0",
+    "react-d3-library": "^1.1.8",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.3",
     "react-scripts": "3.1.0",
