@@ -24,8 +24,7 @@ const useStyles = makeStyles({
     backgroundColor: '#242730',
   },
   highlight: {
-    color: 'orange',
-    fontSize: '1.2em'
+    color: '#D55D0E',
   }
 });
 
@@ -33,6 +32,7 @@ export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
   const hoverItem = props.hoverItem;
+  const hoverCallback = props.hoverCallback;
 
   function RenderTableCell(props) {
     const d = props.d;
@@ -51,7 +51,7 @@ export default function DataTable(props) {
       )
     }
     return (
-      <TableRow key={d.name}>
+      <TableRow key={d.name} onMouseEnter={() => {hoverCallback(d)}} >
         <TableCell className={classes.cell} component="th" scope="row">
           {d.name}
         </TableCell>
