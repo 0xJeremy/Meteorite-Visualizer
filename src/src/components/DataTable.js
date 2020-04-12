@@ -22,6 +22,10 @@ const useStyles = makeStyles({
   label: {
     color: '#4fbbd6',
     backgroundColor: '#242730',
+  },
+  highlight: {
+    color: 'orange',
+    fontSize: '1.2em'
   }
 });
 
@@ -29,6 +33,36 @@ export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
   const hoverItem = props.hoverItem;
+
+  function RenderTableCell(props) {
+    const d = props.d;
+    if(d === hoverItem) {
+      return (
+        <TableRow key={d.name}>
+          <TableCell className={classes.highlight} component="th" scope="row">
+            {d.name}
+          </TableCell>
+          <TableCell className={classes.highlight} align="right">{d.year}</TableCell>
+          <TableCell className={classes.highlight} align="right">{d.class}</TableCell>
+          <TableCell className={classes.highlight} align="right">{d.mass}</TableCell>
+          <TableCell className={classes.highlight} align="right">{d.coordinates[0]}</TableCell>
+          <TableCell className={classes.highlight} align="right">{d.coordinates[1]}</TableCell>
+        </TableRow>
+      )
+    }
+    return (
+      <TableRow key={d.name}>
+        <TableCell className={classes.cell} component="th" scope="row">
+          {d.name}
+        </TableCell>
+        <TableCell className={classes.cell} align="right">{d.year}</TableCell>
+        <TableCell className={classes.cell} align="right">{d.class}</TableCell>
+        <TableCell className={classes.cell} align="right">{d.mass}</TableCell>
+        <TableCell className={classes.cell} align="right">{d.coordinates[0]}</TableCell>
+        <TableCell className={classes.cell} align="right">{d.coordinates[1]}</TableCell>
+      </TableRow>
+    )
+  }
 
   return (
     <TableContainer className={classes.root} component={Paper}>
@@ -44,18 +78,9 @@ export default function DataTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((d) => (
-            <TableRow key={d.name}>
-              <TableCell className={classes.cell} component="th" scope="row">
-                {d.name}
-              </TableCell>
-              <TableCell className={classes.cell} align="right">{d.year}</TableCell>
-              <TableCell className={classes.cell} align="right">{d.class}</TableCell>
-              <TableCell className={classes.cell} align="right">{d.mass}</TableCell>
-              <TableCell className={classes.cell} align="right">{d.coordinates[0]}</TableCell>
-              <TableCell className={classes.cell} align="right">{d.coordinates[1]}</TableCell>
-            </TableRow>
-          ))}
+          {data.map((d) => 
+            <RenderTableCell d={d} />
+          )}
         </TableBody>
       </Table>
     </TableContainer>

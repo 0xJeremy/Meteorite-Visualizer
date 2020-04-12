@@ -81,11 +81,14 @@ class Deck extends Component {
       getRadius: d => d.mass * 1,
       getFillColor: d => [255, 140, 0],
       getLineColor: d => [0, 0, 0],
-      onHover: info => this.setState({
+      onHover: info => {
+        this.setState({
           hoveredObject: info.object,
           pointerX: info.x,
           pointerY: info.y
         })
+        this.state.hoverCallback(info.object)
+      }
     });
   }
   
