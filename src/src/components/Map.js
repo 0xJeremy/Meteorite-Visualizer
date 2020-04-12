@@ -46,8 +46,8 @@ class Deck extends Component {
       pointerX: null,
       pointerY: null,
       hoverCallback: props.hoverCallback,
+      globalHoverObject: null
     };
-    this.globalHoverObject = props.hoverItem;
     this.data = props.data;
   }
 
@@ -62,6 +62,12 @@ class Deck extends Component {
         Mass: { hoveredObject.mass } <br />
       </div>
     );
+  }
+
+  setItem(d) {
+    this.setState({
+      globalHoverObject: d
+    })
   }
 
   // documentation: https://deck.gl/#/documentation/deckgl-api-reference/layers/scatterplot-layer?section=getposition-function-optional-transition-enabled
@@ -80,14 +86,13 @@ class Deck extends Component {
       lineWidthMinPixels: 1,
       getPosition: d => d.coordinates,
       getRadius: d => {
-        if(d === this.state.hoveredObject) {
-          return d.mass * 2
+        if(d === this.state.globalHoverObject) {
+          return d.mass * 1
         }
         return d.mass * 1
       },
       getFillColor: d => {
-        console.log("Reevaluating")
-        if(d === this.state.hoveredObject) {
+        if(d === this.state.globalHoverObject) {
           return [213, 93, 14]
         }
         return [79, 187, 214]

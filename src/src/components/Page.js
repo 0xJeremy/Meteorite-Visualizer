@@ -26,6 +26,12 @@ const useStyles = makeStyles(theme => ({
 export default function Page() {
   const classes = useStyles();
   const [hoverItem, setHoverItem] = useState(1);
+  const MapState = React.createRef();
+
+  function updateHoverFromTable(d) {
+    setHoverItem(d);
+    MapState.current.setItem(d);
+  }
 
   return (
     <div>
@@ -35,8 +41,8 @@ export default function Page() {
           <Paper className={classes.paper} style={{minHeight: '70vh'}}>MORE TOGGLES</Paper>
         </Grid>
         <Grid item xs={7}>
-          <Deck data={data} hoverItem={hoverItem} hoverCallback={setHoverItem} />
-          <DataTable data={data} hoverItem={hoverItem} hoverCallback={setHoverItem} />
+          <Deck data={data} hoverItem={hoverItem} hoverCallback={setHoverItem} ref={MapState}/>
+          <DataTable data={data} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 1</Paper>
