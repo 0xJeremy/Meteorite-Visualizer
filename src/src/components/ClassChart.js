@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
@@ -59,33 +59,66 @@ export default function ClassChart(props) {
     return self.indexOf(value) === index;
   }
 
-  var unique_classes = Array.from(data.map(function(d)
+
+  var all_classes = Array.from(data.map(function(d)
       {return d.class
                 .replace(/[0-9]/g, '')
                 .replace(/(.*)\s/g,'')
                 .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
                 .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
-      }).values()).filter(onlyUnique)
+      }).values())
 
-  console.log(unique_classes);
+  var unique_classes = all_classes.filter(onlyUnique)
+
+  var counts = {};
+
+  for (var i = 0; i < all_classes.length; i++) {
+    var cls = all_classes[i];
+    counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
+  }
+
+  const x = scaleBand()
+            .range([0, width])
+            .domain(Object.keys(counts));
 
 
+
+  var y_max = max(Object.values(counts))
+
+  const y = scaleLinear()
+            .domain([0, y_max])
+            .range([height, 0]);
+
+  console.log(Object.keys(counts));
   return (
     <Paper className={classes.paper}>
-      <svg className={classes.svg}>
+      <svg className={classes.svg} id="ClassChart">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g transform={`translate(0, ${height})`} />
+          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))}  />
           <g>
-            <g /> 
+            <g ref={node => select(node).call(axisLeft(y).ticks(10))}/> 
             <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
 
               # Meteorites
             </text>
           </g>
+           {
+            // counts.map(d => {
+            //   return (
+            //     <rect
+            //       // key={d.mass/1000}
+            //       style={{fill: '#D55D0E'}}
+            //       className="bar"
+            //       x={}
+            //       y={}
+            //       width={}
+            //       height={}
+            //     />
+            //   )
+            }
 
           <text className={classes.text} y={vh(28)+2} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
-              Class/Type
-
+              Classes/Types
           </text>
         </g>
       </svg>
