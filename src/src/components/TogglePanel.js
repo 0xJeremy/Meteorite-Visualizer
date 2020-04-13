@@ -132,7 +132,7 @@ export default function TogglePanel(props) {
       />
 
 
-      <Snackbar open={smallSnack} autoHideDuration={6000000} onClose={closeSmall}>
+      <Snackbar open={smallSnack} autoHideDuration={6000} onClose={closeSmall}>
         <Alert onClose={closeSmall} severity="success" color="info" classes={{filledInfo: classes.alert}}>
           Loading small data set!
         </Alert>

@@ -41,12 +41,16 @@ export default function Page() {
   function setData(quantity) {
     if(quantity === 'small') {
       setTotalData(small_data);
+      setDispData(small_data)
     } else if (quantity === 'medium') {
-      setTotalData(small_data.concat(medium_data));
+      const data = small_data.concat(medium_data)
+      setTotalData(data);
+      setDispData(data)
     } else if (quantity === 'large') {
-      setTotalData(small_data.concat(medium_data).concat(large_data));
+      const data = small_data.concat(medium_data).concat(large_data);
+      setTotalData(data);
+      setDispData(data)
     }
-    setDispData(totalData);
   }
 
   function filter_timeline(values) {
