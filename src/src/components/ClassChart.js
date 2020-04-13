@@ -89,7 +89,7 @@ export default function ClassChart(props) {
             .domain([0, y_max])
             .range([height, 0]);
 
-  console.log(Object.keys(counts));
+  // console.log(Object.keys(counts));
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">

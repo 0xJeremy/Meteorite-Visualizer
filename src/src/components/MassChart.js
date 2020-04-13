@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { scaleLinear } from 'd3-scale';
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
@@ -36,7 +36,8 @@ const useStyles = makeStyles(theme => ({
 export default function MassChart(props) {
   const classes = useStyles();
   const data = props.data;
-  const hoverItem = props.hoverItem;
+  const selectedData = props.selectedData;
+  const setSelectedData = props.setSelectedData;
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -53,26 +54,37 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var x = scaleLinear()
+  const x = scaleLinear()
           .domain([0, max(data, function(d) { return +d.mass/1000 })])
           .range([0, width]);
 
 
   // Ended up being way too many, theres a ton of overlap, but leaving in for adjustment
-  // var num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
+  // const num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
 
-  var hist = histogram()
+  const hist = histogram()
             .value(function(d) { return d.mass/1000; })
             .domain(x.domain())
             .thresholds(x.ticks(10)); 
 
-  var bins = hist(data);
+  const bins = hist(data);
 
-  var y_max = max(bins, function(d) { return d.length; })
+  const y_max = max(bins, function(d) { return d.length; })
 
-  var y = scaleLinear()
+  const y = scaleLinear()
       .range([height, 0])
       .domain([0, y_max]);
+
+  // const bars = document.getElementsByClassName("bar");
+  // for (var i = 0; i < bars.length; i++) {
+  //     const index = i;
+  //     bars[i].addEventListener('mouseover', () => {
+  //       if(selectedData !== bins[index]) {
+  //         setSelectedData(bins[index]);
+  //       }
+  //     });
+  //     bars[i].addEventListener('mouseout', () => {setSelectedData(null)});
+  // }
 
   return (
     <Paper className={classes.paper}>
@@ -82,12 +94,11 @@ export default function MassChart(props) {
           <g>
             <g ref={node => select(node).call(axisLeft(y).ticks((y_max % 10)))}/> 
             <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
-
               # Meteorites
             </text>
           </g>
           {bins.map(d => {
-            if(d.includes(hoverItem)) {
+            if(selectedData !== null && d.includes(selectedData[0])) {
               return (
                 <rect
                   // key={d.mass/1000}

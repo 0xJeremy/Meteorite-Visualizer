@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Page() {
   const classes = useStyles();
-  const [hoverItem, setHoverItem] = useState(null);
+  const [selectedData, setSelectedData] = useState(null);
   const [timeline, setTimeline] = useState([1950, 2020])
   const [totalData, setTotalData] = useState(initial_data)
   const [dispData, setDispData] = useState(initial_data)
@@ -51,9 +51,11 @@ export default function Page() {
     setDispData(initial_data);
   }
 
-  function updateHoverFromTable(d) {
-    setHoverItem(d);
-    MapState.current.setGlobalHoverObject(d);
+  function updateMapHover(d) {
+    setSelectedData(d);
+    if(MapState.current !== null) {
+      MapState.current.setSelectedData([d]);
+    }
   }
 
   return (
@@ -61,7 +63,7 @@ export default function Page() {
       <Grid container spacing={1}>
 
         <Grid item xs={9}>
-          <Deck data={dispData} hoverItem={hoverItem} hoverCallback={setHoverItem} ref={MapState}/>
+          <Deck data={dispData} selectedData={selectedData} hoverCallback={setSelectedData} ref={MapState}/>
 
           <Grid container spacing={1}>
             <Grid item xs={3}>
@@ -69,15 +71,15 @@ export default function Page() {
             </Grid>
 
             <Grid item xs={9}>
-              <DataTable data={dispData} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
+              <DataTable data={dispData} selectedData={selectedData} hoverCallback={updateMapHover} selectedData={selectedData} />
             </Grid>
           </Grid>
 
         </Grid>
 
         <Grid item xs={3}>
-          <MassChart data={dispData} hoverItem={hoverItem} />
-          <ClassChart data={dispData} hoverItem={hoverItem} />
+          <MassChart data={dispData} selectedData={selectedData} setSelectedData={updateMapHover} />
+          <ClassChart data={dispData} selectedData={selectedData} />
           <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 3</Paper>
         </Grid>
 

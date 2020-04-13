@@ -31,14 +31,14 @@ const useStyles = makeStyles({
 export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
-  const hoverItem = props.hoverItem;
+  const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
 
   function RenderTableCell(props) {
     const d = props.d;
-    if(d === hoverItem) {
+    if(d === selectedData || (selectedData !== null && selectedData.includes(d))) {
       return (
-        <TableRow key={d.name}>
+        <TableRow onMouseLeave={() => {hoverCallback(null)}}>
           <TableCell className={classes.highlight} component="th" scope="row">
             {d.name}
           </TableCell>
@@ -51,7 +51,7 @@ export default function DataTable(props) {
       )
     }
     return (
-      <TableRow key={d.name} onMouseEnter={() => {hoverCallback(d)}} >
+      <TableRow onMouseEnter={() => {hoverCallback([d])}} >
         <TableCell className={classes.cell} component="th" scope="row">
           {d.name}
         </TableCell>

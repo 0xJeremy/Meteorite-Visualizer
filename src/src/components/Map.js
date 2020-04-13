@@ -48,7 +48,7 @@ class Deck extends Component {
       pointerX: null,
       pointerY: null,
       hoverCallback: props.hoverCallback,
-      globalHoverObject: null
+      selectedData: null
     };
     this.data = props.data;
   }
@@ -66,9 +66,9 @@ class Deck extends Component {
     );
   }
 
-  setGlobalHoverObject(d) {
+  setSelectedData(d) {
     this.setState({
-      globalHoverObject: d
+      selectedData: d
     })
   }
 
@@ -89,7 +89,7 @@ class Deck extends Component {
       getPosition: d => d.coordinates,
       getRadius: d => d.mass * 1,
       getFillColor: d => {
-        if(d === this.state.globalHoverObject ||
+        if((this.state.selectedData !== null && this.state.selectedData.includes(d)) ||
            d === this.state.hoveredObject) {
           return [213, 93, 14]
         }
@@ -102,7 +102,7 @@ class Deck extends Component {
           pointerX: info.x,
           pointerY: info.y
         })
-        this.state.hoverCallback(info.object)
+        this.state.hoverCallback([info.object])
       },
       updateTriggers: {
         getFillColor: [this.state]
