@@ -6,6 +6,7 @@ import Deck from './Map';
 import DataTable from './DataTable';
 import MassChart from './MassChart';
 import TogglePanel from './TogglePanel';
+import InfoBox from './InfoBox';
 import initial_data from '../meteorites_medium';
 import more_data from '../meteorites_medium_ext';
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 export default function Page() {
   const classes = useStyles();
   const [hoverItem, setHoverItem] = useState(null);
-  const [timeline, setTimeline] = useState([1800, 2020])
+  const [timeline, setTimeline] = useState([1950, 2020])
   const [data, setData] = useState(initial_data)
   const MapState = React.createRef();
 
@@ -77,6 +78,9 @@ export default function Page() {
         </Grid>
 
       </Grid>
+
+      <InfoBox />
+
     </div>
   );
 }

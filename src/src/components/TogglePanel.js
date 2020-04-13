@@ -50,6 +50,7 @@ const useStyles = makeStyles({
 const Timeline = withStyles({
   root: {
     color: '#4fbbd6',
+    maxWidth: '90%'
   }
 })(Slider)
 
@@ -104,12 +105,12 @@ export default function TogglePanel(props) {
       <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickMore} >Load More Data</Button>
 
       <Typography className={classes.timeline} id="range-slider" gutterBottom>
-        Data Range (years)
+        Data Range ({timeline[0]} - {timeline[1]})
       </Typography>
       <Timeline
         value={timeline}
         onChange={timelineChange}
-        min={1800}
+        min={1950}
         max={2020}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"

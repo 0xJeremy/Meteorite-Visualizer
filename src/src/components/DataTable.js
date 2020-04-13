@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
   root: {
-    maxHeight: '28vh',
+    maxHeight: '29vh',
     backgroundColor: '#242730',
   },
   table: {
