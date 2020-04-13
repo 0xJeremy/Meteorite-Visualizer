@@ -56,7 +56,7 @@
 {"coordinates":[-4.9,30.55],"name":"Agoult","class":"Eucrite","mass":"82","year":2000},
 {"coordinates":[4.35,27.4],"name":"Aguemour 017","class":"L6","mass":"1000","year":2001},
 {"coordinates":[28.9698,30.70952],"name":"Al Alamayn","class":"H5","mass":"13.31","year":2005},
-{"coordinates":[-12.5,27.5],"name":"Al Haggounia 001","class":"Aubrite","mass":"3000000","year":2006},
+{"coordinates":[-12.5,27.5],"name":"Al Haggounia 001","class":"Aubrite","mass":"30000","year":2006},
 {"coordinates":[57.18833,19.42],"name":"Al Huqf 001","class":"L4","mass":"41.5","year":2000},
 {"coordinates":[57.38667,19.27167],"name":"Al Huqf 002","class":"H5","mass":"81.400000000000006","year":2000},
 {"coordinates":[57.11952,19.50695],"name":"Al Huqf 003","class":"L4","mass":"115.42","year":2002},

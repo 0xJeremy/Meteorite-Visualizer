@@ -31,20 +31,22 @@ export default function Page() {
   const classes = useStyles();
   const [hoverItem, setHoverItem] = useState(null);
   const [timeline, setTimeline] = useState([1950, 2020])
-  const [data, setData] = useState(initial_data)
+  const [totalData, setTotalData] = useState(initial_data)
+  const [dispData, setDispData] = useState(initial_data)
   const MapState = React.createRef();
 
   function filter_timeline(values) {
     setTimeline(values);
-    setData(initial_data.filter(d => (d.year > values[0] && d.year < values[1])));
+    setDispData(totalData.filter(d => (d.year >= values[0] && d.year <= values[1])));
   }
 
   function load_more_data() {
-    setData(initial_data.concat(more_data));
+    setTotalData(initial_data.concat(more_data));
+    setDispData(totalData);
   }
 
   function load_less_data() {
-    setData(initial_data);
+    setDispData(initial_data);
   }
 
   function updateHoverFromTable(d) {
@@ -57,7 +59,7 @@ export default function Page() {
       <Grid container spacing={1}>
 
         <Grid item xs={9}>
-          <Deck data={data} hoverItem={hoverItem} hoverCallback={setHoverItem} ref={MapState}/>
+          <Deck data={dispData} hoverItem={hoverItem} hoverCallback={setHoverItem} ref={MapState}/>
 
           <Grid container spacing={1}>
             <Grid item xs={3}>
@@ -65,14 +67,14 @@ export default function Page() {
             </Grid>
 
             <Grid item xs={9}>
-              <DataTable data={data} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
+              <DataTable data={dispData} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
             </Grid>
           </Grid>
 
         </Grid>
 
         <Grid item xs={3}>
-          <MassChart data={data} hoverItem={hoverItem} />
+          <MassChart data={dispData} hoverItem={hoverItem} />
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 2</Paper>
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 3</Paper>
         </Grid>
