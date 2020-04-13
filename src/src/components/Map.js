@@ -13,6 +13,8 @@ const styles = theme => ({
     maxWidth: '100%',
     position: 'relative',
     marginBottom: '8px',
+    marginLeft: '8px',
+    marginTop: '16px',
   },
   tooltip: {
     position: 'absolute',

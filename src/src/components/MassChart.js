@@ -12,13 +12,15 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     marginBottom: '8px',
+    marginRight: '8px',
+    marginTop: '16px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '40px',
     backgroundColor: '#242730',
-    minHeight: '30vh',
+    minHeight: '31vh',
     padding: '0 0 0 0'
   },
   svg: {

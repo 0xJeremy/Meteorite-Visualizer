@@ -14,10 +14,12 @@ function Alert(props) {
 const useStyles = makeStyles({
   paper: {
     marginBottom: '8px',
+    marginLeft: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '30px',
-    backgroundColor: '#242730'
+    backgroundColor: '#242730',
+    minHeight: '27.1vh'
   },
   text: {
     paddingBottom: '16px'
@@ -98,7 +100,7 @@ export default function TogglePanel(props) {
   };
 
   return (
-    <Paper className={classes.paper} style={{minHeight: '30vh'}}>
+    <Paper className={classes.paper}>
       <div className={classes.text} >Data Options</div>
 
       <Button className={classes.red} classes={{outlined: classes.outline_red}} variant="outlined" onClick={clickLess} >Load Less Data</Button>
