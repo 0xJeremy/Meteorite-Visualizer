@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export default function MassChart(props) {
   const classes = useStyles();
   const data = props.data;
@@ -51,7 +52,6 @@ export default function MassChart(props) {
   const margin = { top: vh(1), right: 0, bottom: 0, left: vw(5) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
-
 
   var x = scaleLinear()
           .domain([0, max(data, function(d) { return +d.mass/1000 })])
@@ -82,6 +82,7 @@ export default function MassChart(props) {
           <g>
             <g ref={node => select(node).call(axisLeft(y).ticks((y_max % 10)))}/> 
             <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
+
               # Meteorites
             </text>
           </g>
@@ -89,7 +90,7 @@ export default function MassChart(props) {
             if(d.includes(hoverItem)) {
               return (
                 <rect
-                  key={d.mass/1000}
+                  // key={d.mass/1000}
                   style={{fill: '#D55D0E'}}
                   className="bar"
                   x={x(d.x0)+1}
@@ -101,7 +102,7 @@ export default function MassChart(props) {
             }
             return (
                 <rect
-                  key={d.mass/1000}
+                  // key={d.mass/1000}
                   style={{fill: '#4fbbd6'}}
                   className="bar"
                   x={x(d.x0)+1}
@@ -111,8 +112,10 @@ export default function MassChart(props) {
                 />
               )
           })}
+
           <text className={classes.text} y={vh(28)+2} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
               Mass (kg)
+
           </text>
         </g>
       </svg>
