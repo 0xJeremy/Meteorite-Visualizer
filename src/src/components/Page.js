@@ -29,8 +29,14 @@ const useStyles = makeStyles(theme => ({
 export default function Page() {
   const classes = useStyles();
   const [hoverItem, setHoverItem] = useState(null);
+  const [timeline, setTimeline] = useState([1800, 2020])
   const [data, setData] = useState(initial_data)
   const MapState = React.createRef();
+
+  function filter_timeline(values) {
+    setTimeline(values);
+    setData(initial_data.filter(d => (d.year > values[0] && d.year < values[1])));
+  }
 
   function load_more_data() {
     setData(initial_data.concat(more_data));
@@ -54,7 +60,7 @@ export default function Page() {
 
           <Grid container spacing={1}>
             <Grid item xs={3}>
-              <TogglePanel more={load_more_data} less={load_less_data} />
+              <TogglePanel more={load_more_data} less={load_less_data} timeline={timeline} setTimeline={filter_timeline} />
             </Grid>
 
             <Grid item xs={9}>

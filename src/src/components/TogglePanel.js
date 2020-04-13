@@ -1,7 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -18,7 +20,7 @@ const useStyles = makeStyles({
     backgroundColor: '#242730'
   },
   text: {
-    paddingBottom: '8px'
+    paddingBottom: '16px'
   },
   green: {
     color: '#48c74e'
@@ -39,12 +41,28 @@ const useStyles = makeStyles({
     borderColor: '#e03131',
     height: '100%'
   },
+  timeline: {
+    marginTop: '24px',
+    fontSize: '20px',
+  }
 });
+
+const Timeline = withStyles({
+  root: {
+    color: '#4fbbd6',
+  }
+})(Slider)
+
+function valuetext(value) {
+  return `${value}`;
+}
 
 export default function TogglePanel(props) {
   const classes = useStyles();
   const [snackMore, setSnackMore] = React.useState(false);
   const [snackLess, setSnackLess] = React.useState(false);
+  const timeline = props.timeline;
+  const setTimeline = props.setTimeline;
   const more = props.more;
   const less = props.less;
 
@@ -74,13 +92,29 @@ export default function TogglePanel(props) {
     setSnackMore(false);
   }
 
+  const timelineChange = (event, newValue) => {
+    setTimeline(newValue);
+  };
 
   return (
     <Paper className={classes.paper} style={{minHeight: '30vh'}}>
-      <div className={classes.text} >viz options</div>
+      <div className={classes.text} >Data Options</div>
 
       <Button className={classes.red} classes={{outlined: classes.outline_red}} variant="outlined" onClick={clickLess} >Load Less Data</Button>
       <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickMore} >Load More Data</Button>
+
+      <Typography className={classes.timeline} id="range-slider" gutterBottom>
+        Data Range (years)
+      </Typography>
+      <Timeline
+        value={timeline}
+        onChange={timelineChange}
+        min={1800}
+        max={2020}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+        getAriaValueText={valuetext}
+      />
 
 
       <Snackbar open={snackMore} autoHideDuration={6000} onClose={closeMore}>
