@@ -12,8 +12,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   paper: {
-    padding: theme.spacing(2),
     marginBottom: '8px',
+    marginRight: '8px',
+    marginTop: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '40px',
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     padding: '0 0 0 0'
   },
   svg: {
-    minHeight: '30vh',
+    minHeight: '31vh',
     minWidth: '100%',
   },
   text: {
@@ -126,7 +127,6 @@ export default function MassChart(props) {
 
           <text className={classes.text} y={vh(28)+2} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
               Mass (kg)
-
           </text>
         </g>
       </svg>

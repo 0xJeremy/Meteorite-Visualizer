@@ -13,39 +13,33 @@ function Alert(props) {
 
 const useStyles = makeStyles({
   paper: {
-    marginBottom: '8px',
     marginLeft: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '30px',
     backgroundColor: '#242730',
-    minHeight: '27.1vh'
+    minHeight: '33vh'
   },
   text: {
-    paddingBottom: '16px'
+    paddingBottom: '16px',
   },
   green: {
-    color: '#48c74e'
-  },
-  red: {
-    color: '#e03131',
-    marginRight: '8px'
-  },
-  outline_blue: {
-    borderColor: '#4fbbd6',
-    height: '100%'
+    color: '#48c74e',
+    marginRight: '16px'
   },
   outline_green: {
     borderColor: '#48c74e',
     height: '100%'
   },
-  outline_red: {
-    borderColor: '#e03131',
-    height: '100%'
-  },
   timeline: {
     marginTop: '24px',
     fontSize: '20px',
+  },
+  load: {
+    fontSize: '20px',
+  },
+  alert: {
+    backgroundColor: '#4fbbd6',
   }
 });
 
@@ -62,38 +56,52 @@ function valuetext(value) {
 
 export default function TogglePanel(props) {
   const classes = useStyles();
-  const [snackMore, setSnackMore] = React.useState(false);
-  const [snackLess, setSnackLess] = React.useState(false);
+  const [smallSnack, setSnackSmall] = React.useState(false);
+  const [mediumSnack, setSnackMedium] = React.useState(false);
+  const [largeSnack, setSnackLarge] = React.useState(false);
   const timeline = props.timeline;
   const setTimeline = props.setTimeline;
-  const more = props.more;
-  const less = props.less;
+  const setData = props.setData;
 
-  const clickLess = () => {
-    setSnackLess(true);
-    setSnackMore(false);
-    less();
+  const clickSmall = () => {
+    setSnackSmall(true);
+    setSnackMedium(false);
+    setSnackLarge(false);
+    setData('small');
   }
-
-  const closeLess = (event, reason) => {
-    if (reason === 'clickaway') {
+  const closeSmall = (event, reason) => {
+    if(reason === 'clickaway') {
       return;
     }
-    setSnackLess(false);
+    setSnackSmall(false);
   }
 
-  const clickMore = () => {
-    setSnackMore(true);
-    setSnackLess(false);
-    more();
+  const clickMedium = () => {
+    setSnackSmall(false);
+    setSnackMedium(true);
+    setSnackLarge(false);
+    setData('medium');
   }
-
-  const closeMore = (event, reason) => {
-    if (reason === 'clickaway') {
+  const closeMedium = (event, reason) => {
+    if(reason === 'clickaway') {
       return;
     }
-    setSnackMore(false);
+    setSnackMedium(false);
   }
+
+  const clickLarge = () => {
+    setSnackSmall(false);
+    setSnackMedium(false);
+    setSnackLarge(true);
+    setData('large');
+  }
+  const closeLarge = (event, reason) => {
+    if(reason === 'clickaway') {
+      return;
+    }
+    setSnackLarge(false);
+  }
+
 
   const timelineChange = (event, newValue) => {
     setTimeline(newValue);
@@ -103,8 +111,12 @@ export default function TogglePanel(props) {
     <Paper className={classes.paper}>
       <div className={classes.text} >Data Options</div>
 
-      <Button className={classes.red} classes={{outlined: classes.outline_red}} variant="outlined" onClick={clickLess} >Load Less Data</Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickMore} >Load More Data</Button>
+      <Typography className={classes.load} gutterBottom>
+        Load Data Set
+      </Typography>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickSmall} >Small</Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickMedium} >Medium</Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickLarge} >Large</Button>
 
       <Typography className={classes.timeline} id="range-slider" gutterBottom>
         Data Range ({timeline[0]} - {timeline[1]})
@@ -120,16 +132,22 @@ export default function TogglePanel(props) {
       />
 
 
-      <Snackbar open={snackMore} autoHideDuration={6000} onClose={closeMore}>
-        <Alert onClose={closeMore} severity="success">
-          Loading more data!
+      <Snackbar open={smallSnack} autoHideDuration={6000000} onClose={closeSmall}>
+        <Alert onClose={closeSmall} severity="success" color="info" classes={{filledInfo: classes.alert}}>
+          Loading small data set!
         </Alert>
       </Snackbar>
-      <Snackbar open={snackLess} autoHideDuration={6000} onClose={closeLess}>
-        <Alert onClose={closeLess} severity="error">
-          Loading less data!
+      <Snackbar open={mediumSnack} autoHideDuration={6000} onClose={closeMedium}>
+        <Alert onClose={closeMedium} severity="success" color="info" classes={{filledInfo: classes.alert}}>
+          Loading medium data set!
         </Alert>
       </Snackbar>
+      <Snackbar open={largeSnack} autoHideDuration={6000} onClose={closeLarge}>
+        <Alert onClose={closeLarge} severity="success" color="info" classes={{filledInfo: classes.alert}}>
+          Loading large data set!
+        </Alert>
+      </Snackbar>
+
 
     </Paper>
   );

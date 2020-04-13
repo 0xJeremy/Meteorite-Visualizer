@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
@@ -12,10 +12,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   paper: {
-    padding: theme.spacing(1),
     marginBottom: '8px',
     marginRight: '8px',
-    marginTop: '16px',
+    marginTop: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '40px',
@@ -38,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
-  const hoverItem = props.hoverItem;
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)

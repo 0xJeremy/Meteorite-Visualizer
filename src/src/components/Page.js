@@ -8,8 +8,9 @@ import MassChart from './MassChart';
 import ClassChart from './ClassChart';
 import TogglePanel from './TogglePanel';
 import InfoBox from './InfoBox';
-import initial_data from '../meteorites_medium';
-import more_data from '../meteorites_medium_ext';
+import small_data from '../meteorites_small';
+import medium_data from '../meteorites_medium';
+import large_data from '../meteorites_large';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,29 +34,29 @@ export default function Page() {
   const classes = useStyles();
   const [selectedData, setSelectedData] = useState(null);
   const [timeline, setTimeline] = useState([1950, 2020])
-  const [totalData, setTotalData] = useState(initial_data)
-  const [dispData, setDispData] = useState(initial_data)
+  const [totalData, setTotalData] = useState(small_data)
+  const [dispData, setDispData] = useState(small_data)
   const MapState = React.createRef();
+
+  function setData(quantity) {
+    if(quantity === 'small') {
+      setTotalData(small_data);
+    } else if (quantity === 'medium') {
+      setTotalData(small_data.concat(medium_data));
+    } else if (quantity === 'large') {
+      setTotalData(small_data.concat(medium_data).concat(large_data));
+    }
+    setDispData(totalData);
+  }
 
   function filter_timeline(values) {
     setTimeline(values);
     setDispData(totalData.filter(d => (d.year >= values[0] && d.year <= values[1])));
   }
 
-  function load_more_data() {
-    setTotalData(initial_data.concat(more_data));
-    setDispData(totalData);
-  }
-
-  function load_less_data() {
-    setDispData(initial_data);
-  }
-
   function updateMapHover(d) {
     setSelectedData(d);
-    if(MapState.current !== null) {
-      MapState.current.setSelectedData([d]);
-    }
+    MapState.current.setSelectedData(d);
   }
 
   return (
@@ -67,11 +68,11 @@ export default function Page() {
 
           <Grid container spacing={1}>
             <Grid item xs={3}>
-              <TogglePanel more={load_more_data} less={load_less_data} timeline={timeline} setTimeline={filter_timeline} />
+              <TogglePanel setData={setData} timeline={timeline} setTimeline={filter_timeline} />
             </Grid>
 
             <Grid item xs={9}>
-              <DataTable data={dispData} selectedData={selectedData} hoverCallback={updateMapHover} selectedData={selectedData} />
+              <DataTable data={dispData} selectedData={selectedData} hoverCallback={updateMapHover} />
             </Grid>
           </Grid>
 

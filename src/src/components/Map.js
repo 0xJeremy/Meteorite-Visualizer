@@ -9,12 +9,12 @@ import MAPBOX_ACCESS_TOKEN from './APIKey';
 
 const styles = theme => ({
   root: {
-    minHeight: '70vh',
+    minHeight: '64vh',
     maxWidth: '100%',
     position: 'relative',
     marginBottom: '8px',
     marginLeft: '8px',
-    marginTop: '16px',
+    marginTop: '8px',
   },
   tooltip: {
     position: 'absolute',
