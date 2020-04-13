@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Deck from './Map';
 import DataTable from './DataTable';
 import MassChart from './MassChart';
-import data from '../meteorites_small';
+import data from '../meteorites_medium';
 
 const useStyles = makeStyles(theme => ({
   root: {
