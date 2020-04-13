@@ -32,18 +32,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function vw(view_width) {
+  return view_width * (window.innerWidth / 100)
+}
+
+function vh(view_height) {
+  return view_height * (window.innerHeight / 100)
+}
+
+const svgWidth = vw(23),
+     svgHeight = vh(24);
+
+const margin = { top: vh(1), right: 0, bottom: 0, left: vw(4) },
+       width = svgWidth - margin.left - margin.right,
+      height = svgHeight - margin.top - margin.bottom;
+
 export default function MassChart(props) {
   const classes = useStyles();
   const data = props.data;
   const hoverItem = props.hoverItem;
-
-  const svgWidth = 480,
-        svgHeight = 290;
-
-  const margin = { top: 10, right: 50, bottom: 50, left: 75 },
-         width = svgWidth - margin.left - margin.right,
-        height = svgHeight - margin.top - margin.bottom;
-
 
   var x = scaleLinear()
           .domain([0, max(data, function(d) { return +d.mass/1000 })])
@@ -73,7 +80,7 @@ export default function MassChart(props) {
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
           <g>
             <g ref={node => select(node).call(axisLeft(y).ticks((y_max % 10)))}/> 
-            <text className={classes.text} transform="rotate(-90)" y="-50" dy="0.5em" style={{fill: '#4fbbd6'}}>
+            <text className={classes.text} transform="rotate(-90)" y={vh(-5)} dy="0.5em" style={{fill: '#4fbbd6'}}>
               # Meteorites
             </text>
           </g>
@@ -81,7 +88,7 @@ export default function MassChart(props) {
             if(d.includes(hoverItem)) {
               return (
                 <rect
-                  key={d.mass/1000}
+                  // key={d.mass/1000}
                   style={{fill: '#D55D0E'}}
                   className="bar"
                   x={x(d.x0)+1}
@@ -93,7 +100,7 @@ export default function MassChart(props) {
             }
             return (
                 <rect
-                  key={d.mass/1000}
+                  // key={d.mass/1000}
                   style={{fill: '#4fbbd6'}}
                   className="bar"
                   x={x(d.x0)+1}
@@ -103,8 +110,8 @@ export default function MassChart(props) {
                 />
               )
           })}
-          <text className={classes.text} y="275" x="360" style={{fill: '#4fbbd6'}}>
-              Mass (kg)
+          <text className={classes.text} y={vh(28)} x={vw(19.5)} style={{fill: '#4fbbd6'}}>
+            Mass (kg)
           </text>
         </g>
       </svg>
