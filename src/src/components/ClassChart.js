@@ -55,6 +55,20 @@ export default function ClassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+  }
+
+  var unique_classes = Array.from(data.map(function(d)
+      {return d.class
+                .replace(/[0-9]/g, '')
+                .replace(/(.*)\s/g,'')
+                .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
+                .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+      }).values()).filter(onlyUnique)
+
+  console.log(unique_classes);
+
 
   return (
     <Paper className={classes.paper}>
