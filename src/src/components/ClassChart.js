@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function MassChart(props) {
+export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
   const hoverItem = props.hoverItem;
@@ -60,9 +60,9 @@ export default function MassChart(props) {
     <Paper className={classes.paper}>
       <svg className={classes.svg}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
+          <g transform={`translate(0, ${height})`} />
           <g>
-            <g ref={node => select(node).call()}/> 
+            <g /> 
             <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
 
               # Meteorites

@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Deck from './Map';
 import DataTable from './DataTable';
 import MassChart from './MassChart';
+import ClassChart from './ClassChart';
 import TogglePanel from './TogglePanel';
 import InfoBox from './InfoBox';
 import initial_data from '../meteorites_medium';
@@ -76,7 +77,7 @@ export default function Page() {
 
         <Grid item xs={3}>
           <MassChart data={dispData} hoverItem={hoverItem} />
-          <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 2</Paper>
+          <ClassChart data={dispData} hoverItem={hoverItem} />
           <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 3</Paper>
         </Grid>
 
