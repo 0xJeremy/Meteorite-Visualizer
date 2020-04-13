@@ -46,7 +46,7 @@ export default function Page() {
           <DataTable data={data} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
         </Grid>
         <Grid item xs={3}>
-          <MassChart data={data} />
+          <MassChart data={data} hoverItem={hoverItem} />
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 2</Paper>
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 3</Paper>
         </Grid>
