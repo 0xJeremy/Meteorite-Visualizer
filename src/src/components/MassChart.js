@@ -37,53 +37,36 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  const x = scaleBand()
-            .rangeRound([0, width])
-            .padding(0.1)
-            .domain(data.map(d => d.mass/1000));
 
-
-  var x1 = scaleLinear()
+  var x = scaleLinear()
       .domain([0, max(data, function(d) { return +d.mass/1000 })])
       .range([0, width]);
 
-  const y = scaleLinear()
-            .rangeRound([height, 0])
-            .domain([0, max(data, d => d.mass/1000)]);
 
-  // data.map(d => console.log(d.mass/1000));
+  // Ended up being way too many, theres a ton of overlap, but leaving in for adjustment
+  // var num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
 
-  // var x = scaleLinear()
-  //     .domain([0, max(data, function(d) { return +d.mass/1000 })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-  //     .range([0, width]);
-
-  var num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
-
-  // set the parameters for the histogram
   var hist = histogram()
-      .value(function(d) { return d.mass/1000; })   // I need to give the vector of value
-      .domain(x1.domain())  // then the domain of the graphic
-      .thresholds(x1.ticks(10)); // then the numbers of bins
+      .value(function(d) { return d.mass/1000; })
+      .domain(x.domain())
+      .thresholds(x.ticks(10)); 
 
-  // // And apply this function to data to get the bins
-  // console.log(hist);
   var bins = hist(data);
-  // console.log(bins);
 
   var y_max = max(bins, function(d) { return d.length; })
 
-  var y1 = scaleLinear()
+  var y = scaleLinear()
       .range([height, 0]);
-  y1.domain([0, y_max]);   // d3.hist has to be called before the Y axis obviously
+  y.domain([0, y_max]);
 
 
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x1))} />
+          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
           <g>
-            <g ref={node => select(node).call(axisLeft(y1).ticks((y_max % 10)))}/> 
+            <g ref={node => select(node).call(axisLeft(y).ticks((y_max % 10)))}/> 
 {/*            <text transform="rotate(-90)" y="-10" dy="0.5em" textAnchor="end">
               Frequency
             </text>*/}
@@ -92,10 +75,10 @@ export default function MassChart(props) {
             <rect
               key={d.mass/1000}
               className="bar"
-              x={x1(d.x0)+1}
-              y={y1(d.length)}
-              width={x1(d.x1) - x1(d.x0) - 2}
-              height={height - y1(d.length)}
+              x={x(d.x0)+1}
+              y={y(d.length)}
+              width={x(d.x1) - x(d.x0) - 2}
+              height={height - y(d.length)}
             />
           ))}
         </g>
