@@ -13,6 +13,8 @@ const styles = theme => ({
     maxWidth: '100%',
     position: 'relative',
     marginBottom: '8px',
+    marginLeft: '8px',
+    marginTop: '16px',
   },
   tooltip: {
     position: 'absolute',
@@ -26,9 +28,9 @@ const styles = theme => ({
 
 const MAP_VIEW = new MapView({repeat: true});
 const INITIAL_VIEW = {
-  longitude: -35,
-  latitude: 36.7,
-  zoom: 1.8,
+  longitude: 0,
+  latitude: 30,
+  zoom: 1.7,
   maxZoom: 20,
   pitch: 0,
   bearing: 0

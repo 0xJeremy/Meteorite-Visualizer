@@ -15,8 +15,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     marginBottom: '8px',
+    marginRight: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
     fontSize: '40px',
@@ -75,8 +76,8 @@ export default function Page() {
 
         <Grid item xs={3}>
           <MassChart data={dispData} hoverItem={hoverItem} />
-          <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 2</Paper>
-          <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 3</Paper>
+          <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 2</Paper>
+          <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 3</Paper>
         </Grid>
 
       </Grid>
