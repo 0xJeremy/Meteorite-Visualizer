@@ -5,7 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Deck from './Map';
 import DataTable from './DataTable';
 import MassChart from './MassChart';
-import data from '../meteorites_medium';
+import TogglePanel from './TogglePanel';
+import initial_data from '../meteorites_medium';
+import more_data from '../meteorites_medium_ext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +29,16 @@ const useStyles = makeStyles(theme => ({
 export default function Page() {
   const classes = useStyles();
   const [hoverItem, setHoverItem] = useState(null);
+  const [data, setData] = useState(initial_data)
   const MapState = React.createRef();
+
+  function load_more_data() {
+    setData(initial_data.concat(more_data));
+  }
+
+  function load_less_data() {
+    setData(initial_data);
+  }
 
   function updateHoverFromTable(d) {
     setHoverItem(d);
@@ -37,19 +48,28 @@ export default function Page() {
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <Paper className={classes.paper} style={{minHeight: '70vh'}}>TOGGLES</Paper>
-          <Paper className={classes.paper} style={{minHeight: '30vh'}}>MORE TOGGLES</Paper>
-        </Grid>
-        <Grid item xs={7}>
+
+        <Grid item xs={9}>
           <Deck data={data} hoverItem={hoverItem} hoverCallback={setHoverItem} ref={MapState}/>
-          <DataTable data={data} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
+
+          <Grid container spacing={1}>
+            <Grid item xs={3}>
+              <TogglePanel more={load_more_data} less={load_less_data} />
+            </Grid>
+
+            <Grid item xs={9}>
+              <DataTable data={data} hoverItem={hoverItem} hoverCallback={updateHoverFromTable} />
+            </Grid>
+          </Grid>
+
         </Grid>
+
         <Grid item xs={3}>
           <MassChart data={data} hoverItem={hoverItem} />
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 2</Paper>
           <Paper className={classes.paper} style={{minHeight: '30vh'}}>GRAPH 3</Paper>
         </Grid>
+
       </Grid>
     </div>
   );

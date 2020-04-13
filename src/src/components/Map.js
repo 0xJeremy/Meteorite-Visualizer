@@ -12,7 +12,7 @@ const styles = theme => ({
     minHeight: '70vh',
     maxWidth: '100%',
     position: 'relative',
-    marginBottom: '16px',
+    marginBottom: '8px',
   },
   tooltip: {
     position: 'absolute',

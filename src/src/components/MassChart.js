@@ -103,8 +103,8 @@ export default function MassChart(props) {
                 />
               )
           })}
-          <text className={classes.text} y="275" x="350" style={{fill: '#4fbbd6'}}>
-              Mass (grams)
+          <text className={classes.text} y="275" x="360" style={{fill: '#4fbbd6'}}>
+              Mass (kg)
           </text>
         </g>
       </svg>
