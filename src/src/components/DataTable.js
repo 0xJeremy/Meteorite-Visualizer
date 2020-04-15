@@ -79,7 +79,7 @@ export default function DataTable(props) {
         </TableHead>
         <TableBody>
           {data.map((d) => 
-            <RenderTableCell d={d} />
+            <RenderTableCell d={d} key={d.name}/>
           )}
         </TableBody>
       </Table>

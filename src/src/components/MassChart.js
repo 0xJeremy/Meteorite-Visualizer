@@ -98,7 +98,7 @@ export default function MassChart(props) {
               # Meteorites
             </text>
           </g>
-          {bins.map(d => {
+          {bins.map((d,i)=> {
             if(selectedData !== null && d.includes(selectedData[0])) {
               return (
                 <rect
@@ -109,6 +109,7 @@ export default function MassChart(props) {
                   y={y(d.length)}
                   width={x(d.x1) - x(d.x0) - 2}
                   height={height - y(d.length)}
+                  key={"bin_"+i}
                 />
               )
             }
@@ -121,6 +122,7 @@ export default function MassChart(props) {
                   y={y(d.length)}
                   width={x(d.x1) - x(d.x0) - 2}
                   height={height - y(d.length)}
+                  key={"bin_"+i}
                 />
               )
           })}
