@@ -2,9 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleCategory20} from 'd3-scale';
+import { interpolateInferno, interpolateBlues, interpolatePurples, interpolatePuBuGn, interpolateCool } from 'd3-scale-chromatic'
 import { select } from 'd3-selection';
 import { pie, arc } from 'd3-shape';
 import { entries } from 'd3-collection';
+import { interpolateColors } from '../colorSchemeGenerator.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,10 +71,22 @@ export default function ClassChart(props) {
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
 
+ const colorRangeInfo = {
+        colorStart: 0,
+        colorEnd: 1,
+        useEndAsStart: false,
+      };
+
+  const colorScale = interpolateCool;
+
+  var scheme = interpolateColors(Object.keys(counts).length,colorScale,colorRangeInfo)
+
+
+  var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
   var color = scaleOrdinal()
-  .domain(counts)
-  .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
+  .domain(keysSorted)
+  .range(scheme)
 
  
   var make_pie = pie()

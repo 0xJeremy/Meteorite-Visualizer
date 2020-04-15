@@ -51,7 +51,7 @@ export default function MassChart(props) {
   const svgWidth = vw(23),
         svgHeight = vh(24);
 
-  const margin = { top: vh(1), right: 0, bottom: 0, left: vw(5) },
+  const margin = { top: vh(3), right: 0, bottom: 0, left: vw(5) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -127,7 +127,7 @@ export default function MassChart(props) {
               )
           })}
 
-          <text className={classes.text} y={vh(28)+2} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
+          <text className={classes.text} y={vh(26)} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
               Mass (kg)
           </text>
         </g>
