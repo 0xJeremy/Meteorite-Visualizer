@@ -1,11 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { scaleBand, scaleLinear, scaleOrdinal, scaleCategory20} from 'd3-scale';
 import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { histogram } from 'd3-array';
+import { hierarchy } from 'd3-hierarchy';
+import { pie, arc } from 'd3-shape';
+import { entries } from 'd3-collection';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,6 +56,8 @@ export default function ClassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
+  var radius = Math.min(width, height) / 2
+
   function onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
   }
@@ -75,49 +80,45 @@ export default function ClassChart(props) {
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
 
-  const x = scaleBand()
-            .range([0, width])
-            .domain(Object.keys(counts));
+  var data1 = {a: 9, b: 20, c:30, d:8, e:12}
 
+  var color = scaleOrdinal()
+  .domain(counts)
+  .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
 
+  // var root_tree = hierarchy(counts).sum(function(d){ return d.value})
+  // const x = scaleBand()
+  //           .range([0, width])
+  //           .domain(Object.keys(counts));
+  var make_pie = pie()
+    .value(function(d) {return d.value; });
+  var data_ready = make_pie(entries(counts));
+  console.log(data_ready);
+  
+  // var y_max = max(Object.values(counts))
 
-  var y_max = max(Object.values(counts))
+  // const y = scaleLinear()
+  //           .domain([0, y_max])
+  //           .range([height, 0]);
 
-  const y = scaleLinear()
-            .domain([0, y_max])
-            .range([height, 0]);
+  var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
 
   // console.log(Object.keys(counts));
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))}  />
-          <g>
-            <g ref={node => select(node).call(axisLeft(y).ticks(10))}/> 
-            <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
-
-              # Meteorites
-            </text>
-          </g>
+        <g transform={`translate(${width / 2+radius/2}, ${height/2})`}>
            {
-            // counts.map(d => {
-            //   return (
-            //     <rect
-            //       // key={d.mass/1000}
-            //       style={{fill: '#D55D0E'}}
-            //       className="bar"
-            //       x={}
-            //       y={}
-            //       width={}
-            //       height={}
-            //     />
-            //   )
-            }
-
-          <text className={classes.text} y={vh(28)+2} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
-              Classes/Types
-          </text>
+            data_ready.map(d => {
+              x = arc().innerRadius(0).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle);
+              return (
+                <g className="arc">
+                  <path d={x()} fill={color(d.data.key)} />
+                  />
+                </g>
+              )
+            })
+          }
         </g>
       </svg>
     </Paper>
