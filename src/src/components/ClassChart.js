@@ -114,6 +114,9 @@ export default function ClassChart(props) {
               return (
                 <g className="arc">
                   <path d={x()} fill={color(d.data.key)} />
+                    <text transform={`translate(${x.centroid(d)})`} dy="0em" style={{fontSize:"12px"}}>
+                      {d.data.key}
+                    </text>
                   />
                 </g>
               )
