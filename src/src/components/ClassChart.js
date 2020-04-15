@@ -58,11 +58,6 @@ export default function ClassChart(props) {
 
   var radius = Math.min(width, height) / 2
 
-  function onlyUnique(value, index, self) { 
-    return self.indexOf(value) === index;
-  }
-
-
   var all_classes = Array.from(data.map(function(d)
       {return d.class
                 .replace(/[0-9]/g, '')
@@ -71,8 +66,6 @@ export default function ClassChart(props) {
                 .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
       }).values())
 
-  var unique_classes = all_classes.filter(onlyUnique)
-
   var counts = {};
 
   for (var i = 0; i < all_classes.length; i++) {
@@ -80,30 +73,18 @@ export default function ClassChart(props) {
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
 
-  var data1 = {a: 9, b: 20, c:30, d:8, e:12}
 
   var color = scaleOrdinal()
   .domain(counts)
   .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
 
-  // var root_tree = hierarchy(counts).sum(function(d){ return d.value})
-  // const x = scaleBand()
-  //           .range([0, width])
-  //           .domain(Object.keys(counts));
+ 
   var make_pie = pie()
     .value(function(d) {return d.value; });
   var data_ready = make_pie(entries(counts));
-  console.log(data_ready);
-  
-  // var y_max = max(Object.values(counts))
-
-  // const y = scaleLinear()
-  //           .domain([0, y_max])
-  //           .range([height, 0]);
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
 
-  // console.log(Object.keys(counts));
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
