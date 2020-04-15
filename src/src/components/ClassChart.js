@@ -111,15 +111,25 @@ export default function ClassChart(props) {
            {
             data_ready.map(d => {
               x = arc().innerRadius(0).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle);
+              
+              if((d.startAngle-d.endAngle) >= Math.PI/8){
+                console.log("Test")
+                return (
+                  <g className="arc">
+                    <path d={x()} fill={color(d.data.key)} />
+                      <text transform={`translate(${x.centroid(d)})`} dy="0em" style={{fontSize:"12px"}}>
+                        {d.data.key}
+                      </text>
+                    />
+                  </g>
+                )
+              }
+
               return (
-                <g className="arc">
-                  <path d={x()} fill={color(d.data.key)} />
-                    <text transform={`translate(${x.centroid(d)})`} dy="0em" style={{fontSize:"12px"}}>
-                      {d.data.key}
-                    </text>
-                  />
-                </g>
-              )
+                  <g className="arc">
+                    <path d={x()} fill={color(d.data.key)} />
+                  </g>
+                )
             })
           }
         </g>
