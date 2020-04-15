@@ -2,11 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleCategory20} from 'd3-scale';
-import { max } from 'd3-array';
-import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
-import { histogram } from 'd3-array';
-import { hierarchy } from 'd3-hierarchy';
 import { pie, arc } from 'd3-shape';
 import { entries } from 'd3-collection';
 
@@ -84,6 +80,10 @@ export default function ClassChart(props) {
   var data_ready = make_pie(entries(counts));
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
+
+
+  // TODO: Add legend or tooltip
+
 
   return (
     <Paper className={classes.paper}>

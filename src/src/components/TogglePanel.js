@@ -16,12 +16,12 @@ const useStyles = makeStyles({
     marginLeft: '8px',
     textAlign: 'center',
     color: '#4fbbd6',
-    fontSize: '30px',
+    fontSize: '18px',
     backgroundColor: '#242730',
     minHeight: '33vh'
   },
   text: {
-    paddingBottom: '16px',
+    paddingBottom: '24px',
   },
   green: {
     color: '#48c74e',
@@ -33,10 +33,10 @@ const useStyles = makeStyles({
   },
   timeline: {
     marginTop: '24px',
-    fontSize: '20px',
+    fontSize: '16px',
   },
   load: {
-    fontSize: '20px',
+    fontSize: '16px',
   },
   alert: {
     backgroundColor: '#4fbbd6',
@@ -114,9 +114,9 @@ export default function TogglePanel(props) {
       <Typography className={classes.load} gutterBottom>
         Load Data Set
       </Typography>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickSmall} >Small</Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickMedium} >Medium</Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={clickLarge} >Large</Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickSmall} >Small</Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickMedium} >Medium</Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickLarge} >Large</Button>
 
       <Typography className={classes.timeline} id="range-slider" gutterBottom>
         Data Range ({timeline[0]} - {timeline[1]})
