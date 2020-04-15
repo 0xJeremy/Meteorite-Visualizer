@@ -81,19 +81,14 @@ export default function ClassChart(props) {
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
 
-  function mouseOver() {
-
-  }
-
   // TODO: Add legend or tooltip
   // TODO: Center Pie Chart
   // TODO: Fix labels
 
-
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
-        <g transform={`translate(${width / 2+radius/2}, ${height/2})`} key={"pie_chart"}>
+        <g transform={`translate(${width/2+radius/2}, ${height/2+radius/2-2*margin.top})`} key={"pie_chart"}>
            {
             data_ready.map(d => {
               x = arc().innerRadius(0).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle);
@@ -102,7 +97,7 @@ export default function ClassChart(props) {
                 console.log("Test")
                 return (
                   <g className="arc" key={"arc_"+d.data.key}>
-                    <path d={x()} fill={color(d.data.key)} onMouseOver={mouseOver} key={d.data.key}/>
+                    <path d={x()} fill={color(d.data.key)} key={d.data.key}/>
                       <text transform={`translate(${x.centroid(d)})`} dy="0em" style={{fontSize:"12px"}}>
                         {d.data.key}
                       </text>
