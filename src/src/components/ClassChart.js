@@ -50,11 +50,14 @@ export default function ClassChart(props) {
   const svgWidth = vw(23),
         svgHeight = vh(24);
 
-  const margin = { top: vh(1), right: 0, bottom: 0, left: vw(5) },
+
+
+
+  const margin = { top: 0, right: 0, bottom: 0, left: 0 },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var radius = Math.min(width, height) / 2
+  var radius = Math.min(width, height) * 3/5
 
   var all_classes = Array.from(data.map(function(d)
       {return d.class
@@ -72,12 +75,12 @@ export default function ClassChart(props) {
   }
 
  const colorRangeInfo = {
-        colorStart: 0,
+        colorStart: .25,
         colorEnd: 1,
-        useEndAsStart: false,
+        useEndAsStart: true,
       };
 
-  const colorScale = interpolateCool;
+  const colorScale = interpolateBlues;
 
   var scheme = interpolateColors(Object.keys(counts).length,colorScale,colorRangeInfo)
 
@@ -99,27 +102,16 @@ export default function ClassChart(props) {
   // TODO: Center Pie Chart
   // TODO: Fix labels
 
+  const pad = Math.PI/180
+
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
-        <g transform={`translate(${width/2+radius/2}, ${height/2+radius/2-2*margin.top})`} key={"pie_chart"}>
+        <g transform={`translate(${width/2+radius/16}, ${height/2+radius/4})`} key={"pie_chart"}>
            {
             data_ready.map(d => {
-              x = arc().innerRadius(0).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle);
+              x = arc().innerRadius(radius/2).outerRadius(radius).startAngle(d.startAngle+pad).endAngle(d.endAngle-pad);
               
-              if((d.startAngle-d.endAngle) >= Math.PI/8){
-                console.log("Test")
-                return (
-                  <g className="arc" key={"arc_"+d.data.key}>
-                    <path d={x()} fill={color(d.data.key)} key={d.data.key}/>
-                      <text transform={`translate(${x.centroid(d)})`} dy="0em" style={{fontSize:"12px"}}>
-                        {d.data.key}
-                      </text>
-                    />
-                  </g>
-                )
-              }
-
               return (
                   <g className="arc" key={"arc_"+d.data.key}>
                     <path d={x()} fill={color(d.data.key)} />
