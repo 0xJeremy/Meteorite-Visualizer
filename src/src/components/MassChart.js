@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleLinear } from 'd3-scale';
-import { max } from 'd3-array';
+import { max, mean } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { histogram } from 'd3-array';
@@ -56,7 +56,7 @@ export default function MassChart(props) {
         height = svgHeight - margin.top - margin.bottom;
 
   const x = scaleLinear()
-          .domain([0, max(data, function(d) { return +d.mass/1000 })])
+          .domain([0, mean(data, function(d) { return +d.mass/1000 })*2])
           .range([0, width]);
 
 
@@ -93,8 +93,8 @@ export default function MassChart(props) {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
           <g>
-            <g ref={node => select(node).call(axisLeft(y).ticks((y_max % 10)))}/> 
-            <text className={classes.text} transform="rotate(-90)" y={-vw(2)-2} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
+            <g ref={node => select(node).call(axisLeft(y).ticks(10))}/> 
+            <text className={classes.text} transform="rotate(-90)" y={-vw(2)-5} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
               # Meteorites
             </text>
           </g>
