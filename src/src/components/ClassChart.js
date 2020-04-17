@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     color: '#4fbbd6',
     fontSize: '40px',
     backgroundColor: '#242730',
-    minHeight: '31vh',
+    minHeight: '32vh',
     padding: '0 0 0 0'
   },
   svg: {
@@ -28,16 +28,52 @@ const useStyles = makeStyles(theme => ({
     minWidth: '100%',
   },
   text: {
-    textAnchor: "end",
-    color: '#4fbbd6',
-    fontSize: '25px'
+    textAnchor: 'middle',
+    fontSize: '20px'
   },
+  title: {
+    fontSize: '25px',
+    textAnchor: 'middle'
+  },
+  arc: {
+    "&:hover": {
+      fill: '#D55D0E',
+    }
+  }
 }));
+
+function Arc(props) {
+  const classes = useStyles();
+  const d = props.d;
+  const color = props.color;
+  const x = props.x;
+  const setHover = props.setHover;
+  const [fill, setFill] = React.useState(color(d.data.key))
+  var fillColor = color(d.data.key);
+
+  function enter() {
+    setHover(d);
+    setFill('#D55D0E');
+  }
+
+  function leave() {
+    setHover(null);
+    setFill(color(d.data.key));
+  }
+
+  return (
+    <g className={classes.arc} key={"arc_"+d.data.key}>
+      <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
+    </g>
+  )
+}
 
 
 export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
+  const selectedData = props.selectedData;
+  const [hover, setHover] = React.useState(null);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -51,9 +87,7 @@ export default function ClassChart(props) {
         svgHeight = vh(24);
 
 
-
-
-  const margin = { top: 0, right: 0, bottom: 0, left: 0 },
+  const margin = { top: vh(2.5), right: 0, bottom: 0, left: 0 },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -75,8 +109,8 @@ export default function ClassChart(props) {
   }
 
  const colorRangeInfo = {
-        colorStart: .25,
-        colorEnd: 1,
+        colorStart: .05,
+        colorEnd: 0.9,
         useEndAsStart: true,
       };
 
@@ -104,22 +138,36 @@ export default function ClassChart(props) {
 
   const pad = Math.PI/180
 
+  function ToolTip() {
+    if(hover !== null) {
+      console.log(hover)
+      return (
+        <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
+          {"Class: " + hover.data.key + " (" + hover.data.value + ")"}
+        </text>
+      )
+    }
+    return <div />
+  }
+
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
-        <g transform={`translate(${width/2+radius/16}, ${height/2+radius/4})`} key={"pie_chart"}>
+        <text className={classes.title} y={vh(2.5)} x={vw(12)} style={{fill: '#4fbbd6'}}>
+          Meteorite Class
+        </text>
+        <g transform={`translate(${width/2+radius/16}, ${height/2+radius/4+margin.top})`} key={"pie_chart"}>
            {
             data_ready.map(d => {
-              x = arc().innerRadius(radius/2).outerRadius(radius).startAngle(d.startAngle+pad).endAngle(d.endAngle-pad);
+              x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle+pad).endAngle(d.endAngle-pad);
               
               return (
-                  <g className="arc" key={"arc_"+d.data.key}>
-                    <path d={x()} fill={color(d.data.key)} />
-                  </g>
+                  <Arc x={x} d={d} color={color} setHover={setHover} />
                 )
             })
           }
         </g>
+        <ToolTip />
       </svg>
     </Paper>
   )

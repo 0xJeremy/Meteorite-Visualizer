@@ -24,4 +24,3 @@ function interpolateColors(dataLength, colorScale, colorRangeInfo) {
   }
 
 export {interpolateColors};
-          
