@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
+import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -59,6 +62,7 @@ export default function TogglePanel(props) {
   const [smallSnack, setSnackSmall] = React.useState(false);
   const [mediumSnack, setSnackMedium] = React.useState(false);
   const [largeSnack, setSnackLarge] = React.useState(false);
+  const [animation, setAnimation] = React.useState(null);
   const timeline = props.timeline;
   const setTimeline = props.setTimeline;
   const setData = props.setData;
@@ -107,6 +111,36 @@ export default function TogglePanel(props) {
     setTimeline(newValue);
   };
 
+  const startAnimation = () => {
+    var tmpTimeline = timeline;
+    if(tmpTimeline[0] === 1950 && tmpTimeline[1] === 2020) {
+      tmpTimeline = [1950, 1955];
+    }
+    setTimeline(tmpTimeline);
+    var interval = setInterval(() => {
+      tmpTimeline[0] += 5;
+      tmpTimeline[1] += 5;
+      if(tmpTimeline[1] >= 2020) {
+        setAnimation(null);
+        setTimeline([1950, 2020]);
+        clearInterval(interval);
+        return;
+      }
+      setTimeline(tmpTimeline);
+    }, 1000);
+    setAnimation(interval);
+  }
+
+  const pauseAnimation = () => {
+    clearInterval(animation);
+  }
+
+  const stopAnimation = () => {
+    clearInterval(animation);
+    setAnimation(null);
+    setTimeline([1950, 2020]);
+  }
+
   return (
     <Paper className={classes.paper}>
       <div className={classes.text} >Data Options</div>
@@ -130,6 +164,13 @@ export default function TogglePanel(props) {
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
       />
+
+      <Typography className={classes.timeline} id="range-slider" gutterBottom>
+        Timeline Animation
+      </Typography>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={startAnimation} ><PlayCircleOutlineIcon /></Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={pauseAnimation} ><PauseCircleOutlineIcon /></Button>
+      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={stopAnimation} ><HighlightOffOutlinedIcon /></Button>
 
 
       <Snackbar open={smallSnack} autoHideDuration={6000} onClose={closeSmall}>

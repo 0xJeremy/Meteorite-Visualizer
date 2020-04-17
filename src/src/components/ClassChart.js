@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     textAnchor: 'middle',
-    fontSize: '20px'
+    fontSize: '18px'
   },
   title: {
     fontSize: '25px',
@@ -156,7 +156,7 @@ export default function ClassChart(props) {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
-          {"Class: " + hover.data.key + " (" + hover.data.value + ")"}
+          {"Class " + hover.data.key + " (" + hover.data.value + ")"}
         </text>
       )
     }
