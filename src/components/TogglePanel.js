@@ -10,6 +10,8 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 
+const YEARS = [1980, 2020]
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -113,16 +115,16 @@ export default function TogglePanel(props) {
 
   const startAnimation = () => {
     var tmpTimeline = timeline;
-    if(tmpTimeline[0] === 1950 && tmpTimeline[1] === 2020) {
-      tmpTimeline = [1950, 1955];
+    if(tmpTimeline[0] === YEARS[0] && tmpTimeline[1] === YEARS[1]) {
+      tmpTimeline = [YEARS[0], YEARS[0]+5];
     }
     setTimeline(tmpTimeline);
     var interval = setInterval(() => {
       tmpTimeline[0] += 5;
       tmpTimeline[1] += 5;
-      if(tmpTimeline[1] >= 2020) {
+      if(tmpTimeline[1] > YEARS[1]) {
         setAnimation(null);
-        setTimeline([1950, 2020]);
+        setTimeline([YEARS[0], YEARS[1]]);
         clearInterval(interval);
         return;
       }
@@ -138,7 +140,7 @@ export default function TogglePanel(props) {
   const stopAnimation = () => {
     clearInterval(animation);
     setAnimation(null);
-    setTimeline([1950, 2020]);
+    setTimeline([YEARS[0], YEARS[1]]);
   }
 
   return (
@@ -158,8 +160,8 @@ export default function TogglePanel(props) {
       <Timeline
         value={timeline}
         onChange={timelineChange}
-        min={1950}
-        max={2020}
+        min={YEARS[0]}
+        max={YEARS[1]}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}

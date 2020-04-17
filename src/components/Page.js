@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 export default function Page() {
   const classes = useStyles();
   const [selectedData, setSelectedData] = useState(null);
-  const [timeline, setTimeline] = useState([1950, 2020])
+  const [timeline, setTimeline] = useState([1980, 2020])
   const [totalData, setTotalData] = useState(small_data)
   const [dispData, setDispData] = useState(small_data)
   const MapState = React.createRef();
