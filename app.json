@@ -1,0 +1,7 @@
+{
+  "name": "Lab84",
+  "description": "Some assembly required.",
+  "repository": "https://github.com/LAB84/lab84.org",
+  "logo": "",
+  "image": "heroku/nodejs"
+}

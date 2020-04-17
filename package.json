@@ -7,6 +7,7 @@
     "@material-ui/lab": "^4.0.0-alpha.49",
     "d3": "^5.15.1",
     "deck.gl": "^8.1.1",
+    "express": "^4.17.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.3",
