@@ -154,7 +154,6 @@ export default function ClassChart(props) {
 
   function ToolTip() {
     if(hover !== null) {
-      console.log(hover)
       return (
         <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
           {"Class: " + hover.data.key + " (" + hover.data.value + ")"}

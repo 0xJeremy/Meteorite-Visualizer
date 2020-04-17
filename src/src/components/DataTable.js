@@ -36,7 +36,7 @@ export default function DataTable(props) {
 
   function RenderTableCell(props) {
     const d = props.d;
-    if(d === selectedData || (selectedData !== null && selectedData.includes(d))) {
+    if(selectedData !== null && selectedData[0] === d) {
       return (
         <TableRow onMouseLeave={() => {hoverCallback(null)}}>
           <TableCell className={classes.highlight} component="th" scope="row">
@@ -51,7 +51,7 @@ export default function DataTable(props) {
       )
     }
     return (
-      <TableRow onMouseEnter={() => {hoverCallback([d])}}>
+      <TableRow onMouseEnter={() => {hoverCallback([d])}} onMouseLeave={() => {hoverCallback(null)}}>
         <TableCell className={classes.cell} component="th" scope="row">
           {d.name}
         </TableCell>

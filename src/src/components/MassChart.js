@@ -29,9 +29,59 @@ const useStyles = makeStyles(theme => ({
   text: {
     textAnchor: "end",
     color: '#4fbbd6',
-    fontSize: '25px'
+    fontSize: '20px'
   },
 }));
+
+function Bar(props) {
+  const d = props.d;
+  const x = props.x;
+  const y = props.y;
+  const width = props.width;
+  const height = props.height;
+  const key = props.key;
+  const setHover = props.setHover;
+  const selectedData = props.selectedData;
+  const [fill, setFill] = React.useState('#4fbbd6');
+
+  function enter() {
+    setHover(d);
+    setFill('#D55D0E');
+
+  }
+
+  function leave() {
+    setHover(null);
+    setFill('#4fbbd6')
+  }
+
+  if(selectedData !== null && selectedData !== undefined && d.includes(selectedData[0])) {
+    return (<rect
+      // key={d.mass/1000}
+      style={{'fill': '#D55D0E'}}
+      className="bar"
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      key={key}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
+    />)
+  }
+  return (<rect
+    // key={d.mass/1000}
+    style={{'fill': fill}}
+    className="bar"
+    x={x}
+    y={y}
+    width={width}
+    height={height}
+    key={key}
+    onMouseEnter={enter}
+    onMouseLeave={leave}
+  />)
+}
 
 
 export default function MassChart(props) {
@@ -39,6 +89,7 @@ export default function MassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const setSelectedData = props.setSelectedData;
+  const [hover, setHover] = React.useState(null);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -76,16 +127,16 @@ export default function MassChart(props) {
       .range([height, 0])
       .domain([0, y_max]);
 
-  // const bars = document.getElementsByClassName("bar");
-  // for (var i = 0; i < bars.length; i++) {
-  //     const index = i;
-  //     bars[i].addEventListener('mouseover', () => {
-  //       if(selectedData !== bins[index]) {
-  //         setSelectedData(bins[index]);
-  //       }
-  //     });
-  //     bars[i].addEventListener('mouseout', () => {setSelectedData(null)});
-  // }
+  function ToolTip() {
+    if(hover !== null) {
+      return (
+        <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
+          {"Mass:" + hover.x0 + "-" + hover.x1 + " (kg) (" +  hover.length + ")"}
+        </text>
+      )
+    }
+    return <div />
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -99,37 +150,23 @@ export default function MassChart(props) {
             </text>
           </g>
           {bins.map((d,i)=> {
-            if(selectedData !== null && d.includes(selectedData[0])) {
-              return (
-                <rect
-                  // key={d.mass/1000}
-                  style={{fill: '#D55D0E'}}
-                  className="bar"
-                  x={x(d.x0)+1}
-                  y={y(d.length)}
-                  width={x(d.x1) - x(d.x0) - 2}
-                  height={height - y(d.length)}
-                  key={"bin_"+i}
-                />
-              )
-            }
-            return (
-                <rect
-                  // key={d.mass/1000}
-                  style={{fill: '#4fbbd6'}}
-                  className="bar"
-                  x={x(d.x0)+1}
-                  y={y(d.length)}
-                  width={x(d.x1) - x(d.x0) - 2}
-                  height={height - y(d.length)}
-                  key={"bin_"+i}
-                />
-              )
+            return (<Bar 
+              d={d}
+              selectedData={selectedData}
+              setHover={setHover}
+              className="bar"
+              x={x(d.x0)+1}
+              y={y(d.length)}
+              width={x(d.x1) - x(d.x0) - 2}
+              height={height - y(d.length)}
+              key={"bin_"+i}
+            />)
           })}
 
           <text className={classes.text} y={vh(26)} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
               Mass (kg)
           </text>
+          <ToolTip />
         </g>
       </svg>
     </Paper>
