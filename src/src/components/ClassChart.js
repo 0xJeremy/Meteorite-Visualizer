@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleBand, scaleLinear, scaleOrdinal, scaleCategory20} from 'd3-scale';
-import { interpolateInferno, interpolateBlues, interpolatePurples, interpolatePuBuGn, interpolateCool } from 'd3-scale-chromatic'
-import { select } from 'd3-selection';
+import { scaleOrdinal} from 'd3-scale';
+import { interpolateBlues } from 'd3-scale-chromatic'
 import { pie, arc } from 'd3-shape';
 import { entries } from 'd3-collection';
 import { interpolateColors } from '../colorSchemeGenerator.js'
@@ -48,8 +47,16 @@ function Arc(props) {
   const color = props.color;
   const x = props.x;
   const setHover = props.setHover;
-  const [fill, setFill] = React.useState(color(d.data.key))
-  var fillColor = color(d.data.key);
+  const [fill, setFill] = React.useState(color(d.data.key));
+  const selectedData = props.selectedData;
+
+  function process(c) {
+    return c
+            .replace(/[0-9]/g, '')
+            .replace(/(.*)\s/g,'')
+            .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
+            .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+  }
 
   function enter() {
     setHover(d);
@@ -61,9 +68,16 @@ function Arc(props) {
     setFill(color(d.data.key));
   }
 
+  if(selectedData !== null && selectedData[0] !== undefined && process(selectedData[0].class) === d.data.key) {
+    return (
+      <g className={classes.arc} key={"arc_"+d.data.key}>
+          <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
+      </g>
+    )
+  }
   return (
     <g className={classes.arc} key={"arc_"+d.data.key}>
-      <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
+        <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
     </g>
   )
 }
@@ -162,7 +176,7 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle+pad).endAngle(d.endAngle-pad);
               
               return (
-                  <Arc x={x} d={d} color={color} setHover={setHover} />
+                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData}/>
                 )
             })
           }

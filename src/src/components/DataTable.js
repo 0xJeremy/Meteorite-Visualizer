@@ -51,7 +51,7 @@ export default function DataTable(props) {
       )
     }
     return (
-      <TableRow onMouseEnter={() => {hoverCallback([d])}} >
+      <TableRow onMouseEnter={() => {hoverCallback([d])}}>
         <TableCell className={classes.cell} component="th" scope="row">
           {d.name}
         </TableCell>
