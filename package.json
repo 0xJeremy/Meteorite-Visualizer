@@ -14,7 +14,8 @@
     "react-scripts": "^3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "local": "react-scripts start",
     "build": "react-scripts build"
   },
   "license": "MIT",
