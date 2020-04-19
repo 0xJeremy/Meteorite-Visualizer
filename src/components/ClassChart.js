@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { scaleOrdinal} from 'd3-scale';
-import { interpolateBlues } from 'd3-scale-chromatic'
+import { scaleOrdinal } from 'd3-scale';
+import { interpolateBlues } from 'd3-scale-chromatic';
 import { pie, arc } from 'd3-shape';
 import { entries } from 'd3-collection';
-import { interpolateColors } from '../colorSchemeGenerator.js'
+import { interpolateColors } from '../colorSchemeGenerator.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,11 +34,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: '25px',
     textAnchor: 'middle'
   },
-  arc: {
-    "&:hover": {
-      fill: '#D55D0E',
-    }
-  }
 }));
 
 function Arc(props) {

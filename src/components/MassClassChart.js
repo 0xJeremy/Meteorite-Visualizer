@@ -2,13 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleOrdinal, scaleLinear, scaleBand} from 'd3-scale';
-import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic'
-import { pie, arc, stack, stackOffsetExpand } from 'd3-shape';
-import { entries } from 'd3-collection';
-import { interpolateColors } from '../colorSchemeGenerator.js';
-import { axisBottom, axisLeft, axisTop } from 'd3-axis';
+import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic';
+import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,11 +33,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: '25px',
     textAnchor: 'middle'
   },
-  arc: {
-    "&:hover": {
-      fill: '#D55D0E',
-    }
-  }
 }));
 
 export default function ClassChart(props) {
@@ -102,7 +93,7 @@ export default function ClassChart(props) {
   //60-70kg
   var range7 = 30
   //70-80kg
-  var range8 = 40
+  // var range8 = 40
   //80-90kg
   // var range9 = 50
   //90-100kg
@@ -124,7 +115,7 @@ export default function ClassChart(props) {
 
   for (var i = 0; i < all_classes.length; i++) {
     var cls = all_classes[i];
-    var subset = data.filter(d => d.class == cls);
+    var subset = data.filter(d => d.class === cls);
     var subset_masses = subset.map(d=>d.mass).reduce((acc,curr)=>{acc.push(curr); return acc}, []);
 
     var total_masses = subset_masses.length;
@@ -153,7 +144,7 @@ export default function ClassChart(props) {
 
   var to_display = top_X.reduce((acc,curr)=>{
                       var entries = Object.entries(cls_masses[curr]);
-                      acc[curr] = Object.fromEntries(entries.map((curr, index)=>{entries[index][1] = (index==0) ? curr[1] : entries[index-1][1]+curr[1]; return [curr[0], entries[index][1]]; })); 
+                      acc[curr] = Object.fromEntries(entries.map((curr, index)=>{entries[index][1] = (index===0) ? curr[1] : entries[index-1][1]+curr[1]; return [curr[0], entries[index][1]]; })); 
                       return acc;
                     }, {});
 
@@ -193,7 +184,7 @@ export default function ClassChart(props) {
           <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
           {
             range_keys.map((key,index)=>{
-              if(index == 0){
+              if(index === 0){
                 return (
                   <g style={{fill:color(key)}}>
                     {
@@ -210,7 +201,6 @@ export default function ClassChart(props) {
                   </g>
                 )
               }
-              console.log(key);
               var prev_key = range_keys[index-1];
               return (
                 <g style={{fill:color(key)}}>
