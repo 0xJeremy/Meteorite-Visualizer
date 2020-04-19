@@ -85,23 +85,23 @@ export default function ClassChart(props) {
 
 
   // Less than 10kg
-  var range1 = 10
+  var range1 = .5
   //10-20 kg
-  var range2 = 20
+  var range2 = 1
   //20-30 kg
-  var range3 = 30
+  var range3 = 2
   //30-40 kg
-  var range4 = 40
+  var range4 = 4
   //40-50 kg
-  var range5 = 50
+  var range5 = 10
   //50-60kg
-  var range6 = 60
+  var range6 = 20
   //60-70kg
-  var range7 = 70
+  var range7 = 30
   //70-80kg
-  var range8 = 80
+  var range8 = 40
   //80-90kg
-  var range9 = 90
+  var range9 = 50
   //90-100kg
   var range10 = 100
   //100+
@@ -141,7 +141,7 @@ export default function ClassChart(props) {
 
   var to_display = top_X.reduce((acc,curr)=>{
                       var entries = Object.entries(cls_masses[curr]);
-                      acc[curr] = entries.map((curr, index)=>{var new_obj={}; entries[index][1] = (index==0) ? curr[1] : entries[index-1][1]+curr[1]; new_obj[curr[0]] = entries[index][1]; return new_obj;}); 
+                      acc[curr] = Object.fromEntries(entries.map((curr, index)=>{entries[index][1] = (index==0) ? curr[1] : entries[index-1][1]+curr[1]; return [curr[0], entries[index][1]]; })); 
                       return acc;
                     }, {});
 
@@ -155,6 +155,7 @@ export default function ClassChart(props) {
     .range([margin.top, height - margin.bottom])
     .padding(0.08)
 
+  console.log(y(keysSorted[0]))
   var color = scaleOrdinal()
     .domain(range_keys)
     .range(schemeSpectral[range_keys.length])
@@ -166,22 +167,44 @@ export default function ClassChart(props) {
       <svg className={classes.svg} id="MassClassChart">
         <g>
           {
-            range_keys.forEach(key=>{
+            range_keys.map((key,index)=>{
+
+              if(index == 0){
+                return (
+                  <g style={{fill:color(key)}}>
+                    {
+                      Object.keys(to_display).map(d=>{
+                        var end = to_display[d][key];
+                        return (<rect 
+                          x={x(0)}
+                          y={y(d)} 
+                          width={x(end)-x(0)} 
+                          height={y.bandwidth()} 
+                          />);
+                      })
+                    }
+                  </g>
+                )
+              }
+              var prev_key = range_keys[index-1];
               return (
                 <g style={{fill:color(key)}}>
                   {
-                    Object.keys(to_display).map(function(d){
+                    Object.keys(to_display).map(d=>{
+                      var end = to_display[d][key];
+                      var start = to_display[d][prev_key];
+                      console.log(key);
                       return (<rect 
-                        x={x()}
-                        y={y(key)} 
-                        width={width} 
+                        x={x(start)}
+                        y={y(d)} 
+                        width={x(end)-x(start)} 
                         height={y.bandwidth()} 
                         />);
-
                     })
                   }
                 </g>
               )
+              
             })
           }
         </g>
