@@ -108,12 +108,17 @@ export default function ClassChart(props) {
   var radius = Math.min(width, height) * 3/5
 
   var all_classes = Array.from(data.map(function(d)
-      {return d.class
+      { 
+        var new_class = d.class
                 .replace(/[0-9]/g, '')
                 .replace(/(.*)\s/g,'')
                 .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
                 .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
-      }).values())
+        d.class = new_class;
+        return new_class;
+      }).values());
+
+  // data.map(d => console.log(d.class));
 
   var counts = {};
 
@@ -145,10 +150,6 @@ export default function ClassChart(props) {
   var data_ready = make_pie(entries(counts));
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
-
-  // TODO: Add legend or tooltip
-  // TODO: Center Pie Chart
-  // TODO: Fix labels
 
   const pad = Math.PI/180
 

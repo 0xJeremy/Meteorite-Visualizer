@@ -6,6 +6,7 @@ import Deck from './Map';
 import DataTable from './DataTable';
 import MassChart from './MassChart';
 import ClassChart from './ClassChart';
+import MassClassChart from './MassClassChart';
 import TogglePanel from './TogglePanel';
 import InfoBox from './InfoBox';
 import small_data from '../meteorites_small';
@@ -85,7 +86,7 @@ export default function Page() {
         <Grid item xs={3}>
           <MassChart data={dispData} selectedData={selectedData} setSelectedData={updateMapHover} />
           <ClassChart data={dispData} selectedData={selectedData} />
-          <Paper className={classes.paper} style={{minHeight: '31vh'}}>GRAPH 3</Paper>
+          <MassClassChart data={dispData} selectedData={selectedData} />
         </Grid>
 
       </Grid>
