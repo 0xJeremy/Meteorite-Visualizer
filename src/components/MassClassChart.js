@@ -5,7 +5,10 @@ import { scaleOrdinal, scaleLinear, scaleBand} from 'd3-scale';
 import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic'
 import { pie, arc, stack, stackOffsetExpand } from 'd3-shape';
 import { entries } from 'd3-collection';
-import { interpolateColors } from '../colorSchemeGenerator.js'
+import { interpolateColors } from '../colorSchemeGenerator.js';
+import { axisBottom, axisLeft, axisTop } from 'd3-axis';
+import { select } from 'd3-selection';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,7 +62,7 @@ export default function ClassChart(props) {
         svgHeight = vh(24);
 
 
-  const margin = { top: vh(2.5), right: 0, bottom: 0, left: 0 },
+  const margin = { top: vh(5), right: vw(1), bottom: 0, left: vw(2) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -109,6 +112,15 @@ export default function ClassChart(props) {
 
   var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8",/*"r8-r9","r9-r10","r10+"*/];
 
+  var range_strings = [`<${range1}`,
+                        `${range1}-${range2}`,
+                        `${range2}-${range3}`,
+                        `${range3}-${range4}`,
+                        `${range4}-${range5}`,
+                        `${range5}-${range6}`,
+                        `${range6}-${range7}`,
+                        `${range7}+`]
+
 
   for (var i = 0; i < all_classes.length; i++) {
     var cls = all_classes[i];
@@ -124,8 +136,8 @@ export default function ClassChart(props) {
                        "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
                        "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
                        "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
-                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7 && m/1000 < range8}).length/total_masses,
-                       "r8-r9": subset_masses.filter(m=>{return m/1000 >= range8 /*&& m/1000 < range9*/}).length/total_masses,
+                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7 /*&& m/1000 < range8*/}).length/total_masses,
+                       // "r8-r9": subset_masses.filter(m=>{return m/1000 >= range8 && m/1000 < range9}).length/total_masses,
                        // "r9-r10": subset_masses.filter(m=>{return m/1000 >= range9 && m/1000 < range10}).length/total_masses,
                        // "r10+": subset_masses.filter(m=>{return m/1000 >= range10}).length/total_masses
                      }
@@ -148,25 +160,39 @@ export default function ClassChart(props) {
   console.log(to_display);
 
   var x = scaleLinear()
-    .range([margin.left, width - margin.right])
+    .domain([0,1])
+    .range([0, width])
 
   var y = scaleBand()
     .domain(keysSorted.slice(0,display_top_X_classes))
-    .range([margin.top, height - margin.bottom])
+    .range([0, height])
     .padding(0.08)
 
-  console.log(y(keysSorted[0]))
   var color = scaleOrdinal()
     .domain(range_keys)
     .range(schemeBlues[range_keys.length])
 
+
+
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="MassClassChart">
-        <g>
+        <g transform={`translate(${margin.left}, ${margin.top*1.5})`}>
+          <text y={-vh(4)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
+          {
+            range_keys.map((key, i)=>{
+              return(
+                <g>
+                  <rect x = {3+26*i} y = {-vh(3)} width={25} height={10} fill={color(key)}/>
+                  <text y={-vh(0)} x={3+26*i} style={{fill: '#4fbbd6', fontSize:'10px'}}>{range_strings[i]}</text>
+                </g>
+              )
+            })
+          }
+          <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
+          <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
           {
             range_keys.map((key,index)=>{
-
               if(index == 0){
                 return (
                   <g style={{fill:color(key)}}>
@@ -184,6 +210,7 @@ export default function ClassChart(props) {
                   </g>
                 )
               }
+              console.log(key);
               var prev_key = range_keys[index-1];
               return (
                 <g style={{fill:color(key)}}>
