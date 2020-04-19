@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleOrdinal, scaleLinear, scaleBand} from 'd3-scale';
-import { interpolateBlues, schemeSpectral } from 'd3-scale-chromatic'
+import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic'
 import { pie, arc, stack, stackOffsetExpand } from 'd3-shape';
 import { entries } from 'd3-collection';
 import { interpolateColors } from '../colorSchemeGenerator.js'
@@ -101,13 +101,13 @@ export default function ClassChart(props) {
   //70-80kg
   var range8 = 40
   //80-90kg
-  var range9 = 50
+  // var range9 = 50
   //90-100kg
-  var range10 = 100
+  // var range10 = 100
   //100+
 
 
-  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8","r8-r9","r9-r10","r10+"];
+  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8",/*"r8-r9","r9-r10","r10+"*/];
 
 
   for (var i = 0; i < all_classes.length; i++) {
@@ -125,9 +125,9 @@ export default function ClassChart(props) {
                        "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
                        "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
                        "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7 && m/1000 < range8}).length/total_masses,
-                       "r8-r9": subset_masses.filter(m=>{return m/1000 >= range8 && m/1000 < range9}).length/total_masses,
-                       "r9-r10": subset_masses.filter(m=>{return m/1000 >= range9 && m/1000 < range10}).length/total_masses,
-                       "r10+": subset_masses.filter(m=>{return m/1000 >= range10}).length/total_masses
+                       "r8-r9": subset_masses.filter(m=>{return m/1000 >= range8 /*&& m/1000 < range9*/}).length/total_masses,
+                       // "r9-r10": subset_masses.filter(m=>{return m/1000 >= range9 && m/1000 < range10}).length/total_masses,
+                       // "r10+": subset_masses.filter(m=>{return m/1000 >= range10}).length/total_masses
                      }
 
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
@@ -158,9 +158,7 @@ export default function ClassChart(props) {
   console.log(y(keysSorted[0]))
   var color = scaleOrdinal()
     .domain(range_keys)
-    .range(schemeSpectral[range_keys.length])
-    .unknown("#ccc")
-
+    .range(schemeBlues[range_keys.length])
 
   return (
     <Paper className={classes.paper}>
@@ -193,7 +191,6 @@ export default function ClassChart(props) {
                     Object.keys(to_display).map(d=>{
                       var end = to_display[d][key];
                       var start = to_display[d][prev_key];
-                      console.log(key);
                       return (<rect 
                         x={x(start)}
                         y={y(d)} 
