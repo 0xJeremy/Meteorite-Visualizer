@@ -35,6 +35,35 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function Bar(props) {
+  const classes = useStyles;
+  const item = props.item;
+  const i = props.i;
+  const x = props.x;
+  const y = props.y;
+  const color = props.color;
+  const to_display = props.to_display;
+  const range_keys = props.range_keys;
+
+  return (
+    <g style={{fill:color(item)}}>
+      {
+        Object.keys(to_display).map(d=>{
+          console.log(to_display)
+          var end = to_display[d][item];
+          var start = to_display[d][range_keys[i-1]];
+          return (<rect 
+            x={x(i === 0 ? 0 : start)}
+            y={y(d)} 
+            width={x(end)-x(i === 0 ? 0 : start)} 
+            height={y.bandwidth()} 
+          />);
+        })
+      }
+    </g>
+  )
+}
+
 export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
@@ -148,8 +177,6 @@ export default function ClassChart(props) {
                       return acc;
                     }, {});
 
-  console.log(to_display);
-
   var x = scaleLinear()
     .domain([0,1])
     .range([0, width])
@@ -183,42 +210,8 @@ export default function ClassChart(props) {
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
           <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
           {
-            range_keys.map((key,index)=>{
-              if(index === 0){
-                return (
-                  <g style={{fill:color(key)}}>
-                    {
-                      Object.keys(to_display).map(d=>{
-                        var end = to_display[d][key];
-                        return (<rect 
-                          x={x(0)}
-                          y={y(d)} 
-                          width={x(end)-x(0)} 
-                          height={y.bandwidth()} 
-                          />);
-                      })
-                    }
-                  </g>
-                )
-              }
-              var prev_key = range_keys[index-1];
-              return (
-                <g style={{fill:color(key)}}>
-                  {
-                    Object.keys(to_display).map(d=>{
-                      var end = to_display[d][key];
-                      var start = to_display[d][prev_key];
-                      return (<rect 
-                        x={x(start)}
-                        y={y(d)} 
-                        width={x(end)-x(start)} 
-                        height={y.bandwidth()} 
-                        />);
-                    })
-                  }
-                </g>
-              )
-              
+            range_keys.map((item,i)=>{
+              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys}/>)
             })
           }
         </g>
