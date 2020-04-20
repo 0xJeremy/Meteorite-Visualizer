@@ -28,41 +28,38 @@ const useStyles = makeStyles({
   }
 });
 
+function TableItem(props) {
+  const classes = useStyles();
+  const selectedData = props.selectedData;
+  const hoverCallback = props.hoverCallback;
+  const d = props.d;
+
+  function get_color() {
+    if(selectedData !== null && selectedData[0] === d) {
+      return '#D55D0E';
+    }
+    return 'white';
+  }
+
+  return (
+    <TableRow onMouseEnter={() => {hoverCallback([d])}} onMouseLeave={() => {hoverCallback(null)}}>
+      <TableCell style={{color: get_color()}} component="th" scope="row">
+        {d.name}
+      </TableCell>
+      <TableCell style={{color: get_color()}} align="right">{d.year}</TableCell>
+      <TableCell style={{color: get_color()}} align="right">{d.class}</TableCell>
+      <TableCell style={{color: get_color()}} align="right">{d.mass}</TableCell>
+      <TableCell style={{color: get_color()}} align="right">{d.coordinates[0]}</TableCell>
+      <TableCell style={{color: get_color()}} align="right">{d.coordinates[1]}</TableCell>
+    </TableRow>
+  )
+}
+
 export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
   const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
-
-  function RenderTableCell(props) {
-    const d = props.d;
-    if(selectedData !== null && selectedData[0] === d) {
-      return (
-        <TableRow onMouseLeave={() => {hoverCallback(null)}}>
-          <TableCell className={classes.highlight} component="th" scope="row">
-            {d.name}
-          </TableCell>
-          <TableCell className={classes.highlight} align="right">{d.year}</TableCell>
-          <TableCell className={classes.highlight} align="right">{d.class}</TableCell>
-          <TableCell className={classes.highlight} align="right">{d.mass}</TableCell>
-          <TableCell className={classes.highlight} align="right">{d.coordinates[0]}</TableCell>
-          <TableCell className={classes.highlight} align="right">{d.coordinates[1]}</TableCell>
-        </TableRow>
-      )
-    }
-    return (
-      <TableRow onMouseEnter={() => {hoverCallback([d])}} onMouseLeave={() => {hoverCallback(null)}}>
-        <TableCell className={classes.cell} component="th" scope="row">
-          {d.name}
-        </TableCell>
-        <TableCell className={classes.cell} align="right">{d.year}</TableCell>
-        <TableCell className={classes.cell} align="right">{d.class}</TableCell>
-        <TableCell className={classes.cell} align="right">{d.mass}</TableCell>
-        <TableCell className={classes.cell} align="right">{d.coordinates[0]}</TableCell>
-        <TableCell className={classes.cell} align="right">{d.coordinates[1]}</TableCell>
-      </TableRow>
-    )
-  }
 
   return (
     <TableContainer className={classes.root} component={Paper}>
@@ -79,7 +76,7 @@ export default function DataTable(props) {
         </TableHead>
         <TableBody>
           {data.map((d) => 
-            <RenderTableCell d={d} key={d.name}/>
+            <TableItem d={d} selectedData={selectedData} hoverCallback={hoverCallback} />
           )}
         </TableBody>
       </Table>
