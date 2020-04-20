@@ -59,6 +59,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function label_to_mass_range(label) {
+  if(label === "<r1") {
+    return [0, 0.5]
+  } else if(label === "r1-r2") {
+    return [0.5, 1]
+  } else if(label === "r2-r3") {
+    return [1, 2]
+  } else if(label === "r3-r4") {
+    return [2, 4]
+  } else if(label === "r4-r5") {
+    return [4, 10]
+  } else if(label === "r5-r6") {
+    return [10, 20]
+  } else if(label === "r6-r7") {
+    return [20, 40]
+  } else if(label === "r7-r8") {
+    return [40, 60]
+  }
+}
+
 function Bar(props) {
   const classes = useStyles;
   const item = props.item;
@@ -68,17 +88,44 @@ function Bar(props) {
   const color = props.color;
   const to_display = props.to_display;
   const range_keys = props.range_keys;
+  const [hover, setHover] = React.useState(null);
+  const selectedData = props.selectedData;
+
+  function enter() {
+    setHover(item)
+  }
+
+  function leave() {
+    setHover(null)
+  }
+
+  function get_color(d) {
+    if(selectedData !== null && selectedData !== undefined) {
+      if(selectedData[0] !== undefined && selectedData[0].class === d) {
+        var masses = label_to_mass_range(item);
+        if(selectedData[0].mass/1000 >= masses[0] && selectedData[0].mass/1000 <= masses[1]) {
+          return '#D55D0E';
+        }
+      }
+    }
+    if(hover === item) {
+      return '#D55D0E';
+    }
+    return color(item);
+  }
 
   return (
-    <g style={{fill:color(item)}}>
+    <g>
       {
         Object.keys(to_display).map(d=>{
-          console.log(to_display)
           var end = to_display[d][item];
           var start = to_display[d][range_keys[i-1]];
           return (<rect 
+            style={{fill:get_color(d)}}
             x={x(i === 0 ? 0 : start)}
             y={y(d)} 
+            onMouseEnter={enter}
+            onMouseLeave={leave}
             width={x(end)-x(i === 0 ? 0 : start)} 
             height={y.bandwidth()} 
           />);
@@ -226,7 +273,7 @@ export default function ClassChart(props) {
         value={showNum}
         onChange={handleShowNum}
         className={classes.root}
-        classes={{root: classes.root, selected: classes.root}}
+        classes={{root: classes.root, select: classes.root}}
       >
       <MenuItem className={classes.menu} value={3}>3</MenuItem>
       <MenuItem className={classes.menu} value={5}>5</MenuItem>
@@ -247,12 +294,12 @@ export default function ClassChart(props) {
             })
           }
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
-          <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
           {
             range_keys.map((item,i)=>{
-              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys}/>)
+              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys} selectedData={selectedData}/>)
             })
           }
+          <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
         </g>
       </svg>
     </Paper>
