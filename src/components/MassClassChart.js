@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
   ranges: {
     fill: '#4fbbd6',
     fontSize: '12px',
+    display: 'inline-block'
   },
   formControl: {
     color: '#4fbbd6',
@@ -293,13 +294,13 @@ export default function ClassChart(props) {
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">
         <g transform={`translate(${margin.left}, ${margin.top*1.5})`}>
-          <text y={-vh(4)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
+          <text x = {-margin.left/2} y={-vh(4)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
           {
             range_keys.map((key, i)=>{
               return(
-                <g>
-                  <rect x={3+vw(2.35)*i} y={-vh(3)} width={vw(2.2)} height={vh(1)} fill={color(key)}/>
-                  <text x={3+vw(2.35)*i} y={-vh(1)} className={classes.ranges}>{range_strings[i]}</text>
+                <g style={{marginRight: 'auto',marginLeft: 'auto'}}>
+                  <rect x={-margin.left/2+vw(2.65)*i} y={-vh(3)} width={vw(2.5)} height={vh(1)} fill={color(key)}/>
+                  <text x={-margin.left/2+vw(2.65)*i+vw(.5)} y={-vh(.5)} className={classes.ranges} >{range_strings[i]}</text>
                 </g>
               )
             })
