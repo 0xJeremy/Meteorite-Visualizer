@@ -168,7 +168,7 @@ export default function ClassChart(props) {
         <g transform={`translate(${width/2+radius/16}, ${height/2+radius/4+margin.top})`} key={"pie_chart"}>
            {
             data_ready.map(d => {
-              x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad/2]);
+              x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
                   <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData}/>
