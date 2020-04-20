@@ -46,7 +46,7 @@ export default function InfoBox(props) {
         <DialogTitle className={classes.box} >Meteorite Data Visualizer</DialogTitle>
         <DialogContent className={classes.box} >
           <DialogContentText className={classes.box}>
-            Welcome to the meteorite data visulizer. This page shows all the meteorite data ever collected by NASA.
+            Welcome to the meteorite data visualizer. This page shows all the meteorite data ever collected by NASA.
             You can view the original dataset <a className={classes.link} href="https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh" target="_blank" rel="noopener noreferrer">here</a>.
             <br />
             Please enjoy.

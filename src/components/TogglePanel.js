@@ -10,7 +10,8 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 
-const YEARS = [1980, 2020]
+const YEARS = [1990, 2015];
+const STEP_SIZE = 5;
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -116,12 +117,12 @@ export default function TogglePanel(props) {
   const startAnimation = () => {
     var tmpTimeline = timeline;
     if(tmpTimeline[0] === YEARS[0] && tmpTimeline[1] === YEARS[1]) {
-      tmpTimeline = [YEARS[0], YEARS[0]+5];
+      tmpTimeline = [YEARS[0], YEARS[0]+STEP_SIZE];
     }
     setTimeline(tmpTimeline);
     var interval = setInterval(() => {
-      tmpTimeline[0] += 5;
-      tmpTimeline[1] += 5;
+      tmpTimeline[0] += STEP_SIZE;
+      tmpTimeline[1] += STEP_SIZE;
       if(tmpTimeline[1] > YEARS[1]) {
         setAnimation(null);
         setTimeline([YEARS[0], YEARS[1]]);

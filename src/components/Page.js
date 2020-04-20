@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Deck from './Map';
 import DataTable from './DataTable';
@@ -13,28 +12,9 @@ import small_data from '../meteorites_small';
 import medium_data from '../meteorites_medium';
 import large_data from '../meteorites_large';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
-  paper: {
-    padding: theme.spacing(1),
-    marginBottom: '8px',
-    marginRight: '8px',
-    textAlign: 'center',
-    color: '#4fbbd6',
-    fontSize: '40px',
-    backgroundColor: '#242730'
-  },
-  deck: {
-    marginBottom: '8px',
-  }
-}));
-
 export default function Page() {
-  const classes = useStyles();
   const [selectedData, setSelectedData] = useState(null);
-  const [timeline, setTimeline] = useState([1980, 2020])
+  const [timeline, setTimeline] = useState([1990, 2015])
   const [totalData, setTotalData] = useState(small_data)
   const [dispData, setDispData] = useState(small_data)
   const MapState = React.createRef();

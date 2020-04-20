@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -58,6 +58,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#242730',
   }
 }));
+
+const Menu = withStyles({
+  // root: {
+  //   color: '#4fbbd6',
+  //   backgroundColor: '#242730',
+  //   borderColor: '#4fbbd6',
+  // },
+})(MenuItem)
 
 function label_to_mass_range(label) {
   if(label === "<r1") {
@@ -150,11 +158,11 @@ export default function ClassChart(props) {
     return view_height * (window.innerHeight / 100)
   }
 
-  const svgWidth = vw(24),
+  const svgWidth = vw(23),
         svgHeight = vh(24);
 
 
-  const margin = { top: vh(6), right: vw(1), bottom: 0, left: vw(2) },
+  const margin = { top: vh(6), right: vw(0), bottom: 0, left: vw(4) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -273,11 +281,14 @@ export default function ClassChart(props) {
         value={showNum}
         onChange={handleShowNum}
         className={classes.root}
-        classes={{root: classes.root, select: classes.root}}
+        style={{backgroundColor: '#444750'}}
       >
-      <MenuItem className={classes.menu} value={3}>3</MenuItem>
-      <MenuItem className={classes.menu} value={5}>5</MenuItem>
-      <MenuItem className={classes.menu} value={8}>8</MenuItem>
+        <Menu value={3}>3</Menu>
+        <Menu value={6}>6</Menu>
+        <Menu value={9}>9</Menu>
+        <Menu value={12}>12</Menu>
+        <Menu value={15}>15</Menu>
+        <Menu value={17}>All</Menu>
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">
@@ -287,8 +298,8 @@ export default function ClassChart(props) {
             range_keys.map((key, i)=>{
               return(
                 <g>
-                  <rect x={3+vw(2.6)*i} y={-vh(3)} width={vw(2.4)} height={vh(1)} fill={color(key)}/>
-                  <text x={3+vw(2.6)*i} y={-vh(1)} className={classes.ranges}>{range_strings[i]}</text>
+                  <rect x={3+vw(2.35)*i} y={-vh(3)} width={vw(2.2)} height={vh(1)} fill={color(key)}/>
+                  <text x={3+vw(2.35)*i} y={-vh(1)} className={classes.ranges}>{range_strings[i]}</text>
                 </g>
               )
             })

@@ -39,7 +39,6 @@ function Bar(props) {
   const y = props.y;
   const width = props.width;
   const height = props.height;
-  const key = props.key;
   const setHover = props.setHover;
   const selectedData = props.selectedData;
   const [fill, setFill] = React.useState('#4fbbd6');
@@ -64,7 +63,6 @@ function Bar(props) {
       y={y}
       width={width}
       height={height}
-      key={key}
       onMouseEnter={enter}
       onMouseLeave={leave}
     />)
@@ -77,7 +75,6 @@ function Bar(props) {
     y={y}
     width={width}
     height={height}
-    key={key}
     onMouseEnter={enter}
     onMouseLeave={leave}
   />)

@@ -113,8 +113,6 @@ export default function ClassChart(props) {
         return new_class;
       }).values());
 
-  // data.map(d => console.log(d.class));
-
   var counts = {};
 
   for (var i = 0; i < all_classes.length; i++) {
