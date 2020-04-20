@@ -1,6 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import { scaleOrdinal, scaleLinear, scaleBand} from 'd3-scale';
 import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic';
 import { axisBottom, axisLeft } from 'd3-axis';
@@ -8,7 +12,9 @@ import { select } from 'd3-selection';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    color: '#4fbbd6',
+    backgroundColor: '#242730',
+    borderColor: '#4fbbd6',
   },
   paper: {
     marginBottom: '8px',
@@ -33,6 +39,24 @@ const useStyles = makeStyles(theme => ({
     fontSize: '25px',
     textAnchor: 'middle'
   },
+  ranges: {
+    fill: '#4fbbd6',
+    fontSize: '12px',
+  },
+  formControl: {
+    color: '#4fbbd6',
+    minWidth: '80px',
+    position: 'absolute',
+    right: '2vw'
+  },
+  menu: {
+    color: '#4fbbd6',
+    backgroundColor: '#242730',
+  },
+  gutters: {
+    color: '#4fbbd6',
+    backgroundColor: '#242730',
+  }
 }));
 
 function Bar(props) {
@@ -69,6 +93,7 @@ export default function ClassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const [hover, setHover] = React.useState(null);
+  const [showNum, setShowNum] = React.useState(3);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -78,11 +103,11 @@ export default function ClassChart(props) {
     return view_height * (window.innerHeight / 100)
   }
 
-  const svgWidth = vw(23),
+  const svgWidth = vw(24),
         svgHeight = vh(24);
 
 
-  const margin = { top: vh(5), right: vw(1), bottom: 0, left: vw(2) },
+  const margin = { top: vh(6), right: vw(1), bottom: 0, left: vw(2) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -167,9 +192,7 @@ export default function ClassChart(props) {
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
-  var display_top_X_classes = 3;
-
-  var top_X = keysSorted.slice(0,display_top_X_classes);
+  var top_X = keysSorted.slice(0,showNum);
 
   var to_display = top_X.reduce((acc,curr)=>{
                       var entries = Object.entries(cls_masses[curr]);
@@ -182,7 +205,7 @@ export default function ClassChart(props) {
     .range([0, width])
 
   var y = scaleBand()
-    .domain(keysSorted.slice(0,display_top_X_classes))
+    .domain(keysSorted.slice(0,showNum))
     .range([0, height])
     .padding(0.08)
 
@@ -190,10 +213,26 @@ export default function ClassChart(props) {
     .domain(range_keys)
     .range(schemeBlues[range_keys.length])
 
+  const handleShowNum = (event) => {
+    setShowNum(event.target.value);
+  };
 
 
   return (
     <Paper className={classes.paper}>
+    <FormControl className={classes.formControl}>
+      <InputLabel classes={{root: classes.root}}># Classes</InputLabel>
+      <Select
+        value={showNum}
+        onChange={handleShowNum}
+        className={classes.root}
+        classes={{root: classes.root, selected: classes.root}}
+      >
+      <MenuItem className={classes.menu} value={3}>3</MenuItem>
+      <MenuItem className={classes.menu} value={5}>5</MenuItem>
+      <MenuItem className={classes.menu} value={8}>8</MenuItem>
+      </Select>
+    </FormControl>
       <svg className={classes.svg} id="MassClassChart">
         <g transform={`translate(${margin.left}, ${margin.top*1.5})`}>
           <text y={-vh(4)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
@@ -201,8 +240,8 @@ export default function ClassChart(props) {
             range_keys.map((key, i)=>{
               return(
                 <g>
-                  <rect x = {3+26*i} y = {-vh(3)} width={25} height={10} fill={color(key)}/>
-                  <text y={-vh(0)} x={3+26*i} style={{fill: '#4fbbd6', fontSize:'10px'}}>{range_strings[i]}</text>
+                  <rect x={3+vw(2.6)*i} y={-vh(3)} width={vw(2.4)} height={vh(1)} fill={color(key)}/>
+                  <text x={3+vw(2.6)*i} y={-vh(1)} className={classes.ranges}>{range_strings[i]}</text>
                 </g>
               )
             })
