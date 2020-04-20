@@ -1,202 +1,1002 @@
 [
-{"coordinates":[9.35545,19.64008],"name":"Adrar Chiriet","class":"L6","mass":"926","year":2003},
-{"coordinates":[10.4941,18.61042],"name":"Adrar Madet 002","class":"LL3","mass":"2200","year":2002},
-{"coordinates":[10.03503,17.67987],"name":"Adrar Yaouelt","class":"H5","mass":"2730","year":2002},
-{"coordinates":[-5.51528,31.98457],"name":"Agoudal","class":"Iron, IIAB","mass":"100000","year":2000},
-{"coordinates":[-4.9,30.55],"name":"Agoult","class":"Eucrite","mass":"82","year":2000},
-{"coordinates":[4.35,27.4],"name":"Aguemour 017","class":"L6","mass":"1000","year":2001},
-{"coordinates":[28.9698,30.70952],"name":"Al Alamayn","class":"H5","mass":"13.31","year":2005},
-{"coordinates":[-12.5,27.5],"name":"Al Haggounia 001","class":"Aubrite","mass":"30000","year":2006},
-{"coordinates":[57.18833,19.42],"name":"Al Huqf 001","class":"L4","mass":"41.5","year":2000},
-{"coordinates":[57.38667,19.27167],"name":"Al Huqf 002","class":"H5","mass":"81.400000000000006","year":2000},
-{"coordinates":[57.11952,19.50695],"name":"Al Huqf 003","class":"L4","mass":"115.42","year":2002},
-{"coordinates":[57.09807,19.54482],"name":"Al Huqf 004","class":"L5","mass":"260.22000000000003","year":2002},
-{"coordinates":[57.00848,19.84057],"name":"Al Huqf 005","class":"L6","mass":"763.29","year":2002},
-{"coordinates":[57.00842,19.84067],"name":"Al Huqf 006","class":"L6","mass":"1861.21","year":2002},
-{"coordinates":[57.00953,19.84128],"name":"Al Huqf 007","class":"L5","mass":"1042.7","year":2002},
-{"coordinates":[57.00747,19.84203],"name":"Al Huqf 008","class":"L6","mass":"1074.3","year":2002},
-{"coordinates":[57.00013,19.8423],"name":"Al Huqf 009","class":"H4","mass":"39.83","year":2002},
-{"coordinates":[57.0028,19.86785],"name":"Al Huqf 010","class":"L6","mass":"41539.300000000003","year":2002},
-{"coordinates":[57.0032,19.86607],"name":"Al Huqf 011","class":"L6","mass":"8056","year":2002},
-{"coordinates":[57.32137,19.80252],"name":"Al Huqf 012","class":"L6","mass":"402.75","year":2003},
-{"coordinates":[57.03332,19.60308],"name":"Al Huqf 050","class":"H4","mass":"1066.2","year":2002},
-{"coordinates":[57.32137,19.80252],"name":"Al Huqf 051","class":"L6","mass":"402.75","year":2003},
-{"coordinates":[57.0433,19.65675],"name":"Al Huqf 052","class":"H~5","mass":"1319.4","year":2001},
-{"coordinates":[57.27038,19.61287],"name":"Al Huqf 053","class":"H~5","mass":"854.7","year":2001},
-{"coordinates":[57.2698,19.61612],"name":"Al Huqf 054","class":"L~6","mass":"2936.5","year":2001},
-{"coordinates":[57.28857,19.64073],"name":"Al Huqf 055","class":"H4","mass":"1865.6","year":2001},
-{"coordinates":[57.3334,19.66453],"name":"Al Huqf 056","class":"H5","mass":"124","year":2001},
-{"coordinates":[57.08427,19.53112],"name":"Al Huqf 057","class":"H5","mass":"105.3","year":2001},
-{"coordinates":[57.1693,19.3421],"name":"Al Huqf 058","class":"L~6","mass":"97.7","year":2001},
-{"coordinates":[57.27343,19.31468],"name":"Al Huqf 059","class":"L~3","mass":"362.7","year":2001},
-{"coordinates":[57.26818,19.40518],"name":"Al Huqf 060","class":"L~6","mass":"913.1","year":2001},
-{"coordinates":[57.29878,19.40772],"name":"Al Huqf 062","class":"H~4","mass":"50.7","year":2001},
-{"coordinates":[57.02345,19.44533],"name":"Al Huqf 063","class":"L6","mass":"591.79999999999995","year":2006},
-{"coordinates":[57.27497,19.40412],"name":"Al Huqf 064","class":"H4","mass":"12834","year":2002},
-{"coordinates":[57.22977,19.32092],"name":"Al Huqf 065","class":"L6","mass":"2084.16","year":2007},
-{"coordinates":[57.1292,19.51053],"name":"Al Huqf 066","class":"L4","mass":"150.05699999999999","year":2007},
-{"coordinates":[57.54063,19.22597],"name":"Al Huqf 067","class":"H4","mass":"61.6","year":2009},
-{"coordinates":[57.58427,19.14025],"name":"Al Huqf 068","class":"L3","mass":"165.4","year":2009},
-{"coordinates":[57.13412,19.26795],"name":"Al Huqf 069","class":"H4/5","mass":"250.5","year":2009},
-{"coordinates":[57.10978,19.18798],"name":"Al Huqf 070","class":"L4","mass":"2632.8","year":2009},
-{"coordinates":[55.32742,22.80487],"name":"Al Huwaysah 001","class":"LL6","mass":"3150.5","year":2009},
-{"coordinates":[55.31673,22.79853],"name":"Al Huwaysah 002","class":"LL6","mass":"690.5","year":2009},
-{"coordinates":[55.37323,22.74862],"name":"Al Huwaysah 003","class":"L4-6","mass":"273.05","year":2010},
-{"coordinates":[55.39522,22.74733],"name":"Al Huwaysah 004","class":"H5","mass":"141.51","year":2010},
-{"coordinates":[55.33122,22.73342],"name":"Al Huwaysah 005","class":"L(LL)3.5-3.7","mass":"1228.0999999999999","year":2010},
-{"coordinates":[55.3191,22.73743],"name":"Al Huwaysah 006","class":"L6","mass":"16.41","year":2010},
-{"coordinates":[55.3204,22.73393],"name":"Al Huwaysah 007","class":"L6","mass":"1.56","year":2010},
-{"coordinates":[55.32125,22.73797],"name":"Al Huwaysah 008","class":"H4","mass":"356.2","year":2010},
-{"coordinates":[55.41402,22.75747],"name":"Al Huwaysah 009","class":"H6","mass":"3407.8","year":2010},
-{"coordinates":[55.47218,22.74868],"name":"Al Huwaysah 010","class":"Achondrite-ung","mass":"1411.8","year":2010},
-{"coordinates":[55.3908,22.75978],"name":"Al Huwaysah 011","class":"L4-5","mass":"112.76","year":2010},
-{"coordinates":[55.34027,22.67752],"name":"Al Huwaysah 012","class":"H5","mass":"4694.8999999999996","year":2010},
-{"coordinates":[55.33652,22.68423],"name":"Al Huwaysah 013","class":"H6","mass":"55.51","year":2010},
-{"coordinates":[55.32092,22.68598],"name":"Al Huwaysah 014","class":"H6","mass":"45.52","year":2010},
-{"coordinates":[55.32087,22.68922],"name":"Al Huwaysah 015","class":"H6","mass":"35.299999999999997","year":2010},
-{"coordinates":[55.3336,22.69813],"name":"Al Huwaysah 016","class":"H5","mass":"1330.9","year":2010},
-{"coordinates":[55.36247,22.73852],"name":"Al Huwaysah 017","class":"L6","mass":"439.58","year":2010},
-{"coordinates":[81.25,40.33333],"name":"Alaer 001","class":"LL5","mass":"1.7","year":2007},
-{"coordinates":[81.25,40.33333],"name":"Alaer 002","class":"LL5","mass":"1.1","year":2007},
-{"coordinates":[-108.9038,32.306],"name":"Alkali Flat","class":"L5","mass":"28","year":2011},
-{"coordinates":[0,0],"name":"Allan Hills 03541","class":"H5","mass":"1053.5","year":2003},
-{"coordinates":[0,0],"name":"Allan Hills 03542","class":"L6","mass":"20.399999999999999","year":2003},
-{"coordinates":[158.76862,-76.71695],"name":"Allan Hills 06001","class":"H5","mass":"128.1","year":2006},
-{"coordinates":[158.84305,-76.74253],"name":"Allan Hills 06002","class":"H~5","mass":"119.2","year":2006},
-{"coordinates":[158.79283,-76.71128],"name":"Allan Hills 06003","class":"H~5","mass":"25","year":2006},
-{"coordinates":[158.77838,-76.70522],"name":"Allan Hills 06004","class":"H~5","mass":"61.7","year":2006},
-{"coordinates":[158.77838,-76.70522],"name":"Allan Hills 06005","class":"H~5","mass":"6","year":2006},
-{"coordinates":[158.77587,-76.70558],"name":"Allan Hills 06006","class":"H~5","mass":"280.89999999999998","year":2006},
-{"coordinates":[158.77583,-76.70552],"name":"Allan Hills 06007","class":"H5","mass":"226.3","year":2006},
-{"coordinates":[158.77485,-76.70552],"name":"Allan Hills 06008","class":"H~5","mass":"120","year":2006},
-{"coordinates":[158.77527,-76.71215],"name":"Allan Hills 06009","class":"H~5","mass":"28.6","year":2006},
-{"coordinates":[158.77862,-76.71263],"name":"Allan Hills 06010","class":"H~5","mass":"1.08","year":2006},
-{"coordinates":[158.7786,-76.71255],"name":"Allan Hills 06011","class":"H~5","mass":"24.3","year":2006},
-{"coordinates":[158.77398,-76.71733],"name":"Allan Hills 06012","class":"H5","mass":"91","year":2006},
-{"coordinates":[159.37238,-76.74403],"name":"Allan Hills 09001","class":"L5/6","mass":"0.5","year":2009},
-{"coordinates":[159.37458,-76.74245],"name":"Allan Hills 09002","class":"L6","mass":"71.599999999999994","year":2009},
-{"coordinates":[159.37458,-76.74245],"name":"Allan Hills 09003","class":"L6","mass":"15.5","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09004","class":"Howardite","mass":"221.7","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09005","class":"L5","mass":"122.3","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09006","class":"H5","mass":"104.3","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09008","class":"H5","mass":"31.3","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09009","class":"L6","mass":"24.8","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09010","class":"L3.4","mass":"2.6","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09011","class":"LL6","mass":"14.2","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09012","class":"L6","mass":"18.100000000000001","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09013","class":"L6","mass":"25.5","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 09014","class":"L5","mass":"30.2","year":2009},
-{"coordinates":[0,0],"name":"Allan Hills 10910","class":"L5","mass":"444.1","year":2010},
-{"coordinates":[0,0],"name":"Allan Hills 10911","class":"L6","mass":"218.9","year":2010},
-{"coordinates":[0,0],"name":"Allan Hills 10912","class":"H6","mass":"60.3","year":2010},
-{"coordinates":[159.45252,-76.76098],"name":"Allan Hills 99101","class":"LL3","mass":"103.4","year":2000},
-{"coordinates":[-2.95797,32.73458],"name":"Anoual","class":"Lunar","mass":"5.92","year":2006},
-{"coordinates":[-118.54465,40.90183],"name":"Antelope","class":"H4","mass":"754","year":2012},
-{"coordinates":[-106.56028,32.00584],"name":"Anthony Gap","class":"L6","mass":"347.36","year":2011},
-{"coordinates":[-4.06667,31.66667],"name":"Aoufous","class":"Eucrite-mmict","mass":"195","year":2000},
-{"coordinates":[0,0],"name":"Arabian Peninsula 001","class":"Diogenite","mass":"145","year":2006},
-{"coordinates":[0,0],"name":"Arabian Peninsula 002","class":"Eucrite","mass":"54","year":2006},
-{"coordinates":[0,0],"name":"Arabian Peninsula 003","class":"Diogenite","mass":"56","year":2006},
-{"coordinates":[0,0],"name":"Arabian Peninsula 004","class":"Diogenite","mass":"31","year":2006},
-{"coordinates":[0,0],"name":"Arabian Peninsula 005","class":"Eucrite-mmict","mass":"146","year":2005},
-{"coordinates":[0,0],"name":"Arabian Peninsula 006","class":"Eucrite-mmict","mass":"67","year":2005},
-{"coordinates":[74.44,29.06],"name":"Ararki","class":"L5","mass":"4460","year":2001},
-{"coordinates":[-109.58517,38.68867],"name":"Arches","class":"L5","mass":"534","year":2001},
-{"coordinates":[7.34225,18.673],"name":"Arlit","class":"H5","mass":"20.100000000000001","year":2002},
-{"coordinates":[14.25528,29.35944],"name":"Ashuwairif 001","class":"H4","mass":"14566","year":2008},
-{"coordinates":[14.26972,29.37972],"name":"Ashuwairif 002","class":"L5/6","mass":"11953","year":2008},
-{"coordinates":[14.24833,29.35833],"name":"Ashuwairif 003","class":"H4","mass":"2900","year":2008},
-{"coordinates":[14.27611,29.36583],"name":"Ashuwairif 004","class":"L6","mass":"15750","year":2008},
-{"coordinates":[14.29233,29.3945],"name":"Ashuwairif 005","class":"H4","mass":"335","year":2010},
-{"coordinates":[5.91667,19.26667],"name":"Assamakka","class":"Iron, IVA-an","mass":"4400","year":2002},
-{"coordinates":[-114.16705,34.38063],"name":"Aubrey Hills","class":"H6","mass":"560.79999999999995","year":2010},
-{"coordinates":[53.99032,17.75793],"name":"Aybut 001","class":"H6","mass":"442.26","year":2002},
-{"coordinates":[113.28333,46.7],"name":"Baruun Urt","class":"H5","mass":"25.9","year":2002},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00300","class":"Eucrite-unbr","mass":"124.6","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00301","class":"H3.3","mass":"33.799999999999997","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00302","class":"H3.3","mass":"37.1","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00303","class":"H3.3","mass":"15.8","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00304","class":"L6","mass":"709","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00305","class":"H5","mass":"316.39999999999998","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00306","class":"L5","mass":"66.95","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00307","class":"H6","mass":"130.05000000000001","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00308","class":"L5","mass":"10.7","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00309","class":"L5","mass":"24.1","year":2000},
-{"coordinates":[153.5,-80.25],"name":"Bates Nunataks 00310","class":"LL6","mass":"20.61","year":2000},
-{"coordinates":[35.2995,55.54867],"name":"Batyushkovo","class":"L5","mass":"4620","year":2007},
-{"coordinates":[14.63333,49.76667],"name":"Benešov (a)","class":"LL3.5","mass":"9.720000000000001","year":2011},
-{"coordinates":[14.63333,49.76667],"name":"Benešov (b)","class":"H5","mass":"1.54","year":2011},
-{"coordinates":[-95.52937,50.43845],"name":"Bernic Lake","class":"Iron, IAB-MG","mass":"9162","year":2002},
-{"coordinates":[55.23497,45.4633],"name":"Beyneu","class":"H6","mass":"45","year":2001},
-{"coordinates":[131.31667,-31.01667],"name":"Biduna Blowhole 001","class":"L4","mass":"103.4","year":2009},
-{"coordinates":[131.28547,-31.03297],"name":"Biduna Blowhole 002","class":"L4","mass":"13","year":2011},
-{"coordinates":[131.30394,-31.01964],"name":"Biduna Blowhole 003","class":"L6","mass":"0.4","year":2011},
-{"coordinates":[131.28553,-31.03278],"name":"Biduna Blowhole 004","class":"H5","mass":"114.5","year":2011},
-{"coordinates":[-113.275,33.71333],"name":"Big Horn Mountains","class":"H4","mass":"91.9","year":2006},
-{"coordinates":[9.84069,31.481],"name":"Bir Zar 001","class":"H6","mass":"627","year":2008},
-{"coordinates":[10.28403,31.93833],"name":"Bir Zar 002","class":"L4/5","mass":"331","year":2008},
-{"coordinates":[9.87722,31.49972],"name":"Bir Zar 003","class":"H3","mass":"39","year":2008},
-{"coordinates":[10.19361,31.87164],"name":"Bir Zar 004","class":"H6","mass":"19","year":2008},
-{"coordinates":[10.19572,31.89689],"name":"Bir Zar 005","class":"H4","mass":"17","year":2008},
-{"coordinates":[10.19528,31.89831],"name":"Bir Zar 006","class":"H6","mass":"21","year":2008},
-{"coordinates":[10.1875,31.92181],"name":"Bir Zar 007","class":"L6","mass":"5.2","year":2008},
-{"coordinates":[10.18961,31.92644],"name":"Bir Zar 008","class":"H6","mass":"200","year":2008},
-{"coordinates":[10.18961,31.92644],"name":"Bir Zar 009","class":"H5-6","mass":"21","year":2008},
-{"coordinates":[-119.18352,40.86717],"name":"Black Rock 001","class":"L6","mass":"152","year":2003},
-{"coordinates":[-69.5,-25],"name":"Blanca Estela","class":"Iron, IAB complex","mass":"15600","year":2002},
-{"coordinates":[-115.51833,38.66167],"name":"Blue Eagle","class":"R3-6","mass":"70","year":2006},
-{"coordinates":[-114.19167,35.8675],"name":"Bluebird","class":"L6","mass":"3650","year":2002},
-{"coordinates":[-118.93683,40.2495],"name":"Bluewing 001","class":"Eucrite-mmict","mass":"6.1","year":2000},
-{"coordinates":[-118.94642,40.27957],"name":"Bluewing 008","class":"H5","mass":"451.7","year":2001},
-{"coordinates":[-118.95912,40.2628],"name":"Bluewing 029","class":"H6","mass":"83.8","year":2006},
-{"coordinates":[-118.94693,40.2819],"name":"Bluewing 037","class":"H5","mass":"37.200000000000003","year":2009},
-{"coordinates":[-5.15262,31.15643],"name":"Bou Azarif","class":"H5","mass":"100000","year":2010},
-{"coordinates":[-12.81025,26.6325],"name":"Bou Kra","class":"H6","mass":"130","year":2001},
-{"coordinates":[-12.70978,26.74853],"name":"Bou Kra 002","class":"L5","mass":"606","year":2010},
-{"coordinates":[-12.71864,26.81089],"name":"Bou Kra 003","class":"L6","mass":"50","year":2010},
-{"coordinates":[-12.759,26.707],"name":"Bou Kra 004","class":"Eucrite-mmict","mass":"272.75","year":2010},
-{"coordinates":[-12.724,26.819],"name":"Bou Kra 005","class":"CM2","mass":"31.14","year":2010},
-{"coordinates":[-3.2,31.98333],"name":"Bouanane","class":"L6","mass":"1395","year":2009},
-{"coordinates":[-114.323,34.685],"name":"Boulder Mine","class":"L5","mass":"1560","year":2008},
-{"coordinates":[-114.06667,33.96667],"name":"Bouse","class":"L4-6","mass":"147.4","year":2004},
-{"coordinates":[-114.20883,34.72453],"name":"Buck Mountain Wash","class":"H3-5","mass":"798","year":2004},
-{"coordinates":[-114.22257,34.73245],"name":"Buck Mountains 001","class":"H6","mass":"50","year":2004},
-{"coordinates":[-114.20783,34.71933],"name":"Buck Mountains 002","class":"L6","mass":"18.399999999999999","year":2004},
-{"coordinates":[-114.21717,34.7345],"name":"Buck Mountains 003","class":"L6","mass":"34200","year":2005},
-{"coordinates":[-114.18845,34.70108],"name":"Buck Mountains 004","class":"H3-6","mass":"145.80000000000001","year":2005},
-{"coordinates":[-114.19097,34.70337],"name":"Buck Mountains 005","class":"L6","mass":"859.7","year":2007},
-{"coordinates":[0,0],"name":"Buckley Island 10930","class":"L6","mass":"374.5","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10932","class":"L6","mass":"879.9","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10933","class":"CR2","mass":"486","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10934","class":"L6","mass":"472.2","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10935","class":"L6","mass":"362.4","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10936","class":"L5","mass":"335.2","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10937","class":"L6","mass":"234.6","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10938","class":"L5","mass":"288","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10939","class":"L6","mass":"143.9","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10940","class":"H6","mass":"161.69999999999999","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10941","class":"L6","mass":"118.8","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10942","class":"L6","mass":"95.4","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10943","class":"CO3","mass":"27.8","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10944","class":"CK4","mass":"39.700000000000003","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10945","class":"H6","mass":"80.3","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10946","class":"L5","mass":"28.3","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10947","class":"H5","mass":"47.2","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10948","class":"L6","mass":"41.6","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10949","class":"L6","mass":"22.6","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10950","class":"H6","mass":"10.3","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10951","class":"L6","mass":"26.1","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10952","class":"L6","mass":"5.8","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10953","class":"H4","mass":"7.9","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10954","class":"L6","mass":"22.7","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10955","class":"L6","mass":"15.1","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10956","class":"H5","mass":"20.399999999999999","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10957","class":"L6","mass":"4.9","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10958","class":"LL6","mass":"0.1","year":2010},
-{"coordinates":[0,0],"name":"Buckley Island 10959","class":"H6","mass":"0.3","year":2010},
-{"coordinates":[-99.99306,32.24611],"name":"Buffalo Gap","class":"Iron, IAB-ung","mass":"9300","year":2003},
-{"coordinates":[-98.72383,38.84833],"name":"Bunker Hill","class":"L6","mass":"28000","year":2002},
-{"coordinates":[-106.88333,39.86667],"name":"Burns","class":"Iron, IIIAB","mass":"18400","year":2003},
-{"coordinates":[-70.03333,-24.266],"name":"Caleta el Cobre 001","class":"H6","mass":"9","year":2010},
-{"coordinates":[-70.51667,-24.25],"name":"Caleta el Cobre 002","class":"H6","mass":"18","year":2010}
+ {
+  "coordinates": [
+   -11.34133,
+   17.17493
+  ],
+  "name": "Boumdeid (2011)",
+  "class": "L6",
+  "mass": "3599",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   10.7,
+   59.43333
+  ],
+  "name": "Moss",
+  "class": "CO3.6",
+  "mass": "3763",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03589",
+  "class": "H4",
+  "mass": "232.7",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   131.55,
+   -30.48333
+  ],
+  "name": "Watson 004",
+  "class": "H4",
+  "mass": "1.3",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   16.9575,
+   27.92472
+  ],
+  "name": "Dar al Gani 1020",
+  "class": "H5",
+  "mass": "55.8",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03579",
+  "class": "LL4",
+  "mass": "411.8",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Sandford Cliffs 03465",
+  "class": "L5",
+  "mass": "596.5",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -116.7502,
+   35.06917
+  ],
+  "name": "Coyote Dry Lake 129",
+  "class": "H5",
+  "mass": "140",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "D'Angelo Bluff 06001",
+  "class": "L6",
+  "mass": "26.7",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03588",
+  "class": "L5",
+  "mass": "209.6",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   11.35556,
+   44.495
+  ],
+  "name": "Castenaso",
+  "class": "L5",
+  "mass": "120",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "MacAlpine Hills 02575",
+  "class": "L5",
+  "mass": "2.79",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -11.3715,
+   17.71067
+  ],
+  "name": "Boumdeid (2003)",
+  "class": "L6",
+  "mass": "190",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -5.51528,
+   31.98457
+  ],
+  "name": "Agoudal",
+  "class": "Iron, IIAB",
+  "mass": "100000",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -79.95756,
+   -1.87089
+  ],
+  "name": "Daule",
+  "class": "L5",
+  "mass": "6580",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03581",
+  "class": "LL4",
+  "mass": "541",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   27.58333,
+   -29.33333
+  ],
+  "name": "Thuathe",
+  "class": "H4/5",
+  "mass": "45300",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   28.96,
+   13.66033
+  ],
+  "name": "Al Zarnkh",
+  "class": "LL5",
+  "mass": "700",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Larkman Nunatak 06807",
+  "class": "H5",
+  "mass": "250",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   41.5046,
+   49.78917
+  ],
+  "name": "Zubkovsky",
+  "class": "L6",
+  "mass": "2167",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   155.75,
+   -79.68333
+  ],
+  "name": "Meteorite Hills 00612",
+  "class": "L5",
+  "mass": "110.51",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   95.78333,
+   27.66667
+  ],
+  "name": "Mahadevpur",
+  "class": "H4/5",
+  "mass": "70500",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   -105.02325,
+   40.30583
+  ],
+  "name": "Berthoud",
+  "class": "Eucrite-mmict",
+  "mass": "960",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   -10.5,
+   26.5
+  ],
+  "name": "Tifariti",
+  "class": "L6",
+  "mass": "5.4",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   75.81333,
+   25.14333
+  ],
+  "name": "Kavarpura",
+  "class": "Iron, IIE-an",
+  "mass": "6800",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -111.78558,
+   33.88098
+  ],
+  "name": "Camp Creek",
+  "class": "H4",
+  "mass": "3016",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03577",
+  "class": "LL6",
+  "mass": "556.20000000000005",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -87.67917,
+   41.48472
+  ],
+  "name": "Park Forest",
+  "class": "L5",
+  "mass": "18000",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -10.15367,
+   22.9935
+  ],
+  "name": "Adam Talha",
+  "class": "LL3.2",
+  "mass": "259.3",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   -4.9,
+   30.55
+  ],
+  "name": "Agoult",
+  "class": "Eucrite",
+  "mass": "82",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Larkman Nunatak 06804",
+  "class": "H6",
+  "mass": "130",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03578",
+  "class": "L5",
+  "mass": "471.6",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -114.16705,
+   34.38063
+  ],
+  "name": "Aubrey Hills",
+  "class": "H6",
+  "mass": "560.79999999999995",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   155.75,
+   -79.68333
+  ],
+  "name": "Meteorite Hills 00614",
+  "class": "L5",
+  "mass": "81.89",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   10.06943,
+   30.93397
+  ],
+  "name": "Tieret 012",
+  "class": "L4",
+  "mass": "0.41",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -97.01,
+   31.805
+  ],
+  "name": "Ash Creek",
+  "class": "L6",
+  "mass": "9500",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   9.8,
+   12.76667
+  ],
+  "name": "Kilabo",
+  "class": "LL6",
+  "mass": "19000",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -113.38167,
+   38.99861
+  ],
+  "name": "Tule Valley",
+  "class": "L6",
+  "mass": "17.690000000000001",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   10.2503,
+   30.8193
+  ],
+  "name": "Tieret 003",
+  "class": "H6",
+  "mass": "17.100000000000001",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -69.5,
+   -25
+  ],
+  "name": "Blanca Estela",
+  "class": "Iron, IAB complex",
+  "mass": "15600",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   78.03333,
+   12.66667
+  ],
+  "name": "Sulagiri",
+  "class": "LL6",
+  "mass": "110000",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   70.31333,
+   22.68
+  ],
+  "name": "Jodiya",
+  "class": "L5",
+  "mass": "100",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -106.56028,
+   32.00584
+  ],
+  "name": "Anthony Gap",
+  "class": "L6",
+  "mass": "347.36",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   35.66667,
+   -71.5
+  ],
+  "name": "Yamato 000749",
+  "class": "Martian (nakhlite)",
+  "mass": "1283",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -109.89265,
+   32.11288
+  ],
+  "name": "Willcox Playa 006",
+  "class": "H6",
+  "mass": "3.1",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   -3.51667,
+   39.35
+  ],
+  "name": "Puerto L\u00e1pice",
+  "class": "Eucrite-br",
+  "mass": "500",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   45.17,
+   13.71111
+  ],
+  "name": "Yafa",
+  "class": "H5",
+  "mass": "5700",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   129.19,
+   -31.35
+  ],
+  "name": "Bunburra Rockhole",
+  "class": "Eucrite",
+  "mass": "324",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   48.73742,
+   23.34775
+  ],
+  "name": "Yabrin 001",
+  "class": "LL5",
+  "mass": "65.19",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   11.46745,
+   54.76183
+  ],
+  "name": "Maribo",
+  "class": "CM2",
+  "mass": "25.81",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   155.75,
+   -79.68333
+  ],
+  "name": "Meteorite Hills 00616",
+  "class": "LL6",
+  "mass": "97.51",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   10.24557,
+   30.79576
+  ],
+  "name": "Tieret 002",
+  "class": "L6",
+  "mass": "23.5",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03583",
+  "class": "LL5",
+  "mass": "226.7",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   35.2995,
+   55.54867
+  ],
+  "name": "Batyushkovo",
+  "class": "L5",
+  "mass": "4620",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   7.34225,
+   18.673
+  ],
+  "name": "Arlit",
+  "class": "H5",
+  "mass": "20.100000000000001",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Northwest Africa 1392",
+  "class": "H5",
+  "mass": "64",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   56.67833,
+   20.54167
+  ],
+  "name": "Sayh al Uhaymir 059",
+  "class": "H4",
+  "mass": "62",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -134.20139,
+   59.70444
+  ],
+  "name": "Tagish Lake",
+  "class": "C2-ung",
+  "mass": "10000",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   3.8795,
+   27.503
+  ],
+  "name": "Acfer 323",
+  "class": "LL5",
+  "mass": "117",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -117.60432,
+   39.67357
+  ],
+  "name": "Tungsten Mountain 002",
+  "class": "H6",
+  "mass": "11.3",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -81.36222,
+   28.5475
+  ],
+  "name": "Orlando",
+  "class": "Eucrite",
+  "mass": "180",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   131.50164,
+   -30.575
+  ],
+  "name": "Watson 013",
+  "class": "H3",
+  "mass": "47.1",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -69.71667,
+   -25.23333
+  ],
+  "name": "Catalina 002",
+  "class": "LL3",
+  "mass": "61.1",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -116.94277,
+   34.48975
+  ],
+  "name": "Lucerne Valley 041",
+  "class": "L6",
+  "mass": "0.84",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   106.63241,
+   26.46469
+  ],
+  "name": "Huaxi",
+  "class": "H5",
+  "mass": "1600",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -12.5,
+   27.5
+  ],
+  "name": "Al Haggounia 001",
+  "class": "Aubrite",
+  "mass": "30000",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   36.8001,
+   50.11112
+  ],
+  "name": "Verkhnyi Saltov",
+  "class": "Iron, IIIAB",
+  "mass": "9530",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   159.45252,
+   -76.76098
+  ],
+  "name": "Allan Hills 99101",
+  "class": "LL3",
+  "mass": "103.4",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Larkman Nunatak 06809",
+  "class": "L5",
+  "mass": "371.2",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   131.68333,
+   -30.5
+  ],
+  "name": "Watson 008",
+  "class": "H5",
+  "mass": "1.5",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0.08,
+   12.9
+  ],
+  "name": "Ouadangou",
+  "class": "L5",
+  "mass": "4440",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   9.35545,
+   19.64008
+  ],
+  "name": "Adrar Chiriet",
+  "class": "L6",
+  "mass": "926",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -116.96512,
+   34.487
+  ],
+  "name": "Lucerne Valley 045",
+  "class": "L6",
+  "mass": "38.56",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Roberts Massif 04301",
+  "class": "L5",
+  "mass": "9.1",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Northwest Africa 1391",
+  "class": "L6",
+  "mass": "1091",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -5.01472,
+   23.69639
+  ],
+  "name": "Chergach ",
+  "class": "H5",
+  "mass": "100000",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   32.41275,
+   20.74575
+  ],
+  "name": "Almahata Sitta",
+  "class": "Ureilite-an",
+  "mass": "3950",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   28.9698,
+   30.70952
+  ],
+  "name": "Al Alamayn",
+  "class": "H5",
+  "mass": "13.31",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   53.99032,
+   17.75793
+  ],
+  "name": "Aybut 001",
+  "class": "H6",
+  "mass": "442.26",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Miller Range 07040",
+  "class": "H5",
+  "mass": "413",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   -114.86667,
+   33.01222
+  ],
+  "name": "Chocolate Mountains",
+  "class": "Ureilite",
+  "mass": "699",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   55.18142,
+   22.89183
+  ],
+  "name": "United Arab Emirates 026",
+  "class": "L6",
+  "mass": "97",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -41.73356,
+   -20.85001
+  ],
+  "name": "Varre-Sai",
+  "class": "L5",
+  "mass": "2500",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -76.51,
+   3.405
+  ],
+  "name": "Cali",
+  "class": "H/L4",
+  "mass": "478",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   131.71667,
+   -30.5
+  ],
+  "name": "Watson 010",
+  "class": "H5",
+  "mass": "19.3",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -4.06667,
+   31.66667
+  ],
+  "name": "Aoufous",
+  "class": "Eucrite-mmict",
+  "mass": "195",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -114.45585,
+   35.16993
+  ],
+  "name": "Thumb Butte",
+  "class": "H3.8",
+  "mass": "105",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   -116.95833,
+   34.48728
+  ],
+  "name": "Lucerne Valley 050",
+  "class": "H4",
+  "mass": "6.85",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   -106.88333,
+   39.86667
+  ],
+  "name": "Burns",
+  "class": "Iron, IIIAB",
+  "mass": "18400",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -109.82423,
+   32.14202
+  ],
+  "name": "Willcox Playa 004",
+  "class": "L6",
+  "mass": "19.899999999999999",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   -116.7494,
+   35.06785
+  ],
+  "name": "Coyote Dry Lake 130",
+  "class": "H4",
+  "mass": "6.1",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   131.46667,
+   -30.5
+  ],
+  "name": "Yarle Lakes 004",
+  "class": "CK4",
+  "mass": "4.6",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -114.2761,
+   34.8197
+  ],
+  "name": "Yucca 015",
+  "class": "H-metal",
+  "mass": "3",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   27.32997,
+   37.35172
+  ],
+  "name": "Didim",
+  "class": "H3-5",
+  "mass": "3396",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   10.04587,
+   30.96791
+  ],
+  "name": "Tieret 004",
+  "class": "H5",
+  "mass": "10.6",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   10.06525,
+   30.9337
+  ],
+  "name": "Tieret 008",
+  "class": "L4",
+  "mass": "28",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Roberts Massif 04298",
+  "class": "LL5",
+  "mass": "44",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   10.06945,
+   30.93472
+  ],
+  "name": "Tieret 009",
+  "class": "H5/6",
+  "mass": "9",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -109.58517,
+   38.68867
+  ],
+  "name": "Arches",
+  "class": "L5",
+  "mass": "534",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   14.29233,
+   29.3945
+  ],
+  "name": "Ashuwairif 005",
+  "class": "H4",
+  "mass": "335",
+  "year": 2010
+ }
 ]

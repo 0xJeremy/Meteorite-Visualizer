@@ -1,0 +1,1002 @@
+[
+ {
+  "coordinates": [
+   73.11528,
+   26.50833
+  ],
+  "name": "Bhawad",
+  "class": "LL6",
+  "mass": "678",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   46.01667,
+   30.9
+  ],
+  "name": "Ur",
+  "class": "Iron",
+  "mass": "",
+  "year": 2501
+ },
+ {
+  "coordinates": [
+   -0.51667,
+   27.63533
+  ],
+  "name": "Touat 001",
+  "class": "L6",
+  "mass": "2650",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   10.2056,
+   20.12593
+  ],
+  "name": "Capot Rey",
+  "class": "H5",
+  "mass": "38000",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   131.7,
+   -30.5
+  ],
+  "name": "Watson 005",
+  "class": "H5",
+  "mass": "1.6",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   48.72245,
+   23.35717
+  ],
+  "name": "Yabrin 002",
+  "class": "H5",
+  "mass": "46.32",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   28.9698,
+   30.70952
+  ],
+  "name": "Al Alamayn",
+  "class": "H5",
+  "mass": "13.31",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   -13.1,
+   24.3
+  ],
+  "name": "Oum Dreyga",
+  "class": "H3-5",
+  "mass": "17000",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   4.35,
+   27.4
+  ],
+  "name": "Aguemour 017",
+  "class": "L6",
+  "mass": "1000",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   131.50164,
+   -30.575
+  ],
+  "name": "Watson 013",
+  "class": "H3",
+  "mass": "47.1",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   155.75,
+   -79.68333
+  ],
+  "name": "Meteorite Hills 00615",
+  "class": "H6",
+  "mass": "166.85",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   113.28333,
+   46.7
+  ],
+  "name": "Baruun Urt",
+  "class": "H5",
+  "mass": "25.9",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   21.78713,
+   32.79732
+  ],
+  "name": "Werdama",
+  "class": "H5",
+  "mass": "4000",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -116.95833,
+   34.48728
+  ],
+  "name": "Lucerne Valley 050",
+  "class": "H4",
+  "mass": "6.85",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   -5.01472,
+   23.69639
+  ],
+  "name": "Chergach ",
+  "class": "H5",
+  "mass": "100000",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   3.8795,
+   27.503
+  ],
+  "name": "Acfer 323",
+  "class": "LL5",
+  "mass": "117",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -68.48944,
+   -31.53556
+  ],
+  "name": "Santa Lucia (2008)",
+  "class": "L6",
+  "mass": "4000",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   70.31333,
+   22.68
+  ],
+  "name": "Jodiya",
+  "class": "L5",
+  "mass": "100",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -3.51667,
+   39.35
+  ],
+  "name": "Puerto L\u00e1pice",
+  "class": "Eucrite-br",
+  "mass": "500",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   -111.78558,
+   33.88098
+  ],
+  "name": "Camp Creek",
+  "class": "H4",
+  "mass": "3016",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   94.6,
+   51.53333
+  ],
+  "name": "Cheder",
+  "class": "Iron, IID",
+  "mass": "5390",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   14.63333,
+   49.76667
+  ],
+  "name": "Bene\u0161ov (b)",
+  "class": "H5",
+  "mass": "1.54",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   10.4941,
+   18.61042
+  ],
+  "name": "Adrar Madet 002",
+  "class": "LL3",
+  "mass": "2200",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -97.01,
+   31.805
+  ],
+  "name": "Ash Creek",
+  "class": "L6",
+  "mass": "9500",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   10.21017,
+   30.74819
+  ],
+  "name": "Tieret 001",
+  "class": "H6",
+  "mass": "602",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -79.61667,
+   43.2
+  ],
+  "name": "Grimsby",
+  "class": "H5",
+  "mass": "215",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Roberts Massif 04302",
+  "class": "CV3",
+  "mass": "11.6",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Sandford Cliffs 03466",
+  "class": "L5",
+  "mass": "553.4",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   159.45252,
+   -76.76098
+  ],
+  "name": "Allan Hills 99101",
+  "class": "LL3",
+  "mass": "103.4",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   10.04587,
+   30.96791
+  ],
+  "name": "Tieret 004",
+  "class": "H5",
+  "mass": "10.6",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   106.63241,
+   26.46469
+  ],
+  "name": "Huaxi",
+  "class": "H5",
+  "mass": "1600",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Larkman Nunatak 06807",
+  "class": "H5",
+  "mass": "250",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -101.097,
+   45.425
+  ],
+  "name": "Timber Lake",
+  "class": "H3",
+  "mass": "8660",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   -109.58517,
+   38.68867
+  ],
+  "name": "Arches",
+  "class": "L5",
+  "mass": "534",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -109.89265,
+   32.11288
+  ],
+  "name": "Willcox Playa 006",
+  "class": "H6",
+  "mass": "3.1",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   55.23497,
+   45.4633
+  ],
+  "name": "Beyneu",
+  "class": "H6",
+  "mass": "45",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   -79.95756,
+   -1.87089
+  ],
+  "name": "Daule",
+  "class": "L5",
+  "mass": "6580",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   35.66667,
+   -71.5
+  ],
+  "name": "Yamato 000593",
+  "class": "Martian (nakhlite)",
+  "mass": "13713",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -58.32833,
+   -31.91
+  ],
+  "name": "Berduc",
+  "class": "L6",
+  "mass": "270",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   86.70278,
+   20.4625
+  ],
+  "name": "Kendrapara",
+  "class": "H4-5",
+  "mass": "6669.2",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -87.67917,
+   41.48472
+  ],
+  "name": "Park Forest",
+  "class": "L5",
+  "mass": "18000",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Miller Range 07041",
+  "class": "L6",
+  "mass": "257.3",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   -69.78333,
+   -25.58333
+  ],
+  "name": "San Juan 063",
+  "class": "H5",
+  "mass": "3384",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03589",
+  "class": "H4",
+  "mass": "232.7",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -10.5,
+   26.5
+  ],
+  "name": "Tifariti",
+  "class": "L6",
+  "mass": "5.4",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -109.8455,
+   32.07667
+  ],
+  "name": "Willcox Playa 009",
+  "class": "Mesosiderite",
+  "mass": "160",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   -5.9,
+   15.78333
+  ],
+  "name": "Bassikounou",
+  "class": "H5",
+  "mass": "29560",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 02270",
+  "class": "LL6",
+  "mass": "14.75",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   4.093,
+   27.55917
+  ],
+  "name": "Acfer 322",
+  "class": "L5",
+  "mass": "25",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   126.61667,
+   -30.31667
+  ],
+  "name": "Camel Donga 053",
+  "class": "LL5-6",
+  "mass": "579",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   -7.61123,
+   29.48195
+  ],
+  "name": "Tissint",
+  "class": "Martian (shergottite)",
+  "mass": "7000",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   -115.51833,
+   38.66167
+  ],
+  "name": "Blue Eagle",
+  "class": "R3-6",
+  "mass": "70",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03584",
+  "class": "LL5",
+  "mass": "311.39999999999998",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -116.95333,
+   34.525
+  ],
+  "name": "Lucerne Valley 051",
+  "class": "L5",
+  "mass": "6",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -114.76718,
+   32.91745
+  ],
+  "name": "Cargo Muchacho Mountains",
+  "class": "CO3",
+  "mass": "2860",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   45.17,
+   13.71111
+  ],
+  "name": "Yafa",
+  "class": "H5",
+  "mass": "5700",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03583",
+  "class": "LL5",
+  "mass": "226.7",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -110.43418,
+   31.96185
+  ],
+  "name": "Whetstone Mountains",
+  "class": "H5",
+  "mass": "2138.7399999999998",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   22.005,
+   54.00883
+  ],
+  "name": "So\u0142tmany",
+  "class": "L6",
+  "mass": "1066",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Yamato 000027",
+  "class": "Martian (shergottite)",
+  "mass": "9.68",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   16.06633,
+   27.07567
+  ],
+  "name": "Dar al Gani 1028",
+  "class": "CO3",
+  "mass": "131",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -1.31667,
+   44.08333
+  ],
+  "name": "Contis-Plage",
+  "class": "H5",
+  "mass": "44",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   5.91667,
+   19.26667
+  ],
+  "name": "Assamakka",
+  "class": "Iron, IVA-an",
+  "mass": "4400",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -117.60432,
+   39.67357
+  ],
+  "name": "Tungsten Mountain 002",
+  "class": "H6",
+  "mass": "11.3",
+  "year": 2001
+ },
+ {
+  "coordinates": [
+   131.5,
+   -30.51667
+  ],
+  "name": "Watson 011",
+  "class": "H4",
+  "mass": "4.1",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Allan Hills 03541",
+  "class": "H5",
+  "mass": "1053.5",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   131.68333,
+   -30.5
+  ],
+  "name": "Watson 008",
+  "class": "H5",
+  "mass": "1.5",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   55.17989,
+   22.89092
+  ],
+  "name": "United Arab Emirates 028",
+  "class": "L6",
+  "mass": "39",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   14.63333,
+   49.76667
+  ],
+  "name": "Bene\u0161ov (a)",
+  "class": "LL3.5",
+  "mass": "9.720000000000001",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   -2.95797,
+   32.73458
+  ],
+  "name": "Anoual",
+  "class": "Lunar",
+  "mass": "5.92",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Yamato 000097",
+  "class": "Martian (shergottite)",
+  "mass": "24.48",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -108.9038,
+   32.306
+  ],
+  "name": "Alkali Flat",
+  "class": "L5",
+  "mass": "28",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   -7.015,
+   31.16333
+  ],
+  "name": "Tamdakht",
+  "class": "H5",
+  "mass": "100000",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   -69.5,
+   -25
+  ],
+  "name": "Blanca Estela",
+  "class": "Iron, IAB complex",
+  "mass": "15600",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   131.5,
+   -30.56667
+  ],
+  "name": "Watson 012",
+  "class": "H7",
+  "mass": "103.1",
+  "year": 2009
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 03576",
+  "class": "LL4",
+  "mass": "561",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -98.72383,
+   38.84833
+  ],
+  "name": "Bunker Hill",
+  "class": "L6",
+  "mass": "28000",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   -109.82423,
+   32.14202
+  ],
+  "name": "Willcox Playa 004",
+  "class": "L6",
+  "mass": "19.899999999999999",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   -106.88333,
+   39.86667
+  ],
+  "name": "Burns",
+  "class": "Iron, IIIAB",
+  "mass": "18400",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -10.15367,
+   22.9935
+  ],
+  "name": "Adam Talha",
+  "class": "LL3.2",
+  "mass": "259.3",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   61.11667,
+   54.81667
+  ],
+  "name": "Chelyabinsk",
+  "class": "LL5",
+  "mass": "100000",
+  "year": 2013
+ },
+ {
+  "coordinates": [
+   29.41822,
+   36.54194
+  ],
+  "name": "Kemer",
+  "class": "L4",
+  "mass": "5760",
+  "year": 2008
+ },
+ {
+  "coordinates": [
+   -114.40783,
+   39.35067
+  ],
+  "name": "Yelland Dry Lake",
+  "class": "H4",
+  "mass": "76000",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   -114.2761,
+   34.8197
+  ],
+  "name": "Yucca 015",
+  "class": "H-metal",
+  "mass": "3",
+  "year": 2011
+ },
+ {
+  "coordinates": [
+   120.48333,
+   36.3
+  ],
+  "name": "Xifu",
+  "class": "Iron, IAB complex",
+  "mass": "30000",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   10.06525,
+   30.9337
+  ],
+  "name": "Tieret 008",
+  "class": "L4",
+  "mass": "28",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   -116.97275,
+   34.486
+  ],
+  "name": "Lucerne Valley 057",
+  "class": "L6",
+  "mass": "13.15",
+  "year": 2005
+ },
+ {
+  "coordinates": [
+   -5.51528,
+   31.98457
+  ],
+  "name": "Agoudal",
+  "class": "Iron, IIAB",
+  "mass": "100000",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Northwest Africa 1397",
+  "class": "L/LL6",
+  "mass": "40000",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   -99.99306,
+   32.24611
+  ],
+  "name": "Buffalo Gap",
+  "class": "Iron, IAB-ung",
+  "mass": "9300",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   118.45561,
+   -28.09697
+  ],
+  "name": "Windimurra",
+  "class": "H4/5",
+  "mass": "30000",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   118.01,
+   26.06
+  ],
+  "name": "Youxi",
+  "class": "Mesosiderite-C",
+  "mass": "218000",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   -2.04167,
+   14.15083
+  ],
+  "name": "Gasseltepaoua",
+  "class": "H5",
+  "mass": "",
+  "year": 2000
+ },
+ {
+  "coordinates": [
+   99.81667,
+   40.26667
+  ],
+  "name": "Weikengquan",
+  "class": "H5",
+  "mass": "665",
+  "year": 2006
+ },
+ {
+  "coordinates": [
+   10.06935,
+   30.93417
+  ],
+  "name": "Tieret 011",
+  "class": "H5/6",
+  "mass": "13.4",
+  "year": 2010
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "LaPaz Icefield 02272",
+  "class": "LL6",
+  "mass": "39.590000000000003",
+  "year": 2002
+ },
+ {
+  "coordinates": [
+   27.32997,
+   37.35172
+  ],
+  "name": "Didim",
+  "class": "H3-5",
+  "mass": "3396",
+  "year": 2007
+ },
+ {
+  "coordinates": [
+   11.35556,
+   44.495
+  ],
+  "name": "Castenaso",
+  "class": "L5",
+  "mass": "120",
+  "year": 2003
+ },
+ {
+  "coordinates": [
+   -116.9735,
+   34.48742
+  ],
+  "name": "Lucerne Valley 046",
+  "class": "L6",
+  "mass": "10.32",
+  "year": 2004
+ },
+ {
+  "coordinates": [
+   0,
+   0
+  ],
+  "name": "Northwest Africa 2023",
+  "class": "L4/5",
+  "mass": "14400",
+  "year": 2002
+ }
+]
