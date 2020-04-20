@@ -128,10 +128,10 @@ export default function ClassChart(props) {
 
   const colorScale = interpolateBlues;
 
-  var scheme = interpolateColors(Object.keys(counts).length,colorScale,colorRangeInfo)
-
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
+
+  var scheme = interpolateColors(keysSorted.length,colorScale,colorRangeInfo)
 
   var color = scaleOrdinal()
   .domain(keysSorted)
@@ -142,9 +142,11 @@ export default function ClassChart(props) {
     .value(function(d) {return d.value; });
   var data_ready = make_pie(entries(counts));
 
-  var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2);
+  const pad = Math.PI/180/Object.keys(keysSorted).length
 
-  const pad = Math.PI/180
+  var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2).padAngle([pad/2]);
+
+  
 
   function ToolTip() {
     if(hover !== null) {
@@ -166,7 +168,7 @@ export default function ClassChart(props) {
         <g transform={`translate(${width/2+radius/16}, ${height/2+radius/4+margin.top})`} key={"pie_chart"}>
            {
             data_ready.map(d => {
-              x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle+pad).endAngle(d.endAngle-pad);
+              x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad/2]);
               
               return (
                   <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData}/>
