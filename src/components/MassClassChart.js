@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#242730',
     borderColor: '#4fbbd6',
     height: '3vh',
-    width: '3.9vw',
+    minWidth: '4vw',
+    width: '4vw',
     top: '0.8vh'
   },
   paper: {
@@ -280,7 +281,7 @@ export default function ClassChart(props) {
   return (
     <Paper className={classes.paper}>
     <FormControl className={classes.formControl}>
-      <InputLabel classes={{root: classes.root}}># Classes</InputLabel>
+      {/*<InputLabel classes={{root: classes.root}}># Classes</InputLabel>*/}
       <Select
         value={showNum}
         onChange={handleShowNum}
@@ -298,6 +299,7 @@ export default function ClassChart(props) {
       <svg className={classes.svg} id="MassClassChart">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <text x = {-margin.left/1.2} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
+          <text x = {-margin.left/1.2+vw(15)} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}># Classes:</text>
           {
             range_keys.map((key, i)=>{
               return(

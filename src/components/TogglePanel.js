@@ -10,8 +10,8 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 
-const YEARS = [1990, 2015];
-const STEP_SIZE = 5;
+const YEARS = [1450, 2015];
+const STEP_SIZE = 50;
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

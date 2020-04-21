@@ -14,7 +14,7 @@ import large_data from '../meteorites_large';
 
 export default function Page() {
   const [selectedData, setSelectedData] = useState(null);
-  const [timeline, setTimeline] = useState([1990, 2015])
+  const [timeline, setTimeline] = useState([1450, 2015])
   const [totalData, setTotalData] = useState(small_data)
   const [dispData, setDispData] = useState(small_data)
   const MapState = React.createRef();
