@@ -142,7 +142,7 @@ export default function MassChart(props) {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-          {"Mass " + hover.x0 + "-" + hover.x1 + " (kg) (" +  hover.length + ")"}
+          {"Mass " + ((parseInt(hover.x1) == max_x) ? (hover.x0 + "+") : (hover.x0 + "-" + hover.x1)) + " (kg) (" +  hover.length + ")"}
         </text>
       )
       
