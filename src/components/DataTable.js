@@ -140,7 +140,7 @@ export default function DataTable(props) {
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"left"} id={"Name"} />
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Year"} />
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Class"} />
-            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Mass"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Mass\u00a0(g)"}/>
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Latitude"} />
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Longitude"} />
           </TableRow>
