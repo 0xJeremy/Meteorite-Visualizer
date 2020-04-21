@@ -108,9 +108,9 @@ export default function DataTable(props) {
   function sortData(method) {
     if(orderType === method) {
       setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
-      var tmp = dispData;
-      tmp.reverse();
-      setDispData(tmp);
+      var tmp_data = dispData;
+      tmp_data.reverse();
+      setDispData(tmp_data);
       return;
     }
     var tmp = data;
