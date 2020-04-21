@@ -137,13 +137,6 @@ export default function MassChart(props) {
       .domain([0, y_max]);
 
 
-  const defaultBoxProps = {
-    bgcolor: 'background.paper',
-    borderColor: 'text.primary',
-    m: 1,
-    border: 1,
-    style: {left: '100px', top: '150px'},
-  };
 
   function ToolTip() {
     if(hover !== null) {
