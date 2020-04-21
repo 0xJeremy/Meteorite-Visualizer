@@ -105,6 +105,35 @@ export default function DataTable(props) {
   const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
 
+  if(data.length !== dispData.length) {
+    rerender();
+  }
+
+  function rerender() {
+    if(orderType === null) {
+      setDispData(data);
+      return;
+    }
+    var tmp = data;
+    if(orderType === 'Name') {
+      tmp.sort((a, b) => {return a.name.localeCompare(b.name);});
+    } else if(orderType === 'Year') {
+      tmp.sort((a, b) => {return a.year-b.year});
+    } else if(orderType === 'Class') {
+      tmp.sort((a, b) => {return a.class.localeCompare(b.class);});
+    } else if(orderType === 'Mass\u00a0(g)') {
+      tmp.sort((a, b) => {return a.mass-b.mass});
+    } else if(orderType === 'Latitude') {
+      tmp.sort((a, b) => {return a.coordinates[0]-b.coordinates[0]});
+    } else if(orderType === 'Longitude') {
+      tmp.sort((a, b) => {return a.coordinates[1]-b.coordinates[1]});
+    }
+    if(orderDirection === 'desc') {
+      tmp.reverse();
+    }
+    setDispData(tmp);
+  }
+
   function sortData(method) {
     if(orderType === method) {
       setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
