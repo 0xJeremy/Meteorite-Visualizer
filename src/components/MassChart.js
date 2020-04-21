@@ -1,11 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import { scaleLinear } from 'd3-scale';
 import { max, mean } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { histogram } from 'd3-array';
+import Chip from '@material-ui/core/Chip';
+import Box from '@material-ui/core/Box';
+import { borders } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,6 +35,12 @@ const useStyles = makeStyles(theme => ({
     color: '#4fbbd6',
     fontSize: '20px'
   },
+  tooltip: {
+    textAnchor: "end",
+    color: '#4fbbd6',
+    fontSize: '20px',
+    border: "5px solid red"
+  },
 }));
 
 function Bar(props) {
@@ -41,7 +51,7 @@ function Bar(props) {
   const height = props.height;
   const setHover = props.setHover;
   const selectedData = props.selectedData;
-  const [fill, setFill] = React.useState('#4fbbd6');
+  const [fill, setFill] = React.useState('#0a4a90');
 
   function enter() {
     setHover(d);
@@ -51,7 +61,7 @@ function Bar(props) {
 
   function leave() {
     setHover(null);
-    setFill('#4fbbd6')
+    setFill('#0a4a90')
   }
 
   if(selectedData !== null && selectedData !== undefined && d.includes(selectedData[0])) {
@@ -103,8 +113,10 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
+  const max_x = parseInt(mean(data, function(d) { return +d.mass/1000 }))
+
   const x = scaleLinear()
-          .domain([0, mean(data, function(d) { return +d.mass/1000 })*2])
+          .domain([0, max_x])
           .range([0, width]);
 
 
@@ -112,9 +124,9 @@ export default function MassChart(props) {
   // const num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
 
   const hist = histogram()
-            .value(function(d) { return d.mass/1000; })
+            .value(function(d) { return (d.mass/1000 >= max_x) ? max_x : d.mass/1000 ; })
             .domain(x.domain())
-            .thresholds(x.ticks(10)); 
+            .thresholds(x.ticks()); 
 
   const bins = hist(data);
 
@@ -124,6 +136,15 @@ export default function MassChart(props) {
       .range([height, 0])
       .domain([0, y_max]);
 
+
+  const defaultBoxProps = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    m: 1,
+    border: 1,
+    style: {left: '100px', top: '150px'},
+  };
+
   function ToolTip() {
     if(hover !== null) {
       return (
@@ -131,6 +152,7 @@ export default function MassChart(props) {
           {"Mass " + hover.x0 + "-" + hover.x1 + " (kg) (" +  hover.length + ")"}
         </text>
       )
+      
     }
     return <div />
   }
@@ -163,7 +185,7 @@ export default function MassChart(props) {
           <text className={classes.text} y={vh(26)} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
               Mass (kg)
           </text>
-          <ToolTip />
+          <ToolTip/>
         </g>
       </svg>
     </Paper>

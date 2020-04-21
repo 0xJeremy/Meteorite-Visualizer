@@ -152,7 +152,7 @@ export default function ClassChart(props) {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
-          {"Class " + hover.data.key + " (" + hover.data.value + ")"}
+          {hover.data.key + " (" + hover.data.value + ")"}
         </text>
       )
     }
