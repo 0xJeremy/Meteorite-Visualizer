@@ -50,7 +50,9 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     color: '#4fbbd6',
     position: 'absolute',
-    right: '1vw'
+    right: '1vw',
+    height: '2vw',
+    fontSize: '12'
   },
   menu: {
     color: '#4fbbd6',
@@ -297,7 +299,7 @@ export default function ClassChart(props) {
       <svg className={classes.svg} id="MassClassChart">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <text x = {-margin.left/1.2} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
-          <text x = {-margin.left/1.2+vw(15)} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}># Classes:</text>
+          <text x = {-margin.left/1.2+vw(14)} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}># Classes: </text>
           {
             range_keys.map((key, i)=>{
               return(
