@@ -115,17 +115,17 @@ export default function DataTable(props) {
     }
     var tmp = data;
     if(method === 'Name') {
-      tmp.sort((a, b) => {return a.name-b.name});
+      tmp.sort((a, b) => {return a.name.localeCompare(b.name);});
     } else if(method === 'Year') {
       tmp.sort((a, b) => {return a.year-b.year});
     } else if(method === 'Class') {
-      tmp.sort((a, b) => {return a.class-b.class});
+      tmp.sort((a, b) => {return a.class.localeCompare(b.class);});
     } else if(method === 'Mass') {
       tmp.sort((a, b) => {return a.mass-b.mass});
     } else if(method === 'Latitude') {
-      tmp.sort((a, b) => {return a.latitude-b.latitude});
+      tmp.sort((a, b) => {return a.coordinates[0]-b.coordinates[0]});
     } else if(method === 'Longitude') {
-      tmp.sort((a, b) => {return a.longitude-b.longitude});
+      tmp.sort((a, b) => {return a.coordinates[1]-b.coordinates[1]});
     }
     setOrderDirection('asc');
     setOrderType(method);
