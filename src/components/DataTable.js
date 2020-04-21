@@ -83,7 +83,7 @@ function TableTitle(props) {
   const setSort = props.setSort;
 
   return (
-    <TableCell className={classes.label} align={side} sortDirection={true}>
+    <TableCell className={classes.label} align={side} sortDirection={'asc'}>
       <StyledTableSortLabel
         active={orderType === id}
         direction={orderDirection}
@@ -137,9 +137,9 @@ export default function DataTable(props) {
   function sortData(method) {
     if(orderType === method) {
       setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
-      var tmp = dispData;
-      tmp.reverse();
-      setDispData(tmp);
+      var tmp_data = dispData;
+      tmp_data.reverse();
+      setDispData(tmp_data);
       return;
     }
     var tmp = data;
@@ -166,17 +166,17 @@ export default function DataTable(props) {
       <Table stickyHeader className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"left"} id={"Name"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"left"} id={"Name"}/>
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Year"} />
-            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Class"} />
-            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Mass\u00a0(g)"}/>
-            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Latitude"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Class"}/>
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Mass\u00a0(g)"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Latitude"}/>
             <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Longitude"} />
           </TableRow>
         </TableHead>
         <TableBody>
-          {dispData.map((d) => 
-            <TableItem d={d} selectedData={selectedData} hoverCallback={hoverCallback} />
+          {dispData.map((d, i) => 
+            <TableItem d={d} selectedData={selectedData} hoverCallback={hoverCallback} key ={i} />
           )}
         </TableBody>
       </Table>

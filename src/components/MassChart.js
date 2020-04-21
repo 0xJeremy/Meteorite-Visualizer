@@ -1,15 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import { scaleLinear } from 'd3-scale';
 import { max, mean } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { histogram } from 'd3-array';
-import Chip from '@material-ui/core/Chip';
-import Box from '@material-ui/core/Box';
-import { borders } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -142,7 +138,7 @@ export default function MassChart(props) {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-          {"Mass " + ((parseInt(hover.x1) == max_x) ? (hover.x0 + "+") : (hover.x0 + "-" + hover.x1)) + " (kg) (" +  hover.length + ")"}
+          {"Mass " + ((parseInt(hover.x1) === max_x) ? (hover.x0 + "+") : (hover.x0 + "-" + hover.x1)) + " (kg) (" +  hover.length + ")"}
         </text>
       )
       

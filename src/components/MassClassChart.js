@@ -140,6 +140,7 @@ function Bar(props) {
             onMouseLeave={leave}
             width={x(end)-x(i === 0 ? 0 : start)} 
             height={y.bandwidth()} 
+            key={d}
           />);
         })
       }
@@ -302,7 +303,7 @@ export default function ClassChart(props) {
           {
             range_keys.map((key, i)=>{
               return(
-                <g style={{marginRight: 'auto',marginLeft: 'auto'}}>
+                <g style={{marginRight: 'auto',marginLeft: 'auto'}} key={key}>
                   <rect x={-margin.left/1.2+vw(2.3)*i} y={-vh(4)} width={vw(2.1)} height={vh(1)} fill={color(key)}/>
                   <text x={-margin.left/1.2+vw(2.3)*i+vw(.2)} y={-vh(1.5)} className={classes.ranges} >{range_strings[i]}</text>
                 </g>
@@ -312,7 +313,7 @@ export default function ClassChart(props) {
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
           {
             range_keys.map((item,i)=>{
-              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys} selectedData={selectedData}/>)
+              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys} selectedData={selectedData} key={i}/>)
             })
           }
           <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
