@@ -120,7 +120,7 @@ export default function DataTable(props) {
       tmp.sort((a, b) => {return a.year-b.year});
     } else if(method === 'Class') {
       tmp.sort((a, b) => {return a.class.localeCompare(b.class);});
-    } else if(method === 'Mass') {
+    } else if(method === 'Mass\u00a0(g)') {
       tmp.sort((a, b) => {return a.mass-b.mass});
     } else if(method === 'Latitude') {
       tmp.sort((a, b) => {return a.coordinates[0]-b.coordinates[0]});
