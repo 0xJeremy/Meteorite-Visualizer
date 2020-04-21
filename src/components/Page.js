@@ -21,8 +21,9 @@ export default function Page() {
 
   function setData(quantity) {
     if(quantity === 'small') {
-      setTotalData(small_data);
-      setDispData(small_data)
+      const data = small_data
+      setTotalData(data);
+      setDispData(data)
     } else if (quantity === 'medium') {
       const data = small_data.concat(medium_data)
       setTotalData(data);
