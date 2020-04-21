@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
@@ -25,11 +26,13 @@ const useStyles = makeStyles({
   },
   highlight: {
     color: '#D55D0E',
-  }
+  },
+  active: {
+    color: 'white',
+  },
 });
 
 function TableItem(props) {
-  const classes = useStyles();
   const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
   const d = props.d;
@@ -55,27 +58,95 @@ function TableItem(props) {
   )
 }
 
+const StyledTableSortLabel = withStyles((theme: Theme) => createStyles({
+  root: {
+    color: '#4fbbd6',
+    "&:hover": {
+      color: '#48c74e',
+    },
+    '&$active': {
+      color: '#48c74e',
+    },
+  },
+  active: {},
+  icon: {
+    color: 'inherit !important'
+  },
+}))(TableSortLabel);
+
+function TableTitle(props) {
+  const classes = useStyles();
+  const orderType = props.orderType;
+  const orderDirection = props.orderDirection;
+  const id = props.id;
+  const side = props.side;
+  const setSort = props.setSort;
+
+  return (
+    <TableCell className={classes.label} align={side} sortDirection={true}>
+      <StyledTableSortLabel
+        active={orderType === id}
+        direction={orderDirection}
+        onClick={() => {setSort(id)}}
+        classes={{active: classes.active}}
+      >
+        {id}
+      </StyledTableSortLabel>
+    </TableCell>
+  )
+}
+
 export default function DataTable(props) {
   const classes = useStyles();
   const data = props.data;
+  const [dispData, setDispData] = React.useState(data);
+  const [orderType, setOrderType] = React.useState(null);
+  const [orderDirection, setOrderDirection] = React.useState('asc');
   const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
+
+  function sortData(method) {
+    if(orderType === method) {
+      setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
+      var tmp = dispData;
+      tmp.reverse();
+      setDispData(tmp);
+      return;
+    }
+    var tmp = data;
+    if(method === 'Name') {
+      tmp.sort((a, b) => {return a.name-b.name});
+    } else if(method === 'Year') {
+      tmp.sort((a, b) => {return a.year-b.year});
+    } else if(method === 'Class') {
+      tmp.sort((a, b) => {return a.class-b.class});
+    } else if(method === 'Mass') {
+      tmp.sort((a, b) => {return a.mass-b.mass});
+    } else if(method === 'Latitude') {
+      tmp.sort((a, b) => {return a.latitude-b.latitude});
+    } else if(method === 'Longitude') {
+      tmp.sort((a, b) => {return a.longitude-b.longitude});
+    }
+    setOrderDirection('asc');
+    setOrderType(method);
+    setDispData(tmp);
+  }
 
   return (
     <TableContainer className={classes.root} component={Paper}>
       <Table stickyHeader className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.label}>Name</TableCell>
-            <TableCell className={classes.label} align="right">Year&nbsp;</TableCell>
-            <TableCell className={classes.label} align="right">Class&nbsp;</TableCell>
-            <TableCell className={classes.label} align="right">Mass&nbsp;(g)</TableCell>
-            <TableCell className={classes.label} align="right">Latitude&nbsp;</TableCell>
-            <TableCell className={classes.label} align="right">Longitude&nbsp;</TableCell>
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"left"} id={"Name"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Year"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Class"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Mass"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Latitude"} />
+            <TableTitle orderType={orderType} orderDirection={orderDirection} setSort={sortData} side={"right"} id={"Longitude"} />
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((d) => 
+          {dispData.map((d) => 
             <TableItem d={d} selectedData={selectedData} hoverCallback={hoverCallback} />
           )}
         </TableBody>

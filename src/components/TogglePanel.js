@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     fontSize: '16px',
   },
   alert: {
-    backgroundColor: '#4fbbd6',
+    backgroundColor: '#2f9bb6',
   }
 });
 
