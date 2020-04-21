@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -281,7 +280,6 @@ export default function ClassChart(props) {
   return (
     <Paper className={classes.paper}>
     <FormControl className={classes.formControl}>
-      {/*<InputLabel classes={{root: classes.root}}># Classes</InputLabel>*/}
       <Select
         value={showNum}
         onChange={handleShowNum}

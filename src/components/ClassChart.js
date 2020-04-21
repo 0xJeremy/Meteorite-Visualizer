@@ -44,6 +44,11 @@ function Arc(props) {
   const setHover = props.setHover;
   const [fill, setFill] = React.useState(color(d.data.key));
   const selectedData = props.selectedData;
+  const showColor = props.showColor;
+
+  if(showColor !== fill && fill !== '#D55D0E') {
+    setFill(showColor)
+  }
 
   function process(c) {
     return c
@@ -171,7 +176,7 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
-                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i}/>
+                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.key)}/>
                 )
             })
           }
