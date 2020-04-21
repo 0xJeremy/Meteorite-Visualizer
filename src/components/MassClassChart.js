@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     color: '#4fbbd6',
     backgroundColor: '#242730',
     borderColor: '#4fbbd6',
+    height: '3vh',
+    width: '3.9vw',
+    top: '0.8vh'
   },
   paper: {
     marginBottom: '8px',
@@ -28,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     padding: '0 0 0 0'
   },
   svg: {
-    minHeight: '30vh',
+    minHeight: '33vh',
     minWidth: '100%',
   },
   text: {
@@ -46,9 +49,8 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     color: '#4fbbd6',
-    minWidth: '80px',
     position: 'absolute',
-    right: '2vw'
+    right: '1vw'
   },
   menu: {
     color: '#4fbbd6',
@@ -160,10 +162,10 @@ export default function ClassChart(props) {
   }
 
   const svgWidth = vw(23),
-        svgHeight = vh(24);
+        svgHeight = vh(30);
 
 
-  const margin = { top: vh(6), right: vw(0), bottom: 0, left: vw(4) },
+  const margin = { top: vh(7), right: vw(0), bottom: 0, left: vw(4) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
@@ -293,14 +295,14 @@ export default function ClassChart(props) {
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">
-        <g transform={`translate(${margin.left}, ${margin.top*1.5})`}>
-          <text x = {-margin.left/2} y={-vh(4)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <text x = {-margin.left/1.2} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
           {
             range_keys.map((key, i)=>{
               return(
                 <g style={{marginRight: 'auto',marginLeft: 'auto'}}>
-                  <rect x={-margin.left/2+vw(2.65)*i} y={-vh(3)} width={vw(2.5)} height={vh(1)} fill={color(key)}/>
-                  <text x={-margin.left/2+vw(2.65)*i+vw(.5)} y={-vh(.5)} className={classes.ranges} >{range_strings[i]}</text>
+                  <rect x={-margin.left/1.2+vw(2.3)*i} y={-vh(4)} width={vw(2.1)} height={vh(1)} fill={color(key)}/>
+                  <text x={-margin.left/1.2+vw(2.3)*i+vw(.2)} y={-vh(1.5)} className={classes.ranges} >{range_strings[i]}</text>
                 </g>
               )
             })
