@@ -272,6 +272,12 @@ export default function ClassChart(props) {
   };
 
 
+  var legend_axis = scaleBand()
+    .domain(range_strings)
+    .range([0,width-vw(1)])
+
+  const legend_height = 8
+
   return (
     <Paper className={classes.paper}>
     <FormControl className={classes.formControl}>
@@ -293,23 +299,29 @@ export default function ClassChart(props) {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <text x = {-margin.left/1.2} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
           <text x = {-margin.left/1.2+vw(14)} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}># Classes: </text>
+          <g transform={`translate(${-margin.left+vw(1)}, ${-margin.top/3})`} ref={node => select(node).call(axisBottom(legend_axis).tickSize(0)).select(".domain").remove()}>
           {
             range_keys.map((key, i)=>{
               return(
-                <g style={{marginRight: 'auto',marginLeft: 'auto'}} key={key}>
-                  <rect x={-margin.left/1.2+vw(2.3)*i} y={-vh(4)} width={vw(2.1)} height={vh(1)} fill={color(key)}/>
-                  <text x={-margin.left/1.2+vw(2.3)*i+vw(.2)} y={-vh(1.5)} className={classes.ranges} >{range_strings[i]}</text>
-                </g>
+                  <rect
+                    x={legend_axis(range_strings[i])+1}
+                    y={-legend_height}
+                    width={legend_axis.bandwidth()-2}
+                    height={legend_height}
+                    key={"bin_"+i}
+                    fill = {color(key)}
+                  />
               )
             })
           }
+          </g>
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
           {
             range_keys.map((item,i)=>{
               return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys} selectedData={selectedData} key={i}/>)
             })
           }
-          <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0))} />
+          <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0)).select(".domain").remove()} />
         </g>
       </svg>
     </Paper>

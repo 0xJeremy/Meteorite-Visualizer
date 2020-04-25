@@ -136,6 +136,9 @@ export default function ClassChart(props) {
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
+  var keep_top = 0
+
+
   var scheme = interpolateColors(keysSorted.length,colorScale,colorRangeInfo)
 
   var color = scaleOrdinal()

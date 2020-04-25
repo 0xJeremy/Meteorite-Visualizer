@@ -202,51 +202,6 @@ export default function MassChart(props) {
   )
 
 
-  // const classes = useStyles();
-  // const data = props.data;
-  // const selectedData = props.selectedData;
-  // const setSelectedData = props.setSelectedData;
-  // const [hover, setHover] = React.useState(null);
-
-  // function vw(view_width) {
-  //   return view_width * (window.innerWidth / 100)
-  // }
-
-  // function vh(view_height) {
-  //   return view_height * (window.innerHeight / 100)
-  // }
-
-  // const svgWidth = vw(23),
-  //       svgHeight = vh(24);
-
-  // const margin = { top: vh(1), right: 0, bottom: 0, left: vw(5) },
-  //        width = svgWidth - margin.left - margin.right,
-  //       height = svgHeight - margin.top - margin.bottom;
-
-  // const max_x = parseInt(mean(data, function(d) { return +d.mass/1000 }))
-
-  // const x = scaleLinear()
-  //         .domain([0, max_x])
-  //         .range([0, width]);
-
-
-  // // Ended up being way too many, theres a ton of overlap, but leaving in for adjustment
-  // // const num_unique_masses = Array.from(data.map(function(d){return d.roadname;}).keys()).count;
-
-  // const hist = histogram()
-  //           .value(function(d) { return (d.mass/1000 >= max_x) ? max_x : d.mass/1000 ; })
-  //           .domain(x.domain())
-  //           .thresholds(x.ticks()); 
-
-  // const bins = hist(data);
-
-  // const y_max = max(bins, function(d) { return d.length; })
-
-  // const y = scaleLinear()
-  //     .range([height, 0])
-  //     .domain([0, y_max]);
-
-
 
   // function ToolTip() {
   //   if(hover !== null) {
@@ -260,37 +215,4 @@ export default function MassChart(props) {
   //   return <div />
   // }
 
-  // return (
-  //   <Paper className={classes.paper}>
-  //     <svg className={classes.svg}>
-  //       <g transform={`translate(${margin.left}, ${margin.top})`}>
-  //         <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
-  //         <g>
-  //           <g ref={node => select(node).call(axisLeft(y).ticks(10))}/> 
-  //           <text className={classes.text} transform="rotate(-90)" y={-vw(2)-5} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
-  //             # Meteorites
-  //           </text>
-  //         </g>
-  //         {bins.map((d,i)=> {
-  //           return (<Bar 
-  //             d={d}
-  //             selectedData={selectedData}
-  //             setHover={setHover}
-  //             className="bar"
-  //             x={x(d.x0)+1}
-  //             y={y(d.length)}
-  //             width={x(d.x1) - x(d.x0) - 2}
-  //             height={height - y(d.length)}
-  //             key={"bin_"+i}
-  //           />)
-  //         })}
-
-  //         <text className={classes.text} y={vh(27)} x={svgWidth/2+vw(1)} style={{fill: '#4fbbd6'}}>
-  //             Mass (kg)
-  //         </text>
-  //         <ToolTip/>
-  //       </g>
-  //     </svg>
-  //   </Paper>
-  // )
 };
