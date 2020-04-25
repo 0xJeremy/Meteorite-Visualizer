@@ -41,41 +41,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Bar(props) {
-  const d = props.d;
+  const r_str = props.r_str;
   const x = props.x;
   const y = props.y;
   const width = props.width;
   const height = props.height;
   const setHover = props.setHover;
   const selectedData = props.selectedData;
-  const [fill, setFill] = React.useState('#0a4a90');
+  const defaultFill = props.defaultFill;
+  const [fill, setFill] = React.useState(defaultFill);
 
   function enter() {
-    setHover(d);
+    setHover(r_str);
     setFill('#D55D0E');
 
   }
 
   function leave() {
     setHover(null);
-    setFill('#0a4a90')
+    setFill(defaultFill);
   }
 
-  if(selectedData !== null && selectedData !== undefined && d.includes(selectedData[0])) {
-    return (<rect
-      // key={d.mass/1000}
-      style={{'fill': '#D55D0E'}}
-      className="bar"
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      onMouseEnter={enter}
-      onMouseLeave={leave}
-    />)
-  }
   return (<rect
-    // key={d.mass/1000}
     style={{'fill': fill}}
     className="bar"
     x={x}
@@ -163,6 +150,7 @@ export default function MassChart(props) {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
+        {hover} kg ({grouped_masses[range_keys[range_strings.indexOf(hover)]]})
         </text>
       )
       
@@ -182,13 +170,16 @@ export default function MassChart(props) {
            </text>
          </g>
          {range_strings.map((r_str,i)=> {
-           return (<rect
+           return (<Bar
+             r_str={r_str}
              x={x(r_str)+1}
              y={y(grouped_masses[range_keys[i]])}
+             selectedData={selectedData}
+             setHover={setHover}
              width={x.bandwidth()-2}
              height={height-y(grouped_masses[range_keys[i]])}
              key={"bin_"+i}
-             fill = {color(r_str)}
+             defaultFill={color(r_str)}
            />)
          })}
 
@@ -200,19 +191,5 @@ export default function MassChart(props) {
       </svg>
     </Paper>
   )
-
-
-
-  // function ToolTip() {
-  //   if(hover !== null) {
-  //     return (
-  //       <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-  //         {"Mass " + ((parseInt(hover.x1) === max_x) ? (hover.x0 + "+") : (hover.x0 + "-" + hover.x1)) + " (kg) (" +  hover.length + ")"}
-  //       </text>
-  //     )
-      
-  //   }
-  //   return <div />
-  // }
 
 };

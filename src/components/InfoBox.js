@@ -12,11 +12,11 @@ const useStyles = makeStyles(theme => ({
     color: '#4fbbd6',
     backgroundColor: '#242730',
   },
-  green: {
-    color: '#48c74e'
+  blue: {
+    color: '#4fbbd6'
   },
-  outline_green: {
-    borderColor: '#48c74e',
+  outline_blue: {
+    borderColor: '#4fbbd6',
     height: '100%'
   },
   box: {
@@ -57,7 +57,7 @@ export default function InfoBox(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.box} >
-          <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" onClick={handleClose} >
+          <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" onClick={handleClose} >
             Done!
           </Button>
         </DialogActions>
