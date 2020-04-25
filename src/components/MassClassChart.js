@@ -193,19 +193,12 @@ export default function ClassChart(props) {
 
 
 
-  // Less than 10kg
   var range1 = .5
-  //10-20 kg
   var range2 = 1
-  //20-30 kg
   var range3 = 2
-  //30-40 kg
   var range4 = 4
-  //40-50 kg
   var range5 = 10
-  //50-60kg
   var range6 = 20
-  //60-70kg
   var range7 = 30
   //70-80kg
   // var range8 = 40
