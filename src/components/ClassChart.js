@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleOrdinal } from 'd3-scale';
-import { interpolateBlues, interpolateSpectral } from 'd3-scale-chromatic';
+import { interpolateBlues, interpolateSpectral, interpolateGreys, interpolateBuGn } from 'd3-scale-chromatic';
 import { pie, arc } from 'd3-shape';
 import { entries } from 'd3-collection';
 import { interpolateColors } from '../colorSchemeGenerator.js';
@@ -135,11 +135,11 @@ export default function ClassChart(props) {
 
  const colorRangeInfo = {
         colorStart: .05,
-        colorEnd: 0.9,
+        colorEnd: 0.7,
         useEndAsStart: true,
       };
 
-  const colorScale = interpolateBlues;
+  const colorScale = interpolateGreys;
 
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
