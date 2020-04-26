@@ -136,8 +136,8 @@ export default function MassChart(props) {
   var range_strings = []
 
   for (var i = 0; i < breakpoints.length; i++){
-        if (i == 0) {range_strings.push(`<${breakpoints[0]}`)}
-        else if (i == breakpoints.length-1) {range_strings.push(`${breakpoints[i-1]}+`)}
+        if (i === 0) {range_strings.push(`<${breakpoints[0]}`)}
+        else if (i === breakpoints.length-1) {range_strings.push(`${breakpoints[i-1]}+`)}
         else {range_strings.push(`${breakpoints[i-1]}-${breakpoints[i]}`)}
       }
                         
@@ -175,7 +175,7 @@ export default function MassChart(props) {
     var min = tmp.range[0];
     var max = tmp.range[1];
     if(min < breakpoints[0]) { var disp = '<' + max; }
-    else if(max == breakpoints[breakpoints.length - 1]) { var disp =  min + '+'; }
+    else if(max === breakpoints[breakpoints.length - 1]) { var disp =  min + '+'; }
     else { var disp = min.toString() + '-' + max; }
     return (
       <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
