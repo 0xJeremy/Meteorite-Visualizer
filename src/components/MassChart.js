@@ -115,8 +115,8 @@ export default function MassChart(props) {
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
     var range;
-    if(i == 0) { range = [0, breakpoints[i]]; }
-    else if(i == breakpoints.length-1) { range = [breakpoints[i], 9999999999999999]; }
+    if(i === 0) { range = [0, breakpoints[i]]; }
+    else if(i === breakpoints.length-1) { range = [breakpoints[i], 9999999999999999]; }
     else { range = [breakpoints[i-1], breakpoints[i]]; }
     var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
     mass_data.push({
@@ -144,7 +144,7 @@ export default function MassChart(props) {
     var tmp;
     if(hover !== null) {
       tmp = hover;
-    } else if(selectedData !== null) {
+    } else if(selectedData !== null && selectedData[0] !== undefined) {
       tmp = mass_data.filter((d)=>d.data.includes(selectedData[0]))[0];
     } else {
       return <div />
