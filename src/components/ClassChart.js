@@ -36,6 +36,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function process(c) {
+  return c
+          .replace(/[0-9]/g, '')
+          .replace(/(.*)\s/g,'')
+          .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
+          .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+}
+
 function Arc(props) {
   const classes = useStyles();
   const d = props.d;
@@ -43,6 +51,7 @@ function Arc(props) {
   const x = props.x;
   const setHover = props.setHover;
   const [fill, setFill] = React.useState(color(d.data.key));
+  const setSelectedData = props.setSelectedData;
   const selectedData = props.selectedData;
   const showColor = props.showColor;
 
@@ -50,20 +59,14 @@ function Arc(props) {
     setFill(showColor)
   }
 
-  function process(c) {
-    return c
-            .replace(/[0-9]/g, '')
-            .replace(/(.*)\s/g,'')
-            .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
-            .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
-  }
-
   function enter() {
+    setSelectedData(d.data.key);
     setHover(d);
     setFill('#D55D0E');
   }
 
   function leave() {
+    setSelectedData('NULL_KEY');
     setHover(null);
     setFill(color(d.data.key));
   }
@@ -91,6 +94,7 @@ export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
   const selectedData = props.selectedData;
+  const setSelectedData = props.setSelectedData;
   const [hover, setHover] = React.useState(null);
 
   function vw(view_width) {
@@ -180,6 +184,14 @@ export default function ClassChart(props) {
     )
   }
 
+  function setGlobal(key) {
+    if(key === 'NULL_KEY') {
+      setSelectedData(null);
+    }
+    var tmp = data.filter((d)=>{return process(d.class) === key});
+    setSelectedData(tmp);
+  }
+
   return (
     <Paper className={classes.paper}>
       <svg className={classes.svg} id="ClassChart">
@@ -192,7 +204,7 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
-                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.key)}/>
+                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.key)} setSelectedData={setGlobal} />
                 )
             })
           }
