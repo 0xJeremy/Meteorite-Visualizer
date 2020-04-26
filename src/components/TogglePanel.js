@@ -29,12 +29,12 @@ const useStyles = makeStyles({
   text: {
     paddingBottom: '24px',
   },
-  green: {
-    color: '#48c74e',
+  blue: {
+    color: '#4fbbd6',
     marginRight: '16px'
   },
-  outline_green: {
-    borderColor: '#48c74e',
+  outline_blue: {
+    borderColor: '#4fbbd6',
     height: '100%'
   },
   timeline: {
@@ -151,9 +151,9 @@ export default function TogglePanel(props) {
       <Typography className={classes.load} gutterBottom>
         Load Data Set
       </Typography>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickSmall} >Small</Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickMedium} >Medium</Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={clickLarge} >Large</Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={clickSmall} >Small</Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={clickMedium} >Medium</Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={clickLarge} >Large</Button>
 
       <Typography className={classes.timeline} id="range-slider" gutterBottom>
         Data Range ({timeline[0]} - {timeline[1]})
@@ -171,9 +171,9 @@ export default function TogglePanel(props) {
       <Typography className={classes.timeline} id="range-slider" gutterBottom>
         Timeline Animation
       </Typography>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={startAnimation} ><PlayCircleOutlineIcon /></Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={pauseAnimation} ><PauseCircleOutlineIcon /></Button>
-      <Button className={classes.green} classes={{outlined: classes.outline_green}} variant="outlined" size="small" onClick={stopAnimation} ><HighlightOffOutlinedIcon /></Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={startAnimation} ><PlayCircleOutlineIcon /></Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={pauseAnimation} ><PauseCircleOutlineIcon /></Button>
+      <Button className={classes.blue} classes={{outlined: classes.outline_blue}} variant="outlined" size="small" onClick={stopAnimation} ><HighlightOffOutlinedIcon /></Button>
 
 
       <Snackbar open={smallSnack} autoHideDuration={6000} onClose={closeSmall}>

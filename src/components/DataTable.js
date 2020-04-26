@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -62,10 +62,10 @@ const StyledTableSortLabel = withStyles((theme: Theme) => createStyles({
   root: {
     color: '#4fbbd6',
     "&:hover": {
-      color: '#48c74e',
+      color: '#D55D0E',
     },
     '&$active': {
-      color: '#48c74e',
+      color: '#D55D0E',
     },
   },
   active: {},
@@ -104,6 +104,9 @@ export default function DataTable(props) {
   const [orderDirection, setOrderDirection] = React.useState('asc');
   const selectedData = props.selectedData;
   const hoverCallback = props.hoverCallback;
+  useEffect(() => {
+    sortData('Name');
+  }, [])
 
   if(data.length !== dispData.length) {
     rerender();

@@ -48,7 +48,8 @@ function Bar(props) {
   const height = props.height;
   const setHover = props.setHover;
   const selectedData = props.selectedData;
-  const [fill, setFill] = React.useState('#0a4a90');
+  const defaultFill = props.defaultFill;
+  const [fill, setFill] = React.useState(defaultFill);
 
   function enter() {
     setHover(d);
@@ -58,12 +59,11 @@ function Bar(props) {
 
   function leave() {
     setHover(null);
-    setFill('#0a4a90')
+    setFill(defaultFill);
   }
 
-  if(selectedData !== null && selectedData !== undefined && d.includes(selectedData[0])) {
+  if(selectedData !== null && d.data.includes(selectedData[0])) {
     return (<rect
-      // key={d.mass/1000}
       style={{'fill': '#D55D0E'}}
       className="bar"
       x={x}
@@ -74,8 +74,8 @@ function Bar(props) {
       onMouseLeave={leave}
     />)
   }
+
   return (<rect
-    // key={d.mass/1000}
     style={{'fill': fill}}
     className="bar"
     x={x}
@@ -110,64 +110,55 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var range1 = .5
-  var range2 = 1
-  var range3 = 2
-  var range4 = 4
-  var range5 = 10
-  var range6 = 20
-  var range7 = 30
+  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30]
 
-
-
-  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7+"];
-
-  var range_strings = [`<${range1}`,
-                        `${range1}-${range2}`,
-                        `${range2}-${range3}`,
-                        `${range3}-${range4}`,
-                        `${range4}-${range5}`,
-                        `${range5}-${range6}`,
-                        `${range6}-${range7}`,
-                        `${range7}+`]
-
-
-  var masses = data.map((d)=>{return d.mass});
-  
-  var grouped_masses = { "<r1": masses.filter(m=>{return m/1000 < range1}).length, 
-                         "r1-r2": masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length,
-                         "r2-r3": masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length,
-                         "r3-r4": masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length,
-                         "r4-r5": masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length,
-                         "r5-r6": masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length,
-                         "r6-r7": masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length,
-                         "r7+": masses.filter(m=>{return m/1000 >= range7}).length}
+  var mass_data = [];
+  for(var i = 0; i < breakpoints.length; i++) {
+    var range;
+    if(i === 0) { range = [0, breakpoints[i]]; }
+    else if(i === breakpoints.length-1) { range = [breakpoints[i], 9999999999999999]; }
+    else { range = [breakpoints[i-1], breakpoints[i]]; }
+    var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
+    mass_data.push({
+      'range': range,
+      'data': tmp,
+      'actual': breakpoints[i]
+    });
+  }
 
   var x = scaleBand()
-    .domain(range_strings)
+    .domain(breakpoints)
     .range([0, width])
 
-
-  const y_max = max(Object.values(grouped_masses))
+  const y_max = max(mass_data.map((d)=>{return d.data.length}))
 
   var y = scaleLinear()
       .range([height, 0])
       .domain([0, y_max]);
 
-
   var color = scaleOrdinal()
-    .domain(range_keys)
-    .range(schemeBlues[range_keys.length])
+    .domain(breakpoints)
+    .range(schemeBlues[breakpoints.length])
 
  function ToolTip() {
+    var tmp;
     if(hover !== null) {
-      return (
-        <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-        </text>
-      )
-      
+      tmp = hover;
+    } else if(selectedData !== null && selectedData[0] !== undefined) {
+      tmp = mass_data.filter((d)=>d.data.includes(selectedData[0]))[0];
+    } else {
+      return <div />
     }
-    return <div />
+    var min = tmp.range[0];
+    var max = tmp.range[1];
+    if(min < breakpoints[0]) { var disp = '<' + max; }
+    else if(max > breakpoints[breakpoints.length - 1]) { var disp = '>' + min; }
+    else { var disp = min.toString() + '-' + max; }
+    return (
+      <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
+      {disp} kg ({tmp.data.length})
+      </text>
+    )
   }
 
   return (
@@ -181,14 +172,17 @@ export default function MassChart(props) {
              # Meteorites
            </text>
          </g>
-         {range_strings.map((r_str,i)=> {
-           return (<rect
-             x={x(r_str)+1}
-             y={y(grouped_masses[range_keys[i]])}
+         {mass_data.map((d,i)=> {
+           return (<Bar
+             d={d}
+             x={x(d.actual)}
+             y={y(d.data.length)}
+             selectedData={selectedData}
+             setHover={setHover}
              width={x.bandwidth()-2}
-             height={height-y(grouped_masses[range_keys[i]])}
+             height={height-y(d.data.length)}
              key={"bin_"+i}
-             fill = {color(r_str)}
+             defaultFill={color(d.actual)}
            />)
          })}
 
@@ -200,19 +194,5 @@ export default function MassChart(props) {
       </svg>
     </Paper>
   )
-
-
-
-  // function ToolTip() {
-  //   if(hover !== null) {
-  //     return (
-  //       <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-  //         {"Mass " + ((parseInt(hover.x1) === max_x) ? (hover.x0 + "+") : (hover.x0 + "-" + hover.x1)) + " (kg) (" +  hover.length + ")"}
-  //       </text>
-  //     )
-      
-  //   }
-  //   return <div />
-  // }
 
 };
