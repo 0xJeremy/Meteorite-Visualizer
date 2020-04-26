@@ -86,65 +86,44 @@ function label_to_mass_range(label) {
 
 function Bar(props) {
   const classes = useStyles;
-  const item = props.item;
-  const i = props.i;
+  const range = props.range;
   const x = props.x;
   const y = props.y;
   const color = props.color;
-  const to_display = props.to_display;
-  const range_keys = props.range_keys;
+  const cls = props.cls;
+  const start = props.start;
+  const end = props.end;
   const [hover, setHover] = React.useState(null);
-  const selectedData = props.selectedData;
-  const setSelectedData = props.setSelectedData;
 
   function enter() {
-    setSelectedData(item);
-    setHover(item);
+    setHover([range, cls]);
   }
 
   function leave() {
-    setSelectedData(null);
     setHover(null);
   }
 
   function get_color(d) {
-    if(selectedData !== null && selectedData !== undefined && selectedData[0] !== undefined) {
-      if(selectedData.length === 1 && selectedData[0].class === d) {
-        var masses = label_to_mass_range(item);
-        if(selectedData[0].mass/1000 >= masses[0] && selectedData[0].mass/1000 <= masses[1]) {
-          return '#D55D0E';
-        }
-      }
-    }
-    if(hover === item) {
-      return '#D55D0E';
+
+    if(hover == d){
+        return '#D55D0E';
     }
     return color;
   }
 
-  return (
-    <g>
-      {
-        Object.keys(to_display).map(d=>{
-          var end = to_display[d][item];
-          var start = to_display[d][range_keys[i-1]];
-          return (<rect 
-            style={{fill:get_color(d)}}
-            x={x(i === 0 ? 0 : start)}
-            y={y(d)} 
+  return ( <rect 
+            x={x(start)}
+            y={y(cls)} 
+            width={x(end)-x(start)} 
+            height={y.bandwidth()} 
+            key={cls}
             onMouseEnter={enter}
             onMouseLeave={leave}
-            width={x(end)-x(i === 0 ? 0 : start)} 
-            height={y.bandwidth()} 
-            key={d}
+            style={{fill:get_color([range, cls])}}
           />);
-        })
-      }
-    </g>
-  )
 }
 
-export default function ClassChart(props) {
+export default function MassClassChart(props) {
   const classes = useStyles();
   const data = props.data;
   const selectedData = props.selectedData;
@@ -250,6 +229,9 @@ export default function ClassChart(props) {
                       return acc;
                     }, {});
 
+
+  var to_display_keys = Object.keys(to_display)
+
   var x = scaleLinear()
     .domain([0,1])
     .range([0, width])
@@ -279,7 +261,7 @@ export default function ClassChart(props) {
       return;
     }
     var masses = label_to_mass_range(item);
-    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1]})
+    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1] && d.class == item})
     setSelectedData(tmp);
   }
 
@@ -322,8 +304,20 @@ export default function ClassChart(props) {
           </g>
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
           {
-            range_keys.map((item,i)=>{
-              return (<Bar item={item} i={i} x={x} y={y} color={color(item)} to_display={to_display} range_keys={range_keys} selectedData={selectedData} key={i} setSelectedData={setGlobal}/>)
+            range_keys.map((key,index)=>{
+               return (
+                 <g style={{fill:color(key)}}>
+                 {
+                   Object.keys(to_display).map(d=>{
+                     var end = to_display[d][key];
+                     var start = to_display[d][range_keys[index-1]];
+                     return(
+                        <Bar range={key} cls={d} color={color} x={x} y={y} start={ index ? start : 0} end={end}/>
+                     )
+                   })
+                 }
+                 </g>
+              )
             })
           }
           <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0)).select(".domain").remove()} />
