@@ -113,17 +113,16 @@ export default function MassChart(props) {
   const svgWidth = vw(23),
         svgHeight = vh(24);
 
-  const margin = { top: vh(1), right: 0, bottom: 0, left: vw(5) },
+  const margin = { top: vh(1), right: 0, bottom: vh(1), left: vw(5) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30];
-
+  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30, 9999999999999999]
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
     var range;
     if(i === 0) { range = [0, breakpoints[i]]; }
-    else if(i === breakpoints.length-1) { range = [breakpoints[i], 9999999999999999]; }
+    else if(i === breakpoints.length) { range = [breakpoints[i-1], 9999999999999999]; }
     else { range = [breakpoints[i-1], breakpoints[i]]; }
     var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
     mass_data.push({
@@ -133,8 +132,21 @@ export default function MassChart(props) {
     });
   }
 
+  var range_strings = []
+
+  for (var i = 0; i < breakpoints.length; i++){
+        if (i == 0) {range_strings.push(`<${breakpoints[0]}`)}
+        else if (i == breakpoints.length-1) {range_strings.push(`${breakpoints[i-1]}+`)}
+        else {range_strings.push(`${breakpoints[i-1]}-${breakpoints[i]}`)}
+      }
+                        
+
   var x = scaleBand()
     .domain(breakpoints)
+    .range([0, width])
+
+  var labels = scaleBand()
+    .domain(range_strings)
     .range([0, width])
 
   const y_max = max(mass_data.map((d)=>{return d.data.length}))
@@ -162,7 +174,7 @@ export default function MassChart(props) {
     var min = tmp.range[0];
     var max = tmp.range[1];
     if(min < breakpoints[0]) { var disp = '<' + max; }
-    else if(max > breakpoints[breakpoints.length - 1]) { var disp = '>' + min; }
+    else if(max == breakpoints[breakpoints.length - 1]) { var disp =  min + '+'; }
     else { var disp = min.toString() + '-' + max; }
     return (
       <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
@@ -175,7 +187,7 @@ export default function MassChart(props) {
     <Paper className={classes.paper}>
       <svg className={classes.svg}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-         <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x))} />
+         <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(labels))} />
          <g>
            <g ref={node => select(node).call(axisLeft(y).ticks(10))}/> 
            <text className={classes.text} transform="rotate(-90)" y={-vw(2)-5} x={-svgHeight/4} style={{fill: '#4fbbd6'}}>
@@ -185,7 +197,7 @@ export default function MassChart(props) {
          {mass_data.map((d,i)=> {
            return (<Bar
              d={d}
-             x={x(d.actual)}
+             x={x(d.actual)+1}
              y={y(d.data.length)}
              selectedData={selectedData}
              setHover={setHover}

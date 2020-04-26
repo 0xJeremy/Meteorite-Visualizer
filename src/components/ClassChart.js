@@ -139,7 +139,7 @@ export default function ClassChart(props) {
         useEndAsStart: true,
       };
 
-  const colorScale = interpolateGreys;
+  const colorScale = interpolateBlues;
 
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
