@@ -176,13 +176,15 @@ export default function ClassChart(props) {
   .range(scheme)
 
   console.log(entries(counts))
-
+  console.log(entries(class_data))
  
   var make_pie = pie()
-    .value(function(d) {return d.value; });
-  var data_ready = make_pie(entries(counts));
+    .value(function(d) {return d['data'].length; });
+  var data_ready = make_pie(class_data);
 
-  const pad = Math.PI/180/Object.keys(keysSorted).length
+  console.log(data_ready)
+
+  const pad = Math.PI/180/class_data.length
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2).padAngle([pad/2]);
 
@@ -197,7 +199,7 @@ export default function ClassChart(props) {
         return <div />
       }
       key = selectedData[0].class;
-      value = data_ready.filter((d)=>{return d.data.key === selectedData[0].class})[0].value;
+      value = data_ready.filter((d)=>{return d.data.class === selectedData[0].class})[0].value;
     } else {
       return <div />
     }
@@ -228,7 +230,7 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
-                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.key)} setSelectedData={setGlobal} />
+                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.class)} setSelectedData={setGlobal} />
                 )
             })
           }
