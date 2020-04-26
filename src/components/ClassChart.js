@@ -40,8 +40,8 @@ function process(c) {
   return c
           .replace(/[0-9]/g, '')
           .replace(/(.*)\s/g,'')
-          .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
-          .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+          .replace(/(^[.~*+\-?^${}()|[\]\\/])/g,'')
+          .replace(/([.~*+\-?^${}()|[\]\\/]$)/g,'');
 }
 
 function Arc(props) {
@@ -152,24 +152,23 @@ export default function ClassChart(props) {
 
   const colorScale = interpolateBlues;
 
-  var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
+  // var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
   class_data = class_data.sort(function(a,b){return b['data'].length-a['data'].length})
 
-  var scheme = interpolateColors(keysSorted.length,colorScale,colorRangeInfo)
+
+  var keys = class_data.map(d=>{return d.class});
+  var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo)
 
   var color = scaleOrdinal()
-  .domain(keysSorted)
+  .domain(keys)
   .range(scheme)
 
-  console.log(entries(counts))
-  console.log(entries(class_data))
+
  
   var make_pie = pie()
     .value(function(d) {return d['data'].length; });
   var data_ready = make_pie(class_data);
-
-  console.log(data_ready)
 
   const pad = Math.PI/180/class_data.length
 
