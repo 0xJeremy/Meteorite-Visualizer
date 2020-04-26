@@ -95,18 +95,21 @@ function Bar(props) {
   const range_keys = props.range_keys;
   const [hover, setHover] = React.useState(null);
   const selectedData = props.selectedData;
+  const setSelectedData = props.setSelectedData;
 
   function enter() {
-    setHover(item)
+    setSelectedData(item);
+    setHover(item);
   }
 
   function leave() {
-    setHover(null)
+    setSelectedData(null);
+    setHover(null);
   }
 
   function get_color(d) {
-    if(selectedData !== null && selectedData !== undefined) {
-      if(selectedData[0] !== undefined && selectedData[0].class === d) {
+    if(selectedData !== null && selectedData !== undefined && selectedData[0] !== undefined) {
+      if(selectedData.length === 1 && selectedData[0].class === d) {
         var masses = label_to_mass_range(item);
         if(selectedData[0].mass/1000 >= masses[0] && selectedData[0].mass/1000 <= masses[1]) {
           return '#D55D0E';
@@ -116,7 +119,7 @@ function Bar(props) {
     if(hover === item) {
       return '#D55D0E';
     }
-    return color(item);
+    return color;
   }
 
   return (
@@ -145,6 +148,7 @@ export default function ClassChart(props) {
   const classes = useStyles();
   const data = props.data;
   const selectedData = props.selectedData;
+  const setSelectedData = props.setSelectedData;
   const [hover, setHover] = React.useState(null);
   const [showNum, setShowNum] = React.useState(15);
 
@@ -267,7 +271,17 @@ export default function ClassChart(props) {
     .domain(range_strings)
     .range([0,width-vw(1)])
 
-  const legend_height = 8
+  const legend_height = 8;
+
+  function setGlobal(item) {
+    if(item === null) {
+      setSelectedData(null);
+      return;
+    }
+    var masses = label_to_mass_range(item);
+    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1]})
+    setSelectedData(tmp);
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -300,7 +314,7 @@ export default function ClassChart(props) {
                     width={legend_axis.bandwidth()-2}
                     height={legend_height}
                     key={"bin_"+i}
-                    fill = {color(key)}
+                    fill={color(key)}
                   />
               )
             })
@@ -309,7 +323,7 @@ export default function ClassChart(props) {
           <g transform={`translate(0, ${height})`} ref={node => select(node).call(axisBottom(x).ticks(width / 50, "%"))} />
           {
             range_keys.map((item,i)=>{
-              return (<Bar item={item} i={i} x={x} y={y} color={color} to_display={to_display} range_keys={range_keys} selectedData={selectedData} key={i}/>)
+              return (<Bar item={item} i={i} x={x} y={y} color={color(item)} to_display={to_display} range_keys={range_keys} selectedData={selectedData} key={i} setSelectedData={setGlobal}/>)
             })
           }
           <g ref={node => select(node).call(axisLeft(y).tickSizeOuter(0)).select(".domain").remove()} />
