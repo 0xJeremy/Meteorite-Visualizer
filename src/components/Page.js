@@ -65,8 +65,8 @@ export default function Page() {
 
         <Grid item xs={3}>
           <MassChart data={dispData} selectedData={selectedData} setSelectedData={updateMapHover} />
-          <ClassChart data={dispData} selectedData={selectedData} />
-          <MassClassChart data={dispData} selectedData={selectedData} />
+          <ClassChart data={dispData} selectedData={selectedData} setSelectedData={updateMapHover} />
+          <MassClassChart data={dispData} selectedData={selectedData} setSelectedData={updateMapHover} />
         </Grid>
 
       </Grid>

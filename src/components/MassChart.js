@@ -65,17 +65,21 @@ function Bar(props) {
     setFill(defaultFill);
   }
 
-  if(selectedData !== null && d.data.includes(selectedData[0])) {
-    return (<rect
-      style={{'fill': '#D55D0E'}}
-      className="bar"
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      onMouseEnter={enter}
-      onMouseLeave={leave}
-    />)
+  if(selectedData !== null && selectedData[0] !== undefined) {
+    for(var i = 0; i < selectedData.length; i++) {
+      if(d.data.includes(selectedData[i])) {
+        return (<rect
+          style={{'fill': '#D55D0E'}}
+          className="bar"
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          onMouseEnter={enter}
+          onMouseLeave={leave}
+        />)
+      }
+    }
   }
 
   return (<rect
@@ -115,7 +119,6 @@ export default function MassChart(props) {
 
   var breakpoints = [0.5, 1, 2, 4, 10, 20, 30, 9999999999999999]
 
-
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
     var range;
@@ -129,7 +132,6 @@ export default function MassChart(props) {
       'actual': breakpoints[i]
     });
   }
-
 
   var range_strings = []
 
@@ -163,6 +165,9 @@ export default function MassChart(props) {
     if(hover !== null) {
       tmp = hover;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
+      if(selectedData.length > 1) {
+        return <div />
+      }
       tmp = mass_data.filter((d)=>d.data.includes(selectedData[0]))[0];
     } else {
       return <div />
