@@ -38,8 +38,10 @@ function TableItem(props) {
   const d = props.d;
 
   function get_color() {
-    if(selectedData !== null && selectedData[0] === d) {
-      return '#D55D0E';
+    if(selectedData !== null && selectedData[0] !== undefined) {
+      if(selectedData.includes(d)) {
+        return '#D55D0E';
+      }
     }
     return 'white';
   }
