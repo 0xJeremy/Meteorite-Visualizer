@@ -68,12 +68,16 @@ function Arc(props) {
     setFill(color(d.data.key));
   }
 
-  if(selectedData !== null && selectedData[0] !== undefined && process(selectedData[0].class) === d.data.key) {
-    return (
-      <g className={classes.arc} key={"arc_"+d.data.key}>
-          <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
-      </g>
-    )
+  if(selectedData !== null && selectedData[0] !== undefined) {
+    for(var i = 0; i < selectedData.length; i++) {
+      if(process(selectedData[i].class) === d.data.key) {
+        return (
+          <g className={classes.arc} key={"arc_"+d.data.key}>
+              <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
+          </g>
+        )
+      }
+    }
   }
   return (
     <g className={classes.arc} key={"arc_"+d.data.key}>
@@ -161,6 +165,9 @@ export default function ClassChart(props) {
       key = hover.data.key;
       value = hover.data.value;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
+      if(selectedData.length > 1) {
+        return <div />
+      }
       key = selectedData[0].class;
       value = data_ready.filter((d)=>{return d.data.key === selectedData[0].class})[0].value;
     } else {

@@ -61,7 +61,7 @@ class Deck extends Component {
         Name: { hoveredObject.name } <br />
         Year: { hoveredObject.year } <br />
         Class: { hoveredObject.class } <br />
-        Mass: { hoveredObject.mass } <br />
+        Mass: { hoveredObject.mass } (g) <br />
       </div>
     );
   }
@@ -74,7 +74,7 @@ class Deck extends Component {
 
   // documentation: https://deck.gl/#/documentation/deckgl-api-reference/layers/scatterplot-layer?section=getposition-function-optional-transition-enabled
   getLayer() {
-    const {data = this.data} = this.props;
+    const data = this.data;
     return new ScatterplotLayer({
       id: 'scatterplot-layer',
       data,

@@ -50,14 +50,17 @@ function Bar(props) {
   const selectedData = props.selectedData;
   const defaultFill = props.defaultFill;
   const [fill, setFill] = React.useState(defaultFill);
+  const setSelectedData = props.setSelectedData;
 
   function enter() {
+    setSelectedData(d.data);
     setHover(d);
     setFill('#D55D0E');
 
   }
 
   function leave() {
+    setSelectedData(null);
     setHover(null);
     setFill(defaultFill);
   }
@@ -111,6 +114,7 @@ export default function MassChart(props) {
         height = svgHeight - margin.top - margin.bottom;
 
   var breakpoints = [0.5, 1, 2, 4, 10, 20, 30, 9999999999999999]
+
 
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
@@ -197,6 +201,7 @@ export default function MassChart(props) {
              height={height-y(d.data.length)}
              key={"bin_"+i}
              defaultFill={color(d.actual)}
+             setSelectedData={setSelectedData}
            />)
          })}
 
