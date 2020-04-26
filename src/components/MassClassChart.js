@@ -154,7 +154,7 @@ export default function ClassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const [hover, setHover] = React.useState(null);
-  const [showNum, setShowNum] = React.useState(3);
+  const [showNum, setShowNum] = React.useState(15);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -271,7 +271,6 @@ export default function ClassChart(props) {
     setShowNum(event.target.value);
   };
 
-
   var legend_axis = scaleBand()
     .domain(range_strings)
     .range([0,width-vw(1)])
@@ -292,14 +291,14 @@ export default function ClassChart(props) {
         <Menu value={9}>9</Menu>
         <Menu value={12}>12</Menu>
         <Menu value={15}>15</Menu>
-        <Menu value={17}>All</Menu>
+        <Menu value={100}>All</Menu>
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <text x = {-margin.left/1.2} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}>Kilograms</text>
           <text x = {-margin.left/1.2+vw(14)} y={-vh(5)} style={{fill: '#4fbbd6', fontSize:'15px'}}># Classes: </text>
-          <g transform={`translate(${-margin.left+vw(1)}, ${-margin.top/3})`} ref={node => select(node).call(axisBottom(legend_axis).tickSize(0)).select(".domain").remove()}>
+          <g transform={`translate(${-margin.left+vw(0.5)}, ${-margin.top/2})`} ref={node => select(node).call(axisBottom(legend_axis).tickSize(0)).select(".domain").remove()}>
           {
             range_keys.map((key, i)=>{
               return(

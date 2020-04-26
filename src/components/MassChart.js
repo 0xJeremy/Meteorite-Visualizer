@@ -110,7 +110,7 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30]
+  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30];
 
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
