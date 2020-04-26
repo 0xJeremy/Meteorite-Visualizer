@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Bar(props) {
-  const r_str = props.r_str;
+  const d = props.d;
   const x = props.x;
   const y = props.y;
   const width = props.width;
@@ -52,7 +52,7 @@ function Bar(props) {
   const [fill, setFill] = React.useState(defaultFill);
 
   function enter() {
-    setHover(r_str);
+    setHover(d);
     setFill('#D55D0E');
 
   }
@@ -97,60 +97,45 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var range1 = .5
-  var range2 = 1
-  var range3 = 2
-  var range4 = 4
-  var range5 = 10
-  var range6 = 20
-  var range7 = 30
+  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30]
 
-
-
-  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7+"];
-
-  var range_strings = [`<${range1}`,
-                        `${range1}-${range2}`,
-                        `${range2}-${range3}`,
-                        `${range3}-${range4}`,
-                        `${range4}-${range5}`,
-                        `${range5}-${range6}`,
-                        `${range6}-${range7}`,
-                        `${range7}+`]
-
-
-  var masses = data.map((d)=>{return d.mass});
-  
-  var grouped_masses = { "<r1": masses.filter(m=>{return m/1000 < range1}).length, 
-                         "r1-r2": masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length,
-                         "r2-r3": masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length,
-                         "r3-r4": masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length,
-                         "r4-r5": masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length,
-                         "r5-r6": masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length,
-                         "r6-r7": masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length,
-                         "r7+": masses.filter(m=>{return m/1000 >= range7}).length}
+  var mass_data = [];
+  for(var i = 0; i < breakpoints.length; i++) {
+    var range;
+    if(i == 0) {
+      range = [0, breakpoints[i]];
+    } else if(i == breakpoints.length-1) {
+      range = [breakpoints[i], 9999999999999999];
+    } else {
+      range = [breakpoints[i-1], breakpoints[i]];
+    }
+    var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
+    mass_data.push({
+      'range': range,
+      'data': tmp,
+      'actual': breakpoints[i]
+    });
+  }
 
   var x = scaleBand()
-    .domain(range_strings)
+    .domain(breakpoints)
     .range([0, width])
 
-
-  const y_max = max(Object.values(grouped_masses))
+  const y_max = max(mass_data.map((d)=>{return d.data.length}))
 
   var y = scaleLinear()
       .range([height, 0])
       .domain([0, y_max]);
 
-
   var color = scaleOrdinal()
-    .domain(range_keys)
-    .range(schemeBlues[range_keys.length])
+    .domain(breakpoints)
+    .range(schemeBlues[breakpoints.length])
 
  function ToolTip() {
     if(hover !== null) {
       return (
         <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-        {hover} kg ({grouped_masses[range_keys[range_strings.indexOf(hover)]]})
+        {hover.range[0]}-{hover.range[1]} kg ({hover.data.length})
         </text>
       )
       
@@ -169,17 +154,17 @@ export default function MassChart(props) {
              # Meteorites
            </text>
          </g>
-         {range_strings.map((r_str,i)=> {
+         {mass_data.map((d,i)=> {
            return (<Bar
-             r_str={r_str}
-             x={x(r_str)+1}
-             y={y(grouped_masses[range_keys[i]])}
+             d={d}
+             x={x(d.actual)}
+             y={y(d.data.length)}
              selectedData={selectedData}
              setHover={setHover}
              width={x.bandwidth()-2}
-             height={height-y(grouped_masses[range_keys[i]])}
+             height={height-y(d.data.length)}
              key={"bin_"+i}
-             defaultFill={color(r_str)}
+             defaultFill={color(d.actual)}
            />)
          })}
 
