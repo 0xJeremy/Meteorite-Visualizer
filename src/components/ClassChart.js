@@ -108,7 +108,6 @@ export default function ClassChart(props) {
   const svgWidth = vw(23),
         svgHeight = vh(24);
 
-
   const margin = { top: vh(2.5), right: 0, bottom: 0, left: 0 },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
@@ -117,11 +116,7 @@ export default function ClassChart(props) {
 
   var all_classes = Array.from(data.map(function(d)
       { 
-        var new_class = d.class
-                .replace(/[0-9]/g, '')
-                .replace(/(.*)\s/g,'')
-                .replace(/(^[.~*+\-?^${}()|[\]\\/])/g,'')
-                .replace(/([.~*+\-?^${}()|[\]\\/]$)/g,'');
+        var new_class = process(d.class);
         d.class = new_class;
         return new_class;
       }).values());
@@ -139,35 +134,27 @@ export default function ClassChart(props) {
   }
 
   var uniq_classes = all_classes.filter(distinct)
-  console.log(uniq_classes)
 
   var class_data = []
   for (var i = 0; i < uniq_classes.length; i++){
-    var tmp = data.filter((d)=>{return d.class == uniq_classes[i]});
+    var tmp = data.filter((d)=>{return d.class === uniq_classes[i]});
     class_data.push({
       'class': uniq_classes[i],
       'data': tmp,
     });
   }
 
+  const colorRangeInfo = {
+    colorStart: .05,
+    colorEnd: 0.7,
+    useEndAsStart: true,
+  };
 
-
- const colorRangeInfo = {
-        colorStart: .05,
-        colorEnd: 0.7,
-        useEndAsStart: true,
-      };
-
-  const colorScale = interpolateGreys;
-
+  const colorScale = interpolateBlues;
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
   class_data = class_data.sort(function(a,b){return b['data'].length-a['data'].length})
-
-
-  var keep_top = 0
-
 
   var scheme = interpolateColors(keysSorted.length,colorScale,colorRangeInfo)
 
