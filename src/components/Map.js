@@ -74,7 +74,7 @@ class Deck extends Component {
 
   // documentation: https://deck.gl/#/documentation/deckgl-api-reference/layers/scatterplot-layer?section=getposition-function-optional-transition-enabled
   getLayer() {
-    const data = this.data;
+    const {data = this.data} = this.props;
     return new ScatterplotLayer({
       id: 'scatterplot-layer',
       data,
