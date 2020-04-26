@@ -64,14 +64,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Menu = withStyles({
-  // root: {
-  //   color: '#4fbbd6',
-  //   backgroundColor: '#242730',
-  //   borderColor: '#4fbbd6',
-  // },
-})(MenuItem)
-
 function label_to_mass_range(label) {
   if(label === "<r1") {
     return [0, 0.5]
@@ -286,12 +278,12 @@ export default function ClassChart(props) {
         className={classes.root}
         style={{backgroundColor: '#444750'}}
       >
-        <Menu value={3}>3</Menu>
-        <Menu value={6}>6</Menu>
-        <Menu value={9}>9</Menu>
-        <Menu value={12}>12</Menu>
-        <Menu value={15}>15</Menu>
-        <Menu value={100}>All</Menu>
+        <MenuItem value={3}>3</MenuItem>
+        <MenuItem value={6}>6</MenuItem>
+        <MenuItem value={9}>9</MenuItem>
+        <MenuItem value={12}>12</MenuItem>
+        <MenuItem value={15}>15</MenuItem>
+        <MenuItem value={100}>All</MenuItem>
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">

@@ -60,20 +60,20 @@ function Arc(props) {
   }
 
   function enter() {
-    setSelectedData(d.data.key);
+    setSelectedData(d.data.data);
     setHover(d);
     setFill('#D55D0E');
   }
 
   function leave() {
-    setSelectedData('NULL_KEY');
+    setSelectedData(null);
     setHover(null);
-    setFill(color(d.data.key));
+    setFill(color(d.data.class));
   }
 
   if(selectedData !== null && selectedData[0] !== undefined) {
     for(var i = 0; i < selectedData.length; i++) {
-      if(process(selectedData[i].class) === d.data.key) {
+      if(process(selectedData[i].class) === d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
               <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
@@ -128,7 +128,6 @@ export default function ClassChart(props) {
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
 
-
   const distinct = (value, index, self)=>{
     return self.indexOf(value) === index;
   }
@@ -152,25 +151,20 @@ export default function ClassChart(props) {
 
   const colorScale = interpolateBlues;
 
-  // var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
-
-  class_data = class_data.sort(function(a,b){return b['data'].length-a['data'].length})
-
+  class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
 
   var keys = class_data.map(d=>{return d.class});
-  var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo)
+  var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo);
 
   var color = scaleOrdinal()
-  .domain(keys)
-  .range(scheme)
+              .domain(keys)
+              .range(scheme);
 
-
- 
   var make_pie = pie()
-    .value(function(d) {return d['data'].length; });
+    .value((d)=>{return d['data'].length; });
   var data_ready = make_pie(class_data);
 
-  const pad = Math.PI/180/class_data.length
+  const pad = Math.PI/180/class_data.length;
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2).padAngle([pad/2]);
 
@@ -178,30 +172,18 @@ export default function ClassChart(props) {
     var key;
     var value;
     if(hover !== null) {
-      key = hover.data.key;
-      value = hover.data.value;
+      key = hover.data.class;
+      value = hover.data.data.length;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
-      if(selectedData.length > 1) {
-        return <div />
-      }
+      if(selectedData.length > 1) { return <div /> }
       key = selectedData[0].class;
       value = data_ready.filter((d)=>{return d.data.class === selectedData[0].class})[0].value;
-    } else {
-      return <div />
-    }
+    } else { return <div /> }
     return (
       <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
         {key + " (" + value + ")"}
       </text>
     )
-  }
-
-  function setGlobal(key) {
-    if(key === 'NULL_KEY') {
-      setSelectedData(null);
-    }
-    var tmp = data.filter((d)=>{return process(d.class) === key});
-    setSelectedData(tmp);
   }
 
   return (
@@ -216,8 +198,8 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
-                  <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.class)} setSelectedData={setGlobal} />
-                )
+                <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.class)} setSelectedData={setSelectedData} />
+              )
             })
           }
         </g>
