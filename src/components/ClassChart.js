@@ -2,9 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleOrdinal } from 'd3-scale';
-import { interpolateBlues, interpolateSpectral, interpolateGreys, interpolateBuGn } from 'd3-scale-chromatic';
+import { interpolateBlues } from 'd3-scale-chromatic';
 import { pie, arc } from 'd3-shape';
-import { entries } from 'd3-collection';
 import { interpolateColors } from '../colorSchemeGenerator.js';
 
 const useStyles = makeStyles(theme => ({
@@ -135,10 +134,11 @@ export default function ClassChart(props) {
   var uniq_classes = all_classes.filter(distinct)
 
   var class_data = []
-  for (var i = 0; i < uniq_classes.length; i++){
-    var tmp = data.filter((d)=>{return d.class === uniq_classes[i]});
+  for (var j = 0; j < uniq_classes.length; j++){
+    const iter = j
+    var tmp = data.filter((d)=>{return d.class === uniq_classes[iter]});
     class_data.push({
-      'class': uniq_classes[i],
+      'class': uniq_classes[j],
       'data': tmp,
     });
   }

@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { scaleOrdinal, scaleLinear, scaleBand} from 'd3-scale';
-import { schemeBlues, schemeSpectral } from 'd3-scale-chromatic';
+import { schemeBlues } from 'd3-scale-chromatic';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 
@@ -84,8 +84,15 @@ function label_to_mass_range(label) {
   }
 }
 
+function process(c) {
+  return c
+          .replace(/[0-9]/g, '')
+          .replace(/(.*)\s/g,'')
+          .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
+          .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+}
+
 function Bar(props) {
-  const classes = useStyles;
   const range = props.range;
   const x = props.x;
   const y = props.y;
@@ -94,33 +101,49 @@ function Bar(props) {
   const start = props.start;
   const end = props.end;
   const [hover, setHover] = React.useState(null);
+  const selectedData = props.selectedData
+  const setSelectedData = props.setSelectedData;
 
   function enter() {
     setHover([range, cls]);
+    setSelectedData(range, cls);
   }
 
   function leave() {
+    setSelectedData(null, null);
     setHover(null);
   }
 
   function get_color(d) {
-
-    if(hover == d){
+    if(hover !== null) {
+      if(hover[0] === range && hover[1] === cls){
         return '#D55D0E';
+      }
     }
+    if(selectedData !== null && selectedData[0] !== undefined) {
+      for(var i = 0; i < selectedData.length; i++) {
+        var masses = label_to_mass_range(range);
+        if(process(selectedData[i].class) === cls && selectedData[i].mass/1000 >= masses[0] && selectedData[i].mass/1000 <= masses[1]) {
+          return '#D55D0E';
+        }
+      }
+    }
+    
     return color;
   }
 
-  return ( <rect 
-            x={x(start)}
-            y={y(cls)} 
-            width={x(end)-x(start)} 
-            height={y.bandwidth()} 
-            key={cls}
-            onMouseEnter={enter}
-            onMouseLeave={leave}
-            style={{fill:get_color([range, cls])}}
-          />);
+  return (
+    <rect 
+      x={x(start)}
+      y={y(cls)} 
+      width={x(end)-x(start)} 
+      height={y.bandwidth()} 
+      key={cls}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
+      style={{fill:get_color([range, cls])}}
+    />
+  );
 }
 
 export default function MassClassChart(props) {
@@ -128,7 +151,6 @@ export default function MassClassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const setSelectedData = props.setSelectedData;
-  const [hover, setHover] = React.useState(null);
   const [showNum, setShowNum] = React.useState(15);
 
   function vw(view_width) {
@@ -150,17 +172,10 @@ export default function MassClassChart(props) {
 
   var all_classes = Array.from(data.map(function(d)
       { 
-        var new_class = d.class
-                .replace(/[0-9]/g, '')
-                .replace(/(.*)\s/g,'')
-                .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
-                .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+        var new_class = process(d.class);
         d.class = new_class;
-        // d.mass = d.mass/1000
         return new_class;
       }).values());
-
-  // data.map(d => console.log(d.class));
 
   var counts = {};
 
@@ -175,16 +190,8 @@ export default function MassClassChart(props) {
   var range5 = 10
   var range6 = 20
   var range7 = 30
-  //70-80kg
-  // var range8 = 40
-  //80-90kg
-  // var range9 = 50
-  //90-100kg
-  // var range10 = 100
-  //100+
 
-
-  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8",/*"r8-r9","r9-r10","r10+"*/];
+  var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8"];
 
   var range_strings = [`<${range1}`,
                         `${range1}-${range2}`,
@@ -197,7 +204,7 @@ export default function MassClassChart(props) {
 
 
   for (var i = 0; i < all_classes.length; i++) {
-    var cls = all_classes[i];
+    const cls = all_classes[i];
     var subset = data.filter(d => d.class === cls);
     var subset_masses = subset.map(d=>d.mass).reduce((acc,curr)=>{acc.push(curr); return acc}, []);
 
@@ -210,10 +217,7 @@ export default function MassClassChart(props) {
                        "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
                        "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
                        "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
-                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7 /*&& m/1000 < range8*/}).length/total_masses,
-                       // "r8-r9": subset_masses.filter(m=>{return m/1000 >= range8 && m/1000 < range9}).length/total_masses,
-                       // "r9-r10": subset_masses.filter(m=>{return m/1000 >= range9 && m/1000 < range10}).length/total_masses,
-                       // "r10+": subset_masses.filter(m=>{return m/1000 >= range10}).length/total_masses
+                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7}).length/total_masses,
                      }
 
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
@@ -228,9 +232,6 @@ export default function MassClassChart(props) {
                       acc[curr] = Object.fromEntries(entries.map((curr, index)=>{entries[index][1] = (index===0) ? curr[1] : entries[index-1][1]+curr[1]; return [curr[0], entries[index][1]]; })); 
                       return acc;
                     }, {});
-
-
-  var to_display_keys = Object.keys(to_display)
 
   var x = scaleLinear()
     .domain([0,1])
@@ -255,13 +256,13 @@ export default function MassClassChart(props) {
 
   const legend_height = 8;
 
-  function setGlobal(item) {
-    if(item === null) {
+  function setGlobal(range, cls) {
+    if(range === null || cls === null) {
       setSelectedData(null);
       return;
     }
-    var masses = label_to_mass_range(item);
-    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1] && d.class == item})
+    var masses = label_to_mass_range(range);
+    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1] && process(d.class) === cls});
     setSelectedData(tmp);
   }
 
@@ -312,7 +313,7 @@ export default function MassClassChart(props) {
                      var end = to_display[d][key];
                      var start = to_display[d][range_keys[index-1]];
                      return(
-                        <Bar range={key} cls={d} color={color} x={x} y={y} start={ index ? start : 0} end={end}/>
+                        <Bar range={key} cls={d} color={color(key)} x={x} y={y} start={ index ? start : 0} end={end} selectedData={selectedData} setSelectedData={setGlobal}/>
                      )
                    })
                  }

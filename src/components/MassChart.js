@@ -2,10 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleLinear, scaleBand, scaleOrdinal } from 'd3-scale';
-import { max, mean } from 'd3-array';
+import { max } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
-import { histogram } from 'd3-array';
 import { schemeBlues } from 'd3-scale-chromatic';
 
 const useStyles = makeStyles(theme => ({
@@ -53,16 +52,15 @@ function Bar(props) {
   const setSelectedData = props.setSelectedData;
 
   function enter() {
-    setSelectedData(d.data);
     setHover(d);
     setFill('#D55D0E');
-
+    setSelectedData(d.data);
   }
 
   function leave() {
-    setSelectedData(null);
     setHover(null);
     setFill(defaultFill);
+    setSelectedData(null);
   }
 
   if(selectedData !== null && selectedData[0] !== undefined) {
@@ -125,9 +123,10 @@ export default function MassChart(props) {
     if(i === 0) { range = [0, breakpoints[i]]; }
     else if(i === breakpoints.length) { range = [breakpoints[i-1], 9999999999999999]; }
     else { range = [breakpoints[i-1], breakpoints[i]]; }
-    var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
+    const r = range;
+    var tmp = data.filter((d)=>{return d.mass/1000 >= r[0] && d.mass/1000 < r[1]});
     mass_data.push({
-      'range': range,
+      'range': r,
       'data': tmp,
       'actual': breakpoints[i]
     });
@@ -135,10 +134,10 @@ export default function MassChart(props) {
 
   var range_strings = []
 
-  for (var i = 0; i < breakpoints.length; i++){
-        if (i === 0) {range_strings.push(`<${breakpoints[0]}`)}
-        else if (i === breakpoints.length-1) {range_strings.push(`${breakpoints[i-1]}+`)}
-        else {range_strings.push(`${breakpoints[i-1]}-${breakpoints[i]}`)}
+  for (var j = 0; j < breakpoints.length; j++){
+        if (j === 0) {range_strings.push(`<${breakpoints[0]}`)}
+        else if (j === breakpoints.length-1) {range_strings.push(`${breakpoints[j-1]}+`)}
+        else {range_strings.push(`${breakpoints[j-1]}-${breakpoints[j]}`)}
       }
                         
 
@@ -174,12 +173,13 @@ export default function MassChart(props) {
     }
     var min = tmp.range[0];
     var max = tmp.range[1];
-    if(min < breakpoints[0]) { var disp = '<' + max; }
-    else if(max === breakpoints[breakpoints.length - 1]) { var disp =  min + '+'; }
-    else { var disp = min.toString() + '-' + max; }
+    var name;
+    if(min < breakpoints[0]) { name = '<' + max; }
+    else if(max === breakpoints[breakpoints.length - 1]) { name =  min + '+'; }
+    else { name = min.toString() + '-' + max; }
     return (
       <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-      {disp} kg ({tmp.data.length})
+      {name} kg ({tmp.data.length})
       </text>
     )
   }
