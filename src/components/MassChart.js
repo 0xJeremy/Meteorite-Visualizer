@@ -62,6 +62,19 @@ function Bar(props) {
     setFill(defaultFill);
   }
 
+  if(selectedData !== null && d.data.includes(selectedData[0])) {
+    return (<rect
+      style={{'fill': '#D55D0E'}}
+      className="bar"
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
+    />)
+  }
+
   return (<rect
     style={{'fill': fill}}
     className="bar"
@@ -102,13 +115,9 @@ export default function MassChart(props) {
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
     var range;
-    if(i == 0) {
-      range = [0, breakpoints[i]];
-    } else if(i == breakpoints.length-1) {
-      range = [breakpoints[i], 9999999999999999];
-    } else {
-      range = [breakpoints[i-1], breakpoints[i]];
-    }
+    if(i == 0) { range = [0, breakpoints[i]]; }
+    else if(i == breakpoints.length-1) { range = [breakpoints[i], 9999999999999999]; }
+    else { range = [breakpoints[i-1], breakpoints[i]]; }
     var tmp = data.filter((d)=>{return d.mass/1000 >= range[0] && d.mass/1000 < range[1]});
     mass_data.push({
       'range': range,
@@ -132,15 +141,24 @@ export default function MassChart(props) {
     .range(schemeBlues[breakpoints.length])
 
  function ToolTip() {
+    var tmp;
     if(hover !== null) {
-      return (
-        <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
-        {hover.range[0]}-{hover.range[1]} kg ({hover.data.length})
-        </text>
-      )
-      
+      tmp = hover;
+    } else if(selectedData !== null) {
+      tmp = mass_data.filter((d)=>d.data.includes(selectedData[0]))[0];
+    } else {
+      return <div />
     }
-    return <div />
+    var min = tmp.range[0];
+    var max = tmp.range[1];
+    if(min < breakpoints[0]) { var disp = '<' + max; }
+    else if(max > breakpoints[breakpoints.length - 1]) { var disp = '>' + min; }
+    else { var disp = min.toString() + '-' + max; }
+    return (
+      <text className={classes.text} y={vh(8)} x={vw(18)} style={{fill: '#D55D0E'}}>
+      {disp} kg ({tmp.data.length})
+      </text>
+    )
   }
 
   return (
