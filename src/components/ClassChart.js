@@ -116,8 +116,8 @@ export default function ClassChart(props) {
         var new_class = d.class
                 .replace(/[0-9]/g, '')
                 .replace(/(.*)\s/g,'')
-                .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
-                .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+                .replace(/(^[.~*+\-?^${}()|[\]\\/])/g,'')
+                .replace(/([.~*+\-?^${}()|[\]\\/]$)/g,'');
         d.class = new_class;
         return new_class;
       }).values());
@@ -128,6 +128,25 @@ export default function ClassChart(props) {
     var cls = all_classes[i];
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
+
+
+  const distinct = (value, index, self)=>{
+    return self.indexOf(value) === index;
+  }
+
+  var uniq_classes = all_classes.filter(distinct)
+  console.log(uniq_classes)
+
+  var class_data = []
+  for (var i = 0; i < uniq_classes.length; i++){
+    var tmp = data.filter((d)=>{return d.class == uniq_classes[i]});
+    class_data.push({
+      'class': uniq_classes[i],
+      'data': tmp,
+    });
+  }
+
+
 
  const colorRangeInfo = {
         colorStart: .05,
@@ -140,6 +159,9 @@ export default function ClassChart(props) {
 
   var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
 
+  class_data = class_data.sort(function(a,b){return b['data'].length-a['data'].length})
+
+
   var keep_top = 0
 
 
@@ -148,6 +170,8 @@ export default function ClassChart(props) {
   var color = scaleOrdinal()
   .domain(keysSorted)
   .range(scheme)
+
+  console.log(entries(counts))
 
  
   var make_pie = pie()
