@@ -203,6 +203,8 @@ export default function MassClassChart(props) {
                         `${range7}+`]
 
 
+
+
   for (var i = 0; i < all_classes.length; i++) {
     const cls = all_classes[i];
     var subset = data.filter(d => d.class === cls);
@@ -230,6 +232,7 @@ export default function MassClassChart(props) {
 
   var uniq_classes = all_classes.filter(distinct)
 
+
   var class_data = []
   for (var j = 0; j < uniq_classes.length; j++){
     const iter = j
@@ -239,8 +242,36 @@ export default function MassClassChart(props) {
       'data': tmp,
     });
   }
-
   class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
+
+  var other_data = []
+  if (class_data.length > 14){
+    class_data = class_data.reduce((acc, curr, i)=>{
+      if (i > 13){
+        other_data.push(curr.data[0]);
+        return acc;
+      }
+      acc.push(curr);
+      return acc;
+    },[])
+  }
+  class_data.push({'class':'other', 'data':other_data})
+  class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
+
+
+  var other_masses = other_data.map(d=>d.mass).reduce((acc,curr)=>{acc.push(curr); return acc}, []);
+  cls_masses['other'] ={ "<r1": subset_masses.filter(m=>{return m/1000 < range1}).length/total_masses, 
+                       "r1-r2": subset_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/total_masses,
+                       "r2-r3": subset_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/total_masses,
+                       "r3-r4": subset_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/total_masses,
+                       "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
+                       "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
+                       "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
+                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7}).length/total_masses,
+                     }
+
+
+
   var keysSorted = class_data.map(d=>{return d['class']})
 
   var top_X = keysSorted.slice(0,showNum);

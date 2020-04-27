@@ -70,17 +70,18 @@ function Arc(props) {
     setFill(color(d.data.class));
   }
 
-  if(selectedData !== null && selectedData[0] !== undefined) {
-    for(var i = 0; i < selectedData.length; i++) {
-      if(process(selectedData[i].class) == d.data.class) {
-        return (
-          <g className={classes.arc} key={"arc_"+d.data.key}>
-              <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
-          </g>
-        )
-      }
-    }
-  }
+
+  // if(selectedData !== null && selectedData[0] !== undefined) {
+  //   for(var i = 0; i < selectedData.length; i++) {
+  //     if(process(selectedData[i].class) == d.data.class) {
+  //       return (
+  //         <g className={classes.arc} key={"arc_"+d.data.key}>
+  //             <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
+  //         </g>
+  //       )
+  //     }
+  //   }
+  // }
   return (
     <g className={classes.arc} key={"arc_"+d.data.key}>
         <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
@@ -153,8 +154,46 @@ export default function ClassChart(props) {
 
   class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
 
+
+  var other_data = []
+  if (class_data.length > 14){
+    class_data = class_data.reduce((acc, curr, i)=>{
+      if (i > 13){
+        other_data.push(curr.data);
+        return acc;
+      }
+      acc.push(curr);
+      return acc;
+    },[])
+  }
+
+  // function sortedIndex(array, value) {
+  //   var low = 0,
+  //       high = array.length;
+
+  //   console.log(low)
+  //   console.log(high)
+
+  //   while (low < high) {
+  //       var mid = (low + high) >>> 1;
+  //       if (array[mid]['data'].length < value) low = mid + 1;
+  //       else high = mid;
+  //   }
+  //   return low;
+  // }
+
+  // console.log(other_data)
+  // console.log(class_data)
+
+  // var insert_idx = sortedIndex(class_data, other_data.length)
+  // console.log(insert_idx);
+  // // class_data = class_data.splice(insert_idx, 0, other_data);
+
+  class_data.push({'class':'other', 'data':other_data})
+  class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
+
   var keys = class_data.map(d=>{return d.class});
-  console.log(keys);
+
   var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo);
 
   var color = scaleOrdinal()
