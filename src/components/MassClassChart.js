@@ -168,7 +168,6 @@ export default function MassClassChart(props) {
   const svgWidth = vw(23),
         svgHeight = vh(30);
 
-
   const margin = { top: vh(7), right: vw(0), bottom: 0, left: vw(4) },
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
@@ -185,8 +184,6 @@ export default function MassClassChart(props) {
 
   var cls_masses = {};
 
-
-
   var range1 = .5
   var range2 = 1
   var range3 = 2
@@ -197,14 +194,16 @@ export default function MassClassChart(props) {
 
   var range_keys = ["<r1","r1-r2","r2-r3","r3-r4","r4-r5","r5-r6","r6-r7","r7-r8"];
 
-  var range_strings = [`<${range1}`,
-                        `${range1}-${range2}`,
-                        `${range2}-${range3}`,
-                        `${range3}-${range4}`,
-                        `${range4}-${range5}`,
-                        `${range5}-${range6}`,
-                        `${range6}-${range7}`,
-                        `${range7}+`]
+  var range_strings = [
+    `<${range1}`,
+    `${range1}-${range2}`,
+    `${range2}-${range3}`,
+    `${range3}-${range4}`,
+    `${range4}-${range5}`,
+    `${range5}-${range6}`,
+    `${range6}-${range7}`,
+    `${range7}+`
+  ]
 
   for (var i = 0; i < all_classes.length; i++) {
     const cls = all_classes[i];
@@ -213,26 +212,25 @@ export default function MassClassChart(props) {
 
     var total_masses = subset_masses.length;
 
-    cls_masses[cls] = { "<r1": subset_masses.filter(m=>{return m/1000 < range1}).length/total_masses, 
-                       "r1-r2": subset_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/total_masses,
-                       "r2-r3": subset_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/total_masses,
-                       "r3-r4": subset_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/total_masses,
-                       "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
-                       "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
-                       "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
-                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7}).length/total_masses,
-                     }
+    cls_masses[cls] = { 
+        "<r1": subset_masses.filter(m=>{return m/1000 < range1}).length/total_masses, 
+      "r1-r2": subset_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/total_masses,
+      "r2-r3": subset_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/total_masses,
+      "r3-r4": subset_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/total_masses,
+      "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
+      "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
+      "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
+      "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7}).length/total_masses,
+    }
 
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
-
 
   const distinct = (value, index, self)=>{
     return self.indexOf(value) === index;
   }
 
-  var uniq_classes = all_classes.filter(distinct)
-
+  var uniq_classes = all_classes.filter(distinct);
 
   var class_data = []
   for (var j = 0; j < uniq_classes.length; j++){
@@ -262,15 +260,16 @@ export default function MassClassChart(props) {
 
   var other_masses = other_data.map(d=>d.mass).reduce((acc,curr)=>{acc.push(curr); return acc}, []);
   var other_m_len = other_masses.length;
-  cls_masses['other'] ={ "<r1": other_masses.filter(m=>{return m/1000 < range1}).length/other_m_len, 
-                       "r1-r2": other_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/other_m_len,
-                       "r2-r3": other_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/other_m_len,
-                       "r3-r4": other_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/other_m_len,
-                       "r4-r5": other_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/other_m_len,
-                       "r5-r6": other_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/other_m_len,
-                       "r6-r7": other_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/other_m_len,
-                       "r7-r8": other_masses.filter(m=>{return m/1000 >= range7}).length/other_m_len,
-                     }
+  cls_masses['other'] ={ 
+      "<r1": other_masses.filter(m=>{return m/1000 < range1}).length/other_m_len, 
+    "r1-r2": other_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/other_m_len,
+    "r2-r3": other_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/other_m_len,
+    "r3-r4": other_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/other_m_len,
+    "r4-r5": other_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/other_m_len,
+    "r5-r6": other_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/other_m_len,
+    "r6-r7": other_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/other_m_len,
+    "r7-r8": other_masses.filter(m=>{return m/1000 >= range7}).length/other_m_len,
+  }
 
   var keysSorted = class_data.map(d=>{return d['class']})
 
