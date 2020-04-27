@@ -48,6 +48,7 @@ function Arc(props) {
   const d = props.d;
   const color = props.color;
   const x = props.x;
+  const valid_keys = props.valid_keys
   const setHover = props.setHover;
   const [fill, setFill] = React.useState(color(d.data.key));
   const setSelectedData = props.setSelectedData;
@@ -59,6 +60,7 @@ function Arc(props) {
   }
 
   function enter() {
+    console.log(d.data.data)
     setSelectedData(d.data.data);
     setHover(d);
     setFill('#D55D0E');
@@ -73,7 +75,7 @@ function Arc(props) {
 
   if(selectedData !== null && selectedData[0] !== undefined) {
     for(var i = 0; i < selectedData.length; i++) {
-      if(process(selectedData[i].class) == d.data.class) {
+      if( process(selectedData[i].class)  == d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
               <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
@@ -159,7 +161,7 @@ export default function ClassChart(props) {
   if (class_data.length > 14){
     class_data = class_data.reduce((acc, curr, i)=>{
       if (i > 13){
-        other_data.push(curr.data);
+        other_data.push(curr.data[0]);
         return acc;
       }
       acc.push(curr);
@@ -238,7 +240,7 @@ export default function ClassChart(props) {
               x = arc().innerRadius(radius/1.5).outerRadius(radius).startAngle(d.startAngle).endAngle(d.endAngle).padAngle([pad]);
               
               return (
-                <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.class)} setSelectedData={setSelectedData} />
+                <Arc x={x} d={d} color={color} setHover={setHover} selectedData={selectedData} key={i} showColor={color(d.data.class)} setSelectedData={setSelectedData} valid_keys={keys}/>
               )
             })
           }
