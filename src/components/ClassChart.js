@@ -72,7 +72,7 @@ function Arc(props) {
 
   if(selectedData !== null && selectedData[0] !== undefined) {
     for(var i = 0; i < selectedData.length; i++) {
-      if(process(selectedData[i].class) === d.data.class) {
+      if(process(selectedData[i].class) == d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
               <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
@@ -154,6 +154,7 @@ export default function ClassChart(props) {
   class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
 
   var keys = class_data.map(d=>{return d.class});
+  console.log(keys);
   var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo);
 
   var color = scaleOrdinal()

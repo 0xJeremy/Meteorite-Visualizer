@@ -78,9 +78,9 @@ function label_to_mass_range(label) {
   } else if(label === "r5-r6") {
     return [10, 20]
   } else if(label === "r6-r7") {
-    return [20, 40]
+    return [20, 30]
   } else if(label === "r7-r8") {
-    return [40, 60]
+    return [30, Number.MAX_SAFE_INTEGER]
   }
 }
 
@@ -123,7 +123,7 @@ function Bar(props) {
     if(selectedData !== null && selectedData[0] !== undefined) {
       for(var i = 0; i < selectedData.length; i++) {
         var masses = label_to_mass_range(range);
-        if(process(selectedData[i].class) === cls && selectedData[i].mass/1000 >= masses[0] && selectedData[i].mass/1000 <= masses[1]) {
+        if(selectedData[i].mass/1000 >= masses[0] && selectedData[i].mass/1000 < masses[1] && process(selectedData[i].class) === cls) {
           return '#D55D0E';
         }
       }
@@ -151,7 +151,7 @@ export default function MassClassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const setSelectedData = props.setSelectedData;
-  const [showNum, setShowNum] = React.useState(15);
+  const [showNum, setShowNum] = React.useState(9);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -223,7 +223,25 @@ export default function MassClassChart(props) {
     counts[cls] = counts[cls] ? counts[cls] + 1 : 1;
   }
 
-  var keysSorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]})
+
+  const distinct = (value, index, self)=>{
+    return self.indexOf(value) === index;
+  }
+
+  var uniq_classes = all_classes.filter(distinct)
+
+  var class_data = []
+  for (var j = 0; j < uniq_classes.length; j++){
+    const iter = j
+    var tmp = data.filter((d)=>{return d.class === uniq_classes[iter]});
+    class_data.push({
+      'class': uniq_classes[j],
+      'data': tmp,
+    });
+  }
+
+  class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
+  var keysSorted = class_data.map(d=>{return d['class']})
 
   var top_X = keysSorted.slice(0,showNum);
 
@@ -261,8 +279,8 @@ export default function MassClassChart(props) {
       setSelectedData(null);
       return;
     }
-    var masses = label_to_mass_range(range);
-    var tmp = data.filter((d)=>{return d.mass/1000 >= masses[0] && d.mass/1000 <= masses[1] && process(d.class) === cls});
+    var [lower, upper] = label_to_mass_range(range);
+    var tmp = data.filter((d)=>{return d.mass/1000 >= lower && d.mass/1000 < upper && process(d.class) === cls});
     setSelectedData(tmp);
   }
 
@@ -280,7 +298,7 @@ export default function MassClassChart(props) {
         <MenuItem value={9}>9</MenuItem>
         <MenuItem value={12}>12</MenuItem>
         <MenuItem value={15}>15</MenuItem>
-        <MenuItem value={100}>All</MenuItem>
+        <MenuItem value={25}>Max</MenuItem>
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">
@@ -311,9 +329,9 @@ export default function MassClassChart(props) {
                  {
                    Object.keys(to_display).map(d=>{
                      var end = to_display[d][key];
-                     var start = to_display[d][range_keys[index-1]];
+                     var start = index ? to_display[d][range_keys[index-1]] : 0;
                      return(
-                        <Bar range={key} cls={d} color={color(key)} x={x} y={y} start={ index ? start : 0} end={end} selectedData={selectedData} setSelectedData={setGlobal}/>
+                        <Bar range={key} cls={d} color={color(key)} x={x} y={y} start={start} end={end} selectedData={selectedData} setSelectedData={setGlobal}/>
                      )
                    })
                  }

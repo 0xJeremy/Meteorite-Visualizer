@@ -115,13 +115,13 @@ export default function MassChart(props) {
          width = svgWidth - margin.left - margin.right,
         height = svgHeight - margin.top - margin.bottom;
 
-  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30, 9999999999999999]
+  var breakpoints = [0.5, 1, 2, 4, 10, 20, 30, Number.MAX_SAFE_INTEGER]
 
   var mass_data = [];
   for(var i = 0; i < breakpoints.length; i++) {
     var range;
     if(i === 0) { range = [0, breakpoints[i]]; }
-    else if(i === breakpoints.length) { range = [breakpoints[i-1], 9999999999999999]; }
+    else if(i === breakpoints.length) { range = [breakpoints[i-1], Number.MAX_SAFE_INTEGER]; }
     else { range = [breakpoints[i-1], breakpoints[i]]; }
     const r = range;
     var tmp = data.filter((d)=>{return d.mass/1000 >= r[0] && d.mass/1000 < r[1]});
