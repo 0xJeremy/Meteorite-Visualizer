@@ -155,7 +155,7 @@ export default function MassClassChart(props) {
   const data = props.data;
   const selectedData = props.selectedData;
   const setSelectedData = props.setSelectedData;
-  const [showNum, setShowNum] = React.useState(9);
+  const [showNum, setShowNum] = React.useState(15);
 
   function vw(view_width) {
     return view_width * (window.innerWidth / 100)
@@ -205,9 +205,6 @@ export default function MassClassChart(props) {
                         `${range5}-${range6}`,
                         `${range6}-${range7}`,
                         `${range7}+`]
-
-
-
 
   for (var i = 0; i < all_classes.length; i++) {
     const cls = all_classes[i];
@@ -274,8 +271,6 @@ export default function MassClassChart(props) {
                        "r6-r7": other_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/other_m_len,
                        "r7-r8": other_masses.filter(m=>{return m/1000 >= range7}).length/other_m_len,
                      }
-
-
 
   var keysSorted = class_data.map(d=>{return d['class']})
 

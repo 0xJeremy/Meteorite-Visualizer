@@ -76,7 +76,7 @@ function Arc(props) {
     for(var i = 0; i < selectedData.length; i++) {
       var exp_cls = process(selectedData[i].class)
       var mod_cls = valid_keys.includes(exp_cls) ? exp_cls : 'other'
-      if( mod_cls  == d.data.class) {
+      if(mod_cls === d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
               <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
@@ -90,6 +90,19 @@ function Arc(props) {
         <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
     </g>
   )
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 
@@ -148,8 +161,8 @@ export default function ClassChart(props) {
   }
 
   const colorRangeInfo = {
-    colorStart: .05,
-    colorEnd: 0.7,
+    colorStart: .2,
+    colorEnd: 1,
     useEndAsStart: true,
   };
 
@@ -177,10 +190,9 @@ export default function ClassChart(props) {
 
   var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo);
 
-  // Edit scheme here! Randomize order or whatever
-
+  const [key_colors, setKey_colors] = React.useState(shuffle(keys));
   var color = scaleOrdinal()
-              .domain(keys)
+              .domain(key_colors)
               .range(scheme);
 
   var make_pie = pie()
