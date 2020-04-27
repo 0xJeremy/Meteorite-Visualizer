@@ -111,7 +111,6 @@ class Deck extends Component {
   }
   
   render() {
-    const {mapStyle = 'mapbox://styles/mapbox/dark-v9'} = this.props;
     const { classes } = this.props;
 
     return (
@@ -124,7 +123,8 @@ class Deck extends Component {
         >
           <StaticMap
             reuseMaps
-            mapStyle={mapStyle}
+            // mapStyle={'mapbox://styles/uberdata/cjfxhlikmaj1b2soyzevnywgs'}
+            mapStyle={'mapbox://styles/uberdata/cjoqbbf6l9k302sl96tyvka09'}
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
