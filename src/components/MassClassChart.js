@@ -260,14 +260,15 @@ export default function MassClassChart(props) {
 
 
   var other_masses = other_data.map(d=>d.mass).reduce((acc,curr)=>{acc.push(curr); return acc}, []);
-  cls_masses['other'] ={ "<r1": subset_masses.filter(m=>{return m/1000 < range1}).length/total_masses, 
-                       "r1-r2": subset_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/total_masses,
-                       "r2-r3": subset_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/total_masses,
-                       "r3-r4": subset_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/total_masses,
-                       "r4-r5": subset_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/total_masses,
-                       "r5-r6": subset_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/total_masses,
-                       "r6-r7": subset_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/total_masses,
-                       "r7-r8": subset_masses.filter(m=>{return m/1000 >= range7}).length/total_masses,
+  var other_m_len = other_masses.length;
+  cls_masses['other'] ={ "<r1": other_masses.filter(m=>{return m/1000 < range1}).length/other_m_len, 
+                       "r1-r2": other_masses.filter(m=>{return m/1000 >= range1 && m/1000 < range2}).length/other_m_len,
+                       "r2-r3": other_masses.filter(m=>{return m/1000 >= range2 && m/1000 < range3}).length/other_m_len,
+                       "r3-r4": other_masses.filter(m=>{return m/1000 >= range3 && m/1000 < range4}).length/other_m_len,
+                       "r4-r5": other_masses.filter(m=>{return m/1000 >= range4 && m/1000 < range5}).length/other_m_len,
+                       "r5-r6": other_masses.filter(m=>{return m/1000 >= range5 && m/1000 < range6}).length/other_m_len,
+                       "r6-r7": other_masses.filter(m=>{return m/1000 >= range6 && m/1000 < range7}).length/other_m_len,
+                       "r7-r8": other_masses.filter(m=>{return m/1000 >= range7}).length/other_m_len,
                      }
 
 

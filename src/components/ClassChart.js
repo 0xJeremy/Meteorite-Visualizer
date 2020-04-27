@@ -71,17 +71,17 @@ function Arc(props) {
   }
 
 
-  // if(selectedData !== null && selectedData[0] !== undefined) {
-  //   for(var i = 0; i < selectedData.length; i++) {
-  //     if(process(selectedData[i].class) == d.data.class) {
-  //       return (
-  //         <g className={classes.arc} key={"arc_"+d.data.key}>
-  //             <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
-  //         </g>
-  //       )
-  //     }
-  //   }
-  // }
+  if(selectedData !== null && selectedData[0] !== undefined) {
+    for(var i = 0; i < selectedData.length; i++) {
+      if(process(selectedData[i].class) == d.data.class) {
+        return (
+          <g className={classes.arc} key={"arc_"+d.data.key}>
+              <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
+          </g>
+        )
+      }
+    }
+  }
   return (
     <g className={classes.arc} key={"arc_"+d.data.key}>
         <path d={x()} fill={fill} onMouseEnter={enter} onMouseLeave={leave} />
