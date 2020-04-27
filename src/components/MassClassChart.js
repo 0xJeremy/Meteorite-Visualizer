@@ -100,6 +100,7 @@ function Bar(props) {
   const cls = props.cls;
   const start = props.start;
   const end = props.end;
+  const valid_keys = props.valid_keys;
   const [hover, setHover] = React.useState(null);
   const selectedData = props.selectedData
   const setSelectedData = props.setSelectedData;
@@ -123,7 +124,10 @@ function Bar(props) {
     if(selectedData !== null && selectedData[0] !== undefined) {
       for(var i = 0; i < selectedData.length; i++) {
         var masses = label_to_mass_range(range);
-        if(selectedData[i].mass/1000 >= masses[0] && selectedData[i].mass/1000 < masses[1] && process(selectedData[i].class) === cls) {
+
+        var exp_cls = process(selectedData[i].class)
+        var mod_cls = valid_keys.includes(exp_cls) ? exp_cls : 'other'
+        if(selectedData[i].mass/1000 >= masses[0] && selectedData[i].mass/1000 < masses[1] && mod_cls === cls) {
           return '#D55D0E';
         }
       }
@@ -312,7 +316,7 @@ export default function MassClassChart(props) {
       return;
     }
     var [lower, upper] = label_to_mass_range(range);
-    var tmp = data.filter((d)=>{return d.mass/1000 >= lower && d.mass/1000 < upper && process(d.class) === cls});
+    var tmp = data.filter((d)=>{return d.mass/1000 >= lower && d.mass/1000 < upper && (keysSorted.includes(process(d.class)) ? process(d.class) : 'other') === cls});
     setSelectedData(tmp);
   }
 
@@ -363,7 +367,7 @@ export default function MassClassChart(props) {
                      var end = to_display[d][key];
                      var start = index ? to_display[d][range_keys[index-1]] : 0;
                      return(
-                        <Bar range={key} cls={d} color={color(key)} x={x} y={y} start={start} end={end} selectedData={selectedData} setSelectedData={setGlobal}/>
+                        <Bar valid_keys={top_X} range={key} cls={d} color={color(key)} x={x} y={y} start={start} end={end} selectedData={selectedData} setSelectedData={setGlobal}/>
                      )
                    })
                  }

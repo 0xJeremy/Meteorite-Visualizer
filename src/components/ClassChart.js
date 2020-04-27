@@ -60,7 +60,6 @@ function Arc(props) {
   }
 
   function enter() {
-    console.log(d.data.data)
     setSelectedData(d.data.data);
     setHover(d);
     setFill('#D55D0E');
@@ -75,7 +74,9 @@ function Arc(props) {
 
   if(selectedData !== null && selectedData[0] !== undefined) {
     for(var i = 0; i < selectedData.length; i++) {
-      if( process(selectedData[i].class)  == d.data.class) {
+      var exp_cls = process(selectedData[i].class)
+      var mod_cls = valid_keys.includes(exp_cls) ? exp_cls : 'other'
+      if( mod_cls  == d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
               <path d={x()} fill={'#D55D0E'} onMouseEnter={enter} onMouseLeave={leave} />
@@ -217,9 +218,10 @@ export default function ClassChart(props) {
       key = hover.data.class;
       value = hover.data.data.length;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
-      if(selectedData.length > 1) { return <div /> }
-      key = selectedData[0].class;
-      value = data_ready.filter((d)=>{return d.data.class === selectedData[0].class})[0].value;
+      // if(selectedData.length >= 1) { return <div /> }
+      var exp_cls = process(selectedData[0].class)
+      key = keys.includes(exp_cls) ? exp_cls : 'other'
+      value = data_ready.filter((d)=>{return d.data.class === key})[0].value;
     } else { return <div /> }
     return (
       <text className={classes.text} y={vh(16)} x={vw(12)} style={{fill: '#D55D0E'}}>
