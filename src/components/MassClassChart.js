@@ -333,8 +333,7 @@ export default function MassClassChart(props) {
         <MenuItem value={6}>6</MenuItem>
         <MenuItem value={9}>9</MenuItem>
         <MenuItem value={12}>12</MenuItem>
-        <MenuItem value={15}>15</MenuItem>
-        <MenuItem value={25}>Max</MenuItem>
+        <MenuItem value={15}>All</MenuItem>
       </Select>
     </FormControl>
       <svg className={classes.svg} id="MassClassChart">

@@ -170,34 +170,14 @@ export default function ClassChart(props) {
     },[])
   }
 
-  // function sortedIndex(array, value) {
-  //   var low = 0,
-  //       high = array.length;
-
-  //   console.log(low)
-  //   console.log(high)
-
-  //   while (low < high) {
-  //       var mid = (low + high) >>> 1;
-  //       if (array[mid]['data'].length < value) low = mid + 1;
-  //       else high = mid;
-  //   }
-  //   return low;
-  // }
-
-  // console.log(other_data)
-  // console.log(class_data)
-
-  // var insert_idx = sortedIndex(class_data, other_data.length)
-  // console.log(insert_idx);
-  // // class_data = class_data.splice(insert_idx, 0, other_data);
-
   class_data.push({'class':'other', 'data':other_data})
   class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
 
   var keys = class_data.map(d=>{return d.class});
 
   var scheme = interpolateColors(keys.length,colorScale,colorRangeInfo);
+
+  // Edit scheme here! Randomize order or whatever
 
   var color = scaleOrdinal()
               .domain(keys)
@@ -207,7 +187,7 @@ export default function ClassChart(props) {
     .value((d)=>{return d['data'].length; });
   var data_ready = make_pie(class_data);
 
-  const pad = Math.PI/180/class_data.length;
+  const pad = Math.PI/180;
 
   var x = arc().innerRadius(0).outerRadius(radius).startAngle(0).endAngle(Math.PI * 2).padAngle([pad/2]);
 
@@ -218,7 +198,6 @@ export default function ClassChart(props) {
       key = hover.data.class;
       value = hover.data.data.length;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
-      // if(selectedData.length >= 1) { return <div /> }
       var exp_cls = process(selectedData[0].class)
       key = keys.includes(exp_cls) ? exp_cls : 'other'
       value = data_ready.filter((d)=>{return d.data.class === key})[0].value;
