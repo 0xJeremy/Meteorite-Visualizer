@@ -30,7 +30,7 @@ new_meteorites = open('./meteorites_modified.json','w+')
 json.dump(new_data,new_meteorites)
 
 len_new_data = len(new_data)
-num_samples = 3000
+num_samples = 800
 
 randomList = random.sample(range(0, len(new_data)), num_samples)
 
