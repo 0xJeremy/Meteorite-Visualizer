@@ -112,23 +112,29 @@ class Deck extends Component {
       stroked: true,
       filled: true,
       radiusScale: 6,
-      radiusMinPixels: 0,
+      radiusMinPixels: 5,
       radiusMaxPixels: 8,
-      lineWidthMinPixels: 0,
+      lineWidthMinPixels: 1,
       getPosition: d => d.coordinates,
-      getRadius: d => {
-          if((this.state.selectedData !== null 
+      getRadius: d => d.mass*1,
+      getFillColor: d => {
+        if((this.state.selectedData !== null 
             && this.state.selectedData.includes(d)) 
             || d === this.state.hoveredObject) 
           {
-            return d.mass*1
+            return [213, 93, 14]
           }
-          else {return 0}
+          return [213, 93, 14,0]
       },
-      getFillColor: d => {
-          return [213, 93, 14]
+      getLineColor: d => {
+        if((this.state.selectedData !== null 
+            && this.state.selectedData.includes(d)) 
+            || d === this.state.hoveredObject) 
+          {
+            return [0,0,0]
+          }
+          return [0, 0, 0, 0]
       },
-      getLineColor: d => [0, 0, 0],
       onHover: info => {
         this.setState({
           hoveredObject: info.object,
@@ -138,7 +144,8 @@ class Deck extends Component {
         this.state.hoverCallback([info.object])
       },
       updateTriggers: {
-        getRadius: [this.state]
+        getFillColor: [this.state],
+        getLineColor: [this.state]
       }
     })];
   }
