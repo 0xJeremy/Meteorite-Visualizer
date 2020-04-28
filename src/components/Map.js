@@ -75,7 +75,7 @@ class Deck extends Component {
   // documentation: https://deck.gl/#/documentation/deckgl-api-reference/layers/scatterplot-layer?section=getposition-function-optional-transition-enabled
   getLayer() {
     const {data = this.data} = this.props;
-    return new ScatterplotLayer({
+    return [new ScatterplotLayer({
       id: 'scatterplot-layer',
       data,
       pickable: true,
@@ -89,11 +89,44 @@ class Deck extends Component {
       getPosition: d => d.coordinates,
       getRadius: d => d.mass * 1,
       getFillColor: d => {
-        if((this.state.selectedData !== null && this.state.selectedData.includes(d)) ||
-           d === this.state.hoveredObject) {
-          return [213, 93, 14]
-        }
         return [79, 187, 214]
+      },
+      getLineColor: d => [0, 0, 0],
+      onHover: info => {
+        this.setState({
+          hoveredObject: info.object,
+          pointerX: info.x,
+          pointerY: info.y
+        })
+        this.state.hoverCallback([info.object])
+      }//,
+      // updateTriggers: {
+      //   getFillColor: [this.state]
+      //}
+    }),
+    new ScatterplotLayer({
+      id: 'scatterplot-layer',
+      data,
+      pickable: true,
+      opacity: 1.0,
+      stroked: true,
+      filled: true,
+      radiusScale: 6,
+      radiusMinPixels: 0,
+      radiusMaxPixels: 8,
+      lineWidthMinPixels: 0,
+      getPosition: d => d.coordinates,
+      getRadius: d => {
+          if((this.state.selectedData !== null 
+            && this.state.selectedData.includes(d)) 
+            || d === this.state.hoveredObject) 
+          {
+            return d.mass*1
+          }
+          else {return 0}
+      },
+      getFillColor: d => {
+          return [213, 93, 14]
       },
       getLineColor: d => [0, 0, 0],
       onHover: info => {
@@ -105,9 +138,9 @@ class Deck extends Component {
         this.state.hoverCallback([info.object])
       },
       updateTriggers: {
-        getFillColor: [this.state]
+        getRadius: [this.state]
       }
-    });
+    })];
   }
   
   render() {
