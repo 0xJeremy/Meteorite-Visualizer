@@ -16,7 +16,8 @@ with open(input_file, "r") as source:
                 continue
 
             if (len(row[3].split(' ')[0].split('/')) != 3 or row[4] == '' or row[5] == '' or row[2]=='' or row[2]=='0'
-                or int(row[3].split(' ')[0].split('/')[2]) < 1000):
+                # or int(row[3].split(' ')[0].split('/')[2]) < 1000) 
+                or float(row[5]) < -90 or float(row[5]) > 90):
                 continue
 
             if row_count == 1:

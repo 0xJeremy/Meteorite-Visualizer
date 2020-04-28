@@ -99,10 +99,7 @@ class Deck extends Component {
           pointerY: info.y
         })
         this.state.hoverCallback([info.object])
-      }//,
-      // updateTriggers: {
-      //   getFillColor: [this.state]
-      //}
+      }
     }),
     new ScatterplotLayer({
       id: 'scatterplot-layer',

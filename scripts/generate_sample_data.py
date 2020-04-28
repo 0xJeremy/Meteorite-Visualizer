@@ -8,6 +8,8 @@ new_data = []
 
 duplicates = {}
 
+max_dups = 100
+
 for d in data:
 	if not (d['coordinates'][0] == 0 and d['coordinates'][1]==0):
 
@@ -18,7 +20,7 @@ for d in data:
 		else:
 			duplicates[key] = 1
 		
-		if duplicates[key] <= 20:
+		if duplicates[key] <= max_dups:
 			new_data.append(d)
 
 
@@ -28,7 +30,7 @@ new_meteorites = open('./meteorites_modified.json','w+')
 json.dump(new_data,new_meteorites)
 
 len_new_data = len(new_data)
-num_samples = 800
+num_samples = 3000
 
 randomList = random.sample(range(0, len(new_data)), num_samples)
 
