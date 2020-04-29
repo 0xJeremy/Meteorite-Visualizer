@@ -210,6 +210,9 @@ export default function ClassChart(props) {
       key = hover.data.class;
       value = hover.data.data.length;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
+      if(selectedData.length > 1) {
+        return <div />
+      }
       var exp_cls = process(selectedData[0].class)
       key = keys.includes(exp_cls) ? exp_cls : 'Other';
       value = data_ready.filter((d)=>{return d.data.class === key})[0].value;
