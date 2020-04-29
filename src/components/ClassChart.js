@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { scaleOrdinal } from 'd3-scale';
-import { interpolateBlues, interpolateCividis,interpolateTurbo, interpolateCool, interpolatePuBu, interpolateGreys, interpolateViridis } from 'd3-scale-chromatic';
+import { interpolateBlues } from 'd3-scale-chromatic';
 import { pie, arc } from 'd3-shape';
 import { interpolateColors } from '../colorSchemeGenerator.js';
 
@@ -75,7 +75,7 @@ function Arc(props) {
   if(selectedData !== null && selectedData[0] !== undefined) {
     for(var i = 0; i < selectedData.length; i++) {
       var exp_cls = process(selectedData[i].class)
-      var mod_cls = valid_keys.includes(exp_cls) ? exp_cls : 'other'
+      var mod_cls = valid_keys.includes(exp_cls) ? exp_cls : 'Other'
       if(mod_cls === d.data.class) {
         return (
           <g className={classes.arc} key={"arc_"+d.data.key}>
@@ -183,7 +183,7 @@ export default function ClassChart(props) {
     },[])
   }
 
-  class_data.push({'class':'other', 'data':other_data})
+  class_data.push({'class':'Other', 'data':other_data})
   class_data = class_data.sort((a,b)=>{return b['data'].length-a['data'].length});
 
   var keys = class_data.map(d=>{return d.class});
@@ -211,7 +211,7 @@ export default function ClassChart(props) {
       value = hover.data.data.length;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
       var exp_cls = process(selectedData[0].class)
-      key = keys.includes(exp_cls) ? exp_cls : 'other'
+      key = keys.includes(exp_cls) ? exp_cls : 'Other';
       value = data_ready.filter((d)=>{return d.data.class === key})[0].value;
     } else { return <div /> }
     return (
