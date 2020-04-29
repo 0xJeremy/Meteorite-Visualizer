@@ -86,10 +86,10 @@ function label_to_mass_range(label) {
 
 function process(c) {
   return c
-          .replace(/[0-9]/g, '')
-          .replace(/(.*)\s/g,'')
-          .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
-          .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
+          // .replace(/[0-9]/g, '')
+          // .replace(/(.*)\s/g,'')
+          // .replace(/(^[.*+\-?^${}()|[\]\\/])/g,'')
+          // .replace(/([.*+\-?^${}()|[\]\\/]$)/g,'');
 }
 
 function Bar(props) {
