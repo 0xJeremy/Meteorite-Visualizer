@@ -164,6 +164,9 @@ export default function MassChart(props) {
     if(hover !== null) {
       tmp = hover;
     } else if(selectedData !== null && selectedData[0] !== undefined) {
+      if(selectedData.length > 1) {
+        return <div />
+      }
       tmp = mass_data.filter((d)=>d.data.includes(selectedData[0]))[0];
     } else {
       return <div />
