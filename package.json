@@ -16,7 +16,8 @@
   "scripts": {
     "start": "node server.js",
     "local": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "prettier": "npx prettier --write src"
   },
   "license": "MIT",
   "eslintConfig": {
@@ -33,5 +34,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.3.0"
   }
 }
